@@ -1,149 +1,195 @@
+/* Rasta Colors:
+Green: rgb(1, 138, 45)
+Yellow: rgb(252, 222, 3)
+Red: rgb(213, 28, 44)
+Black: rgb(14, 12, 11) */
+
+html * {
+    font-family: Arial;
+}
+
 /*Desktop View*/
 .header {
-  position: fixed;
-  /* top:0; */
-  width: 100vw;
-  display: flex;
-  background: rgb(247, 247, 247);
-  border-bottom: 1px solid rgb(228, 228, 228);
-  justify-content: center;
-  align-items: center;
-  /* padding: 0px 40px; */
-  height: 80px;
-  z-index: 99;
-  box-sizing: border-box;
-  transition: opacity 500ms ease-in-out;
+    position: flex;
+    /* top:0; */
+    width: 100vw;
+    display: flex;
+    background: rgb(14, 12, 11);
+    /* border-bottom: 1px solid rgb(228, 228, 228); */
+    align-items: center;
+    padding: 0px 40px;
+    height: 80px;
+    z-index: 99;
+    box-sizing: border-box;
+    transition: opacity 500ms ease-in-out;
+    /* display: flex; */
+    justify-content: flex-start;
+    /* position: fixed; */
+    /* top: 0; */
+    /* left: 0; */
+    /* width: 100%; */
+    /* background-color: var(--main-red); */
+    /* box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4); */
+    /* z-index: 10; */
 }
+
+.justify {
+    margin-left: auto;
+}
+
 .header2 {
-  position: fixed;
-  /* top:0; */
-  width: 100vw;
-  display: flex;
-  background: rgb(247, 247, 247);
-  border-bottom: 1px solid rgb(243, 243, 243);
-  justify-content: center;
-  align-items: center;
-  /* padding: 0px 40px; */
-  height: 80px;
-  z-index: 99;
-  box-sizing: border-box;
-  /* top: -60px; */
-  opacity: 0;
-  transition: opacity 300ms ease-out;
+    position: fixed;
+    /* top:0; */
+    width: 100vw;
+    display: flex;
+    background: rgb(14, 12, 11);
+    /* border-bottom: 1px solid rgb(228, 228, 228); */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 40px;
+    height: 80px;
+    z-index: 99;
+    box-sizing: border-box;
+    /* top: -60px; */
+    opacity: 0;
+    transition: opacity 300ms ease-out;
 }
 .logo-nav {
-  padding:0;
-  position: absolute;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  /* background-color: green; */
-}
-.logo-nav-link{
-  text-decoration: none ;
-}
-.logo-nav-slogan{
-  margin-top: 0px;
-  font-size: 13px;
- 
-}
-
-.logo {
-  /* width:150px; */
-  height: 40px;
-}
-.nav-options {
-  background: rgb(247, 247, 247);
-  /* padding-left: 25px; */
-  display: flex;
-
-  list-style-type: none;
-}
-.mobile-option {
-  display: none;
-}
-.option {
-  padding: 0 20px;
-  text-decoration: none;
-}
-.option:hover {
-  cursor: pointer;
-  /* text-decoration: underline; */
-}
-.link {
-  text-decoration: none;
-  font-size: 18px;
-  color: black;
-  padding-bottom: 3px;
-  /* background-color:blueviolet */
-}
-.link::after {
-  content: "";
-  width: 0%;
-  height: 2px;
-  display: block;
-  background-color: black;
-  margin-top: 2px;
-}
-.link:hover::after {
-  width: 100%;
-  transition: all 0.4s;
-}
-
-.mobile-menu {
-  display: none;
-}
-@media (max-width: 768px) {
-  /*Mobile View */
- 
-  .logo {
-    /* width: 45px; */
-    height: 40px;
-  }
-  .nav-options {
-    display: flex;
-    width: 100vw;
-    height: fit-content;
-    position: absolute;
-    top: 80px;
-    top: -500px;
-    right: 0;
-    opacity: 0;
-    transition: all 0.5s ease;
-    flex-direction: column;
-    list-style-type: none;
-    padding: 10px 0;
-    background: rgb(247, 247, 247);
-  }
-  .nav-options.active {
-    background: rgb(247, 247, 247);
-    /* background: #fff; */
-    top: 80px;
-    right: 0;
-    opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 1;
-    align-content: center;
-    padding-left: 0px;
-  }
-
-  .menu-icon {
-    width: 45px;
-    height: 45px;
-  }
-  .option {
+    padding: 0;
+    left: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 0px;
-    border-bottom: 1px solid rgb(243, 243, 243);
-  }
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(247, 247, 247);
+    border-bottom: 1px solid rgb(228, 228, 228);
+    border-radius: 5px;
+    height: 60px;
+}
+
+.nav-logo-component {
+    width: 100px;
+    height: 80px;
+}
+
+.logo-nav-link {
+    text-decoration: none;
+    height: 80px;
+}
+.logo-nav-slogan {
+    margin-top: 0px;
+    font-size: 13px;
+}
+
+.logo {
+    /* width:150px; */
+    height: 40px;
+}
+.nav-options {
+    background: rgb(0, 0, 0);
+    /* padding-left: 25px; */
+    display: flex;
+
+    list-style-type: none;
+}
+.mobile-option {
+    display: none;
+}
+.option {
+    padding: 0 20px;
+    text-decoration: none;
+}
+.option:hover {
+    cursor: pointer;
+    /* text-decoration: underline; */
+}
+.link {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    padding-bottom: 3px;
+    /* background-color:blueviolet */
+}
+.link::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    display: block;
+    background-color: rgb(1, 138, 45);
+    margin-top: 2px;
+}
+.link:hover::after {
+    width: 100%;
+    transition: all 0.4s;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+/* @media only screen and (max-width: 768px) {
+    logo-nav {
+    height: 70px;
+    }
+} */
+@media (max-width: 768px) {
+    /*Mobile View */
+
+    .logo {
+        /* width: 45px; */
+        height: 40px;
+    }
+
+    /* .logo-nav {
+        width: 45px;
+        height: 40px;
+    } */
+
+    .nav-options {
+        display: flex;
+        width: 100vw;
+        height: fit-content;
+        position: absolute;
+        top: 80px;
+        top: -500px;
+        right: 0;
+        opacity: 0;
+        transition: all 0.5s ease;
+        flex-direction: column;
+        list-style-type: none;
+        padding: 10px 0;
+        background: rgb(rgb(14, 12, 11));
+    }
+    .nav-options.active {
+        /* background: rgb(rgb(14, 12, 11)); */
+        /* background: #fff; */
+        top: 80px;
+        right: 0;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 1;
+        align-content: center;
+        padding-left: 0px;
+    }
+
+    .menu-icon {
+        width: 45px;
+        height: 45px;
+        margin-right: 40px;
+        background: rgb(247, 247, 247);
+        border-radius: 5px;
+    }
+    .option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0px;
+        border-bottom: 1px solid rgb(228, 228, 228);
+    }
 }
 .mobile-menu {
-  position: absolute;
-  display: block;
-  right: 20px;
+    position: absolute;
+    display: block;
+    right: 20px;
 }

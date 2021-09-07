@@ -3,6 +3,7 @@ import { ReactComponent as CloseMenu } from "./assets/x.svg";
 import { ReactComponent as MenuIcon } from "./assets/menu.svg";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { ReactComponent as Logo } from "./assets/FEVER.svg";
 
 const Header = () => {
     const [click, setClick] = useState(false);
@@ -33,7 +34,7 @@ const Header = () => {
         <div className={visible ? "header" : "header2"}>
             <div className="logo-nav">
                 <Link to="/" className="logo-nav-link">
-                    Logo Goes Here
+                    <Logo className="nav-logo-component" alt="website logo" />
                 </Link>
             </div>
             <ul className={click ? "nav-options active" : "nav-options"}>
@@ -43,29 +44,30 @@ const Header = () => {
                     </Link>
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
+                    <Link className="link" to="shop">
+                        Shop
+                    </Link>
+                </li>
+                <li className="option" onClick={closeMobileMenu}>
                     <Link className="link" to="about-us">
                         About Us
                     </Link>
                 </li>
-                <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="services">
-                        Services
-                    </Link>
-                </li>
-                <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="solutions">
-                        Solutions
-                    </Link>
-                </li>
+            </ul>
 
+            <ul
+                className={
+                    click ? "justify nav-options active" : "justify nav-options"
+                }
+            >
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="partners">
-                        Partners
+                    <Link className="link" to="cart">
+                        Cart(0)
                     </Link>
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="contact">
-                        Contact
+                    <Link className="link" to="contact-us">
+                        Contact Us
                     </Link>
                 </li>
             </ul>
