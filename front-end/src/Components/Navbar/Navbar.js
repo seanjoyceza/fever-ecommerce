@@ -3,7 +3,7 @@ import { ReactComponent as CloseMenu } from "./assets/x.svg";
 import { ReactComponent as MenuIcon } from "./assets/menu.svg";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "./assets/FEVER.svg";
+import Logo from "./assets/fever.png";
 
 const Header = () => {
     const [click, setClick] = useState(false);
@@ -33,13 +33,17 @@ const Header = () => {
     return (
         <div className={visible ? "header" : "header2"}>
             <div className="logo-nav">
-                <Link to="/" className="logo-nav-link">
-                    <Logo className="nav-logo-component" alt="website logo" />
+                <Link to="/#" className="logo-nav-link">
+                    <img
+                        src={Logo}
+                        className="nav-logo-component"
+                        alt="website logo"
+                    />
                 </Link>
             </div>
             <ul className={click ? "nav-options active" : "nav-options"}>
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="/">
+                    <Link className="link" to="/#">
                         Home
                     </Link>
                 </li>
@@ -60,14 +64,14 @@ const Header = () => {
                     click ? "justify nav-options active" : "justify nav-options"
                 }
             >
-            <li className="option" onClick={closeMobileMenu}>
-            <Link className="link" to="my-account">
-                My Account
-            </Link>
-        </li>
+                <li className="option" onClick={closeMobileMenu}>
+                    <Link className="link" to="my-account">
+                        My Account
+                    </Link>
+                </li>
                 <li className="option" onClick={closeMobileMenu}>
                     <Link className="link" to="cart">
-                        Cart(0)
+                        Cart (0)
                     </Link>
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
@@ -75,7 +79,6 @@ const Header = () => {
                         Contact Us
                     </Link>
                 </li>
-               
             </ul>
 
             <div className="mobile-menu" onClick={handleClick}>

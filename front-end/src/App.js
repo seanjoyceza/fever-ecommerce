@@ -21,7 +21,7 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <Home />
-                      <Footer />
+                        <Footer />
                     </Route>
                     <Route path="/boards">
                         <Boards />
@@ -37,13 +37,13 @@ function App() {
                     </Route>
                     <Route path="/my-account">
                         <MyAccount />
+                        <Footer />
                     </Route>
                     <Route path="/cart">
                         <Cart />
                     </Route>
                 </Switch>
             </AnimatePresence>
-            
         </Router>
     );
 }
