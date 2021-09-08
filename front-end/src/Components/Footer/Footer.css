@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #1f1f1f;
+  background-color: rgb(14, 12, 11);
   color: white;
   align-items: center;
   height: fit-content;
@@ -19,16 +19,20 @@
   display: flex;
   justify-content: space-around;
 }
-.footer__slogan > h1 {
+.footer__slogan__title{
+  font-size: 18px;
+}
+.footer__slogan > p {
   color: rgb(247, 247, 247);
-  font-family: "Frank Regular", "san-serif";
+  /* font-family: "Frank Regular", "san-serif"; */
   justify-self: flex-start;
-  width: 435px;
-  font-size: 80px;
-  animation: SideToSide 1s linear infinite;
+  max-width: 350px;
+  line-height: 35px;
+  /* font-size: 80px; */
+  /* animation: SideToSide 1s linear infinite; */
 }
 
-@keyframes SideToSide {
+/* @keyframes SideToSide {
   0%,
   100% {
     transform: translateX(0px);
@@ -36,7 +40,7 @@
   50% {
     transform: translateX(5px);
   }
-}
+} */
 .linkedIn__link {
   background-color: rgb(247, 247, 247);
   border-radius: 2px;

@@ -1,18 +1,19 @@
 import React from "react";
-import "./AboutUs.css";
 import { motion } from "framer-motion";
+import './Boards.css'
 
-const AboutUs = () => {
+function Boards() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className='about__page'
+      className='boards__page'
     >
-      About Us
+    boards
+    
     </motion.div>
   );
-};
+}
 
-export default AboutUs;
+export default Boards;

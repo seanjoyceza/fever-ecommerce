@@ -10,6 +10,8 @@ import Shop from "./Pages/Shop/Shop";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import Cart from "./Pages/Cart/Cart";
 import Footer from "./Components/Footer/Footer";
+import MyAccount from "./Pages/My-Account/MyAccount";
+import Boards from "./Pages/Secondary-Pages/Boards/Boards";
 
 function App() {
     return (
@@ -19,6 +21,10 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <Home />
+                      <Footer />
+                    </Route>
+                    <Route path="/boards">
+                        <Boards />
                     </Route>
                     <Route path="/shop">
                         <Shop />
@@ -29,12 +35,15 @@ function App() {
                     <Route path="/contact-us">
                         <ContactUs />
                     </Route>
+                    <Route path="/my-account">
+                        <MyAccount />
+                    </Route>
                     <Route path="/cart">
                         <Cart />
                     </Route>
                 </Switch>
             </AnimatePresence>
-            <Footer />
+            
         </Router>
     );
 }

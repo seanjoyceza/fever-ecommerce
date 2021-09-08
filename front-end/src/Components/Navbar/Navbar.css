@@ -10,9 +10,10 @@ html * {
 
 /*Desktop View*/
 .header {
+    box-sizing: border-box;
     position: flex;
     /* top:0; */
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
     background: rgb(14, 12, 11);
     /* border-bottom: 1px solid rgb(228, 228, 228); */
@@ -40,7 +41,7 @@ html * {
 .header2 {
     position: fixed;
     /* top:0; */
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
     background: rgb(14, 12, 11);
     /* border-bottom: 1px solid rgb(228, 228, 228); */
@@ -87,7 +88,7 @@ html * {
     height: 40px;
 }
 .nav-options {
-    background: rgb(0, 0, 0);
+    /* background: rgb(0, 0, 0); */
     /* padding-left: 25px; */
     display: flex;
 

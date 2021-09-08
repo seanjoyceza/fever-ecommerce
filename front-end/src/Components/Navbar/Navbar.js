@@ -60,6 +60,11 @@ const Header = () => {
                     click ? "justify nav-options active" : "justify nav-options"
                 }
             >
+            <li className="option" onClick={closeMobileMenu}>
+            <Link className="link" to="my-account">
+                My Account
+            </Link>
+        </li>
                 <li className="option" onClick={closeMobileMenu}>
                     <Link className="link" to="cart">
                         Cart(0)
@@ -70,6 +75,7 @@ const Header = () => {
                         Contact Us
                     </Link>
                 </li>
+               
             </ul>
 
             <div className="mobile-menu" onClick={handleClick}>
