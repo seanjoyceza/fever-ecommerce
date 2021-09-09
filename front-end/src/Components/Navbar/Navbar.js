@@ -4,6 +4,7 @@ import { ReactComponent as MenuIcon } from "./assets/menu.svg";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Logo from "./assets/fever.png";
+import Cart from "../../Pages/Cart/Cart";
 
 const Header = () => {
     const [click, setClick] = useState(false);
@@ -70,9 +71,7 @@ const Header = () => {
                     </Link>
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="/cart">
-                        Cart (0)
-                    </Link>
+                    <Cart />
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
                     <Link className="link" to="/contact-us">

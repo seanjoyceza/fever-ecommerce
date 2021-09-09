@@ -1,20 +1,56 @@
-.cart__page{
-    box-sizing: border-box;
-    /* padding-top: 80px; */
-  height: 100vh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  /* align-items: center;
-  justify-content: center; */
-  background-color: rgb(247, 247, 247);
+.link {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    padding-bottom: 3px;
+    /* background-color:blueviolet */
+}
+.link::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    display: block;
+    background-color: rgb(1, 138, 45);
+    margin-top: 2px;
+}
+.link:hover::after {
+    width: 100%;
+    transition: all 0.4s;
+}
+/* Green: rgb(1, 138, 45)
+Yellow: rgb(252, 222, 3)
+Red: rgb(213, 28, 44)
+Black: rgb(14, 12, 11)  */
+
+.checkout-btn {
+    background-color: rgb(1, 138, 45);
+    color: #1c1b1b;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    padding: 14px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 32px;
+    margin-right: 20px;
 }
 
+.yourbag-btn {
+    background-color: rgb(213, 28, 44);
+    color: #1c1b1b;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    padding: 14px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 32px;
+}
 
+.btn:active {
+    transform: scale(0.95);
+}
 
-@media (max-width: 768px) {
-    .cart__page {
-      padding-top: 30px;
-    }
-    
-  }
+.btn:focus {
+    outline: 0;
+}
