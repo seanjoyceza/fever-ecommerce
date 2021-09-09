@@ -1,11 +1,16 @@
-import React from "react";
+import React, {  useState } from "react";
 import "./Home.css";
 import { motion } from "framer-motion";
 
+
+import MainLinks from './MainLinks/MainLinks'
+
 //components
-import MainLinks from "./MainLinks/MainLinks";
+
+  
 
 function Home() {
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -13,6 +18,7 @@ function Home() {
             animate={{ opacity: 1 }}
             className="home__page"
         >
+      
             {/*      <FeaturedProducts />
              */}
             <MainLinks />

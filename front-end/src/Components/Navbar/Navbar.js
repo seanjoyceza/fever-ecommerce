@@ -48,12 +48,12 @@ const Header = () => {
                     </Link>
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="shop">
+                    <Link className="link" to="/shop">
                         Shop
                     </Link>
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="about-us">
+                    <Link className="link" to="/about-us">
                         About Us
                     </Link>
                 </li>
@@ -65,17 +65,17 @@ const Header = () => {
                 }
             >
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="my-account">
+                    <Link className="link" to="/my-account">
                         My Account
                     </Link>
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="cart">
+                    <Link className="link" to="/cart">
                         Cart (0)
                     </Link>
                 </li>
                 <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="contact-us">
+                    <Link className="link" to="/contact-us">
                         Contact Us
                     </Link>
                 </li>
