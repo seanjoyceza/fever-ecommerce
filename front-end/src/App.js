@@ -14,6 +14,8 @@ import Footer from "./Components/Footer/Footer";
 import MyAccount from "./Pages/My-Account/MyAccount";
 import Boards from "./Pages/Secondary-Pages/Boards/Boards";
 import ProductDetailPage from "./Components/ProductDetailsPage/ProductDetailPage";
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Register/Register";
 
 function App() {
     return (
@@ -23,6 +25,12 @@ function App() {
                 <Switch>
                     <Route path="/boards">
                         <Boards />
+                    </Route>
+                    <Route exact path="/register">
+                        <Register />
+                    </Route>
+                    <Route exact path="/login">
+                        <Login />
                     </Route>
                     <Route exact path="/about-us">
                         <AboutUs />

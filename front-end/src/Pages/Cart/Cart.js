@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./Cart.css";
@@ -52,7 +53,7 @@ const Cart = (props) => {
                 <div>Your cart is currently empty</div>
                 <div>
                     <button className="btn checkout-btn">Check Out</button>
-                    <button className="btn yourbag-btn">Your Bag</button>
+                    <Link to='/checkout-page' className="btn yourbag-btn">Your Bag</Link>
                 </div>
             </SlidingPane>
         </div>

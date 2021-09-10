@@ -31,7 +31,7 @@
 }
 .product_card_link{
   text-decoration: none;
-  margin: 10px 20px;
+  margin: 10px 10px;
   
 }
 .product_card_link:hover{
@@ -47,6 +47,7 @@ cursor: pointer;
   border: none;
   height: 60px;
   font-size: 23px;
+  border-bottom: 1px solid #75758B
 }
 .product__search__input:focus {
   outline: none;
@@ -54,6 +55,6 @@ cursor: pointer;
 
 @media (max-width: 768px) {
   .shop__page {
-    padding-top: 30px;
+    /* padding-top: 30px; */
   }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "./PageHeader.css";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function PageHeader() {
     return (
@@ -13,9 +14,9 @@ function PageHeader() {
                 <div className="pageheader__top">
                     <div className="pageheader__top-left">
                         <div className="pageheader__slogan">
-                            <a className="pageheader__slogan__logout" href="/#">
+                            <Link className="pageheader__slogan__logout" to="/login">
                                 Logout
-                            </a>
+                            </Link>
                             <p className="pageheader__slogan__title">
                                 My Account
                             </p>
