@@ -1,130 +1,157 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./ProductDetailPage.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import CartContext from "../../ContextStore/cart-ctx";
 import axios from "axios";
+
 const Product = ({ match }) => {
-  const [product, setProduct] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState("");
-  useEffect(() => {
-    fetchProduct();
-    console.log("uf", size);
-  }, []);
-  const fetchProduct = () => {
-    axios
-      .get(`https://fakestoreapi.com/products/${match.params.id}`)
-      .then((res) => {
-        setProduct(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
+    const [product, setProduct] = useState([]);
+    const [quantity, setQuantity] = useState(1);
+    const [size, setSize] = useState("");
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      exit={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className='productDetail__page'
-    >
-      <div className='productDetail__page__details'>
-        <div className='productDetail__page__image__holder'>
-          <img
-            className='productDetail__page__image'
-            src={product.image}
-            alt='product'
-          />
-        </div>
-        <div className='productDetail__page__text'>
-          <h2 className='productDetail__page__title'> {product.title}</h2>
-          <h3 className='productDetail__page__price'> R{product.price}</h3>
-          <p className='productDetail__page__description'>
-            {product.description}
-          </p>
-          <div>
-            <label className='label'>Size: <b>{size}</b></label>
-            <div className='productDetail__page__select_size'>
-              <select
-                className='productDetail__page__size'
-                onChange={(e) => setSize(e.target.value)}
-              >
-                <option
-                  className='productDetail__page__size__option'
-                  value={""}
-                >
-                  Select a size
-                </option>
-                <option
-                  className='productDetail__page__size__option'
-                  value={"Small"}
-                >
-                  Small
-                </option>
-                <option
-                  className='productDetail__page__size__option'
-                  value={"Medium"}
-                >
-                  Medium
-                </option>
-                <option
-                  className='productDetail__page__size__option'
-                  value={"Large"}
-                >
-                  Large
-                </option>
-                <option
-                  className='productDetail__page__size__option'
-                  value={"X-Large"}
-                >
-                  XL
-                </option>
-                <option
-                  className='productDetail__page__size__option'
-                  value={"XX-Large"}
-                >
-                  XXL
-                </option>
-              </select>
-              
-            </div>
-            <label className='label'>Quantity:</label>
-            <div className='quantity__select'>
-              <button
-                className='quantity__button button'
-                onClick={() => {
-                  setQuantity(quantity - 1);
-                }}
-              >
-                -
-              </button>
-              <div className='quantity__display'>
-                {quantity < 1 ? setQuantity(1) : quantity}
-              </div>
-              <button
-                className='quantity__button button'
-                onClick={() => {
-                  setQuantity(quantity + 1);
-                }}
-              >
-                +
-              </button>
-            </div>
-          </div>
-          <button className='productDetail__page__add_to_cart button'>
-            Add to Cart
-          </button>
-          <button className='productDetail__page__buy_now button'>
-            Buy Now
-          </button>
-        </div>
-      </div>
+    const cartCtx = useContext(CartContext);
 
-      <div className='back_to_shop_link'>
-        <Link to='/shop'>Back to shop</Link>
-      </div>
-    </motion.div>
-  );
+    useEffect(() => {
+        fetchProduct();
+        // console.log("uf", size);
+    }, []);
+
+    const fetchProduct = () => {
+        axios
+            .get(`https://fakestoreapi.com/products/${match.params.id}`)
+            .then((res) => {
+                setProduct(res.data);
+                // console.log(res.data);
+            })
+            .catch((err) => console.log(err));
+    };
+
+    const submitHandler = (event) => {
+        if (!size) {
+            return;
+        }
+        cartCtx.addItem({
+            //remember to change this ID to a more comprehensive one
+            id: Math.random(),
+            title: product.title,
+            price: product.price,
+            quantity: quantity,
+            size: size,
+        });
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="productDetail__page"
+        >
+            <div className="productDetail__page__details">
+                <div className="productDetail__page__image__holder">
+                    <img
+                        className="productDetail__page__image"
+                        src={product.image}
+                        alt="product"
+                    />
+                </div>
+                <div className="productDetail__page__text">
+                    <h2 className="productDetail__page__title">
+                        {product.title}
+                    </h2>
+                    <h3 className="productDetail__page__price">
+                        R{product.price}
+                    </h3>
+                    <p className="productDetail__page__description">
+                        {product.description}
+                    </p>
+                    <div>
+                        <label className="label">
+                            Size: <b>{size}</b>
+                        </label>
+                        <div className="productDetail__page__select_size">
+                            <select
+                                className="productDetail__page__size"
+                                onChange={(e) => setSize(e.target.value)}
+                            >
+                                <option
+                                    className="productDetail__page__size__option"
+                                    value={""}
+                                >
+                                    Select a size
+                                </option>
+                                <option
+                                    className="productDetail__page__size__option"
+                                    value={"Small"}
+                                >
+                                    Small
+                                </option>
+                                <option
+                                    className="productDetail__page__size__option"
+                                    value={"Medium"}
+                                >
+                                    Medium
+                                </option>
+                                <option
+                                    className="productDetail__page__size__option"
+                                    value={"Large"}
+                                >
+                                    Large
+                                </option>
+                                <option
+                                    className="productDetail__page__size__option"
+                                    value={"X-Large"}
+                                >
+                                    XL
+                                </option>
+                                <option
+                                    className="productDetail__page__size__option"
+                                    value={"XX-Large"}
+                                >
+                                    XXL
+                                </option>
+                            </select>
+                        </div>
+                        <label className="label">Quantity:</label>
+                        <div className="quantity__select">
+                            <button
+                                className="quantity__button button"
+                                onClick={() => {
+                                    setQuantity(quantity - 1);
+                                }}
+                            >
+                                -
+                            </button>
+                            <div className="quantity__display">
+                                {quantity < 1 ? setQuantity(1) : quantity}
+                            </div>
+                            <button
+                                className="quantity__button button"
+                                onClick={() => {
+                                    setQuantity(quantity + 1);
+                                }}
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+                    <button
+                        className="productDetail__page__add_to_cart button"
+                        onClick={submitHandler}
+                    >
+                        Add to Cart
+                    </button>
+                    <button className="productDetail__page__buy_now button">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <div className="back_to_shop_link">
+                <Link to="/shop">Back to shop</Link>
+            </div>
+        </motion.div>
+    );
 };
 export default Product;

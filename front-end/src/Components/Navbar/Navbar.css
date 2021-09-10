@@ -153,12 +153,11 @@ html * {
         transition: all 0.5s ease;
         flex-direction: column;
         list-style-type: none;
-        padding: 10px 0;
-        background: rgb(rgb(14, 12, 11));
+        background-color: rgb(rgb(14, 12, 11));
     }
     .nav-options.active {
-        /* background: rgb(rgb(14, 12, 11)); */
-        /* background: #fff; */
+        background: rgb(rgb(14, 12, 11));
+        background: #fff;
         top: 80px;
         right: 0;
         opacity: 1;
@@ -166,6 +165,7 @@ html * {
         z-index: 1;
         align-content: center;
         padding-left: 0px;
+        background-color: rgb(rgb(14, 12, 11));
     }
 
     .menu-icon {
@@ -182,7 +182,32 @@ html * {
         padding: 20px 0px;
         border-bottom: 1px solid rgb(228, 228, 228);
     }
+
+    .link {
+        text-decoration: none;
+        font-size: 18px;
+        color: rgb(0, 0, 0) !important;
+        padding-bottom: 3px;
+        /* background-color:blueviolet */
+    }
+    .link::after {
+        content: "";
+        width: 0%;
+        height: 2px;
+        display: block;
+        background-color: rgb(1, 138, 45);
+        margin-top: 2px;
+    }
+    .link:hover::after {
+        width: 100%;
+        transition: all 0.4s;
+    }
+
+    ul li {
+        display: inline-table;
+    }
 }
+
 .mobile-menu {
     position: absolute;
     display: block;
