@@ -33,7 +33,7 @@ const Product = ({ match }) => {
         }
         cartCtx.addItem({
             //remember to change this ID to a more comprehensive one
-            id: Math.random(),
+            id: product.id,
             title: product.title,
             price: product.price,
             quantity: quantity,

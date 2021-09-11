@@ -5,7 +5,6 @@ import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./Cart.css";
 import CartContext from "../../ContextStore/cart-ctx";
 import CartItem from "./CartItem";
-import Modal from "../../Components/UI/Modal";
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -21,19 +20,28 @@ const Cart = (props) => {
     const totalAmount = `R${cartCtx.totalAmount.toFixed(2)}`;
     const hasItems = cartCtx.items.length > 0;
 
-    const cartItemRemoveHandler = () => {};
+    const cartItemRemoveHandler = (id) => {
+        cartCtx.removeItem(id);
+    };
 
-    const cartItemAddHandler = () => {};
+    const cartItemAddHandler = (item) => {
+        // console.log(item);
+        cartCtx.addItem({ ...item, quantity: 1 });
+    };
 
     const cartItems = cartCtx.items.map((item) => {
-        <CartItem
-            key={item.id}
-            title={item.title}
-            amount={item.amount}
-            price={item.price}
-            onRemove={cartItemRemoveHandler.bind(null, item.id)}
-            onAdd={cartItemAddHandler.bind(null, item)}
-        />;
+        return (
+            //Remember the return keyword when using map - does not come up as an error
+            <CartItem
+                key={item.id}
+                image={item.image}
+                title={item.title}
+                quantity={item.quantity}
+                price={item.price}
+                onRemove={cartItemRemoveHandler.bind(null, item.id)} //bind preconfigures the parameters that the function will receive
+                onAdd={cartItemAddHandler.bind(null, item)}
+            />
+        );
     });
 
     const [modalState, setModalState] = useState(false);
@@ -62,10 +70,29 @@ const Cart = (props) => {
         return curNumber + item.quantity;
     }, 0);
 
+    //button bump effect
+    const [btnIsHighlighted, setBtnIsHighlighted] = useState(false);
+    const btnClasses = `${"link"} ${btnIsHighlighted ? "bump" : ""}`;
+    const { items } = cartCtx;
+    useEffect(() => {
+        if (items.length === 0) {
+            return;
+        }
+        setBtnIsHighlighted(true);
+
+        const timer = setTimeout(() => {
+            setBtnIsHighlighted(false);
+        }, 300);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [items]);
+
     return (
         <div>
             <div>
-                <p className="link" onClick={showCartHandler}>
+                <p className={btnClasses} onClick={showCartHandler}>
                     Cart ({numberOfCartItems})
                 </p>
             </div>

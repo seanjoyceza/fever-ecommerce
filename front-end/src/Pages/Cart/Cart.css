@@ -17,6 +17,29 @@
     width: 100%;
     transition: all 0.4s;
 }
+
+.bump {
+    animation: bump 300ms ease-out;
+}
+
+@keyframes bump {
+    0% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(0.9);
+    }
+    30% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 /* Green: rgb(1, 138, 45)
 Yellow: rgb(252, 222, 3)
 Red: rgb(213, 28, 44)
