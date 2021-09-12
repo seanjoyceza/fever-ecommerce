@@ -3,9 +3,9 @@ import "./Shop.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
-import ProductCard from "../../Components/ProductCard/ProductCard";
-
+import ProductCard from "../../ProductCard/ProductCard";
 import loadingSpinner from "../../assets/loading-buffering.gif";
+
 const FeaturedProducts = () => {
     const [products, setProducts] = useState([]);
 

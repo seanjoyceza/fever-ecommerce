@@ -1,0 +1,67 @@
+/* Green: rgb(1, 138, 45)
+Yellow: rgb(252, 222, 3)
+Red: rgb(213, 28, 44)
+Black: rgb(14, 12, 11)  */
+
+/* overall button styling */
+.btn {
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    padding: 14px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 32px;
+    margin-right: 20px;
+    display: block;
+    font-weight: 700;
+}
+
+/* cart buttons */
+.checkout-btn {
+    background-color: rgb(1, 138, 45);
+    color: #1c1b1b;
+    width: 100%;
+}
+
+.yourbag-btn {
+    background-color: rgb(213, 28, 44);
+    color: #1c1b1b;
+    width: 100%;
+}
+
+.yourbag-btn-link {
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn:focus {
+    outline: 0;
+}
+
+/* product details buttons */
+.productDetail__page__buy_now {
+    width: 100%;
+    background-color: #fcde03;
+}
+
+.productDetail__page__buy_now:hover {
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.productDetail__page__add_to_cart {
+    margin: 10px 0 10px 0;
+    height: 45px;
+    width: 100%;
+    background-color: rgb(1, 138, 45);
+    border: 1px solid #767676;
+    transition: all 0.3s ease;
+}
+.productDetail__page__add_to_cart:hover {
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}

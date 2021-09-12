@@ -5,17 +5,17 @@ import { AnimatePresence } from "framer-motion";
 
 //COMPONENTS
 import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Pages/Home-Page/Home";
-import AboutUs from "./Pages/About-Us/AboutUs";
-import Shop from "./Pages/Shop/Shop";
-import ContactUs from "./Pages/ContactUs/ContactUs";
-import Cart from "./Pages/Cart/Cart";
+import Home from "./Components/Pages/Home-Page/Home";
+import AboutUs from "./Components/Pages/About-Us/AboutUs";
+import Shop from "./Components/Pages/Shop/Shop";
+import ContactUs from "./Components/Pages/ContactUs/ContactUs";
+import Cart from "./Components/Pages/Cart/Cart";
 import Footer from "./Components/Footer/Footer";
-import MyAccount from "./Pages/My-Account/MyAccount";
-import Boards from "./Pages/Secondary-Pages/Boards/Boards";
+import MyAccount from "./Components/Pages/My-Account/MyAccount";
+import Boards from "./Components/Pages/Secondary-Pages/Boards/Boards";
 import ProductDetailPage from "./Components/ProductDetailsPage/ProductDetailPage";
-import Login from "./Pages/Login/Login";
-import Register from "./Pages/Register/Register";
+import Login from "./Components/Pages/Login/Login";
+import Register from "./Components/Pages/Register/Register";
 import CartProvider from "./ContextStore/cart-provider";
 
 function App() {

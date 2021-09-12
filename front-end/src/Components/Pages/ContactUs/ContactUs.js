@@ -114,7 +114,6 @@ function Contact() {
                                     <textarea
                                         name="message"
                                         className="contact__form__input"
-                                        id="textarea-input"
                                         placeholder="Your message..."
                                         id="message"
                                         required
@@ -132,13 +131,13 @@ function Contact() {
                     </div>
 
                     <div className="contact__page__details__socials">
-                        <a href="">
+                        <a href="/#">
                             <InstagramIcon className="social__logos" />
                         </a>
-                        <a href="">
+                        <a href="/#">
                             <FacebookIcon className="social__logos" />
                         </a>
-                        <a href="">
+                        <a href="/#">
                             <TelegramIcon className="social__logos" />
                         </a>
                     </div>

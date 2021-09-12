@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./Cart.css";
-import CartContext from "../../ContextStore/cart-ctx";
+
+//components
+import CartContext from "../../../ContextStore/cart-ctx";
 import CartItem from "./CartItem";
+import { Link } from "react-router-dom";
+import SlidingPane from "react-sliding-pane";
+import Button from "../../UI/Button";
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -107,17 +110,15 @@ const Cart = (props) => {
                 {!hasItems && <div>Your cart is currently empty.</div>}
                 {hasItems >= 1 && (
                     <div>
-                        <button className="btn checkout-btn">
+                        <Button type={"checkout-btn"}>
                             Check Out | {totalAmount}
-                        </button>
+                        </Button>
                         <Link
                             to="/checkout-page"
                             className="yourbag-btn-link"
                             onClick={onCloseHandler}
                         >
-                            <button className="btn yourbag-btn">
-                                Your Bag
-                            </button>
+                            <Button type={"yourbag-btn"}>Your Bag</Button>
                         </Link>
                     </div>
                 )}

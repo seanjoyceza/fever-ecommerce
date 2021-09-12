@@ -73,7 +73,7 @@ html * {
 
 .logo-nav-link {
     text-decoration: none;
-    height: 140px;
+    height: 80px;
 }
 .logo-nav-slogan {
     margin-top: 0px;
@@ -84,7 +84,6 @@ html * {
     /* background: rgb(0, 0, 0); */
     /* padding-left: 25px; */
     display: flex;
-
     list-style-type: none;
 }
 .mobile-option {
@@ -104,6 +103,7 @@ html * {
     color: white;
     padding-bottom: 3px;
     /* background-color:blueviolet */
+    font-weight: 700;
 }
 .link::after {
     content: "";
@@ -122,11 +122,12 @@ html * {
     display: none;
 }
 
-/* @media only screen and (max-width: 768px) {
-    logo-nav {
-    height: 70px;
+@media only screen and (max-width: 920px) {
+    .option {
+        padding: 0 7px;
+        text-decoration: none;
     }
-} */
+}
 
 @media (max-width: 768px) {
     /*Mobile View */
@@ -162,10 +163,11 @@ html * {
         right: 0;
         opacity: 1;
         transition: all 0.5s ease;
-        z-index: 1;
+        z-index: 99;
         align-content: center;
         padding-left: 0px;
         background-color: rgb(rgb(14, 12, 11));
+        display: inline-block;
     }
 
     .menu-icon {
@@ -212,4 +214,10 @@ html * {
     position: absolute;
     display: block;
     right: 20px;
+}
+
+@media (max-width: 320px) {
+    .menu-icon {
+        margin-right: 0px;
+    }
 }

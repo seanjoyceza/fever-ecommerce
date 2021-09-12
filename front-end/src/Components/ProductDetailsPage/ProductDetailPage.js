@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import CartContext from "../../ContextStore/cart-ctx";
 import axios from "axios";
+import Button from "../UI/Button";
 
 const Product = ({ match }) => {
     const [product, setProduct] = useState([]);
@@ -31,6 +32,7 @@ const Product = ({ match }) => {
         if (!size) {
             return;
         }
+
         cartCtx.addItem({
             //remember to change this ID to a more comprehensive one
             id: product.id,
@@ -67,13 +69,16 @@ const Product = ({ match }) => {
                         {product.description}
                     </p>
                     <div>
-                        <label className="label">
-                            Size: <b>{size}</b>
-                        </label>
+                        {size && (
+                            <label className="label">
+                                Size: <b>{size}</b>
+                            </label>
+                        )}
                         <div className="productDetail__page__select_size">
                             <select
                                 className="productDetail__page__size"
                                 onChange={(e) => setSize(e.target.value)}
+                                required
                             >
                                 <option
                                     className="productDetail__page__size__option"
@@ -136,15 +141,12 @@ const Product = ({ match }) => {
                             </button>
                         </div>
                     </div>
-                    <button
-                        className="productDetail__page__add_to_cart button"
-                        onClick={submitHandler}
-                    >
-                        Add to Cart
-                    </button>
-                    <button className="productDetail__page__buy_now button">
-                        Buy Now
-                    </button>
+                    <div onClick={submitHandler}>
+                        <Button type="productDetail__page__add_to_cart">
+                            Add to Cart
+                        </Button>
+                    </div>
+                    <Button type="productDetail__page__buy_now">Buy Now</Button>
                 </div>
             </div>
 

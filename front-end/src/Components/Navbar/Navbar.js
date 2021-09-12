@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Fragment } from "react";
 import { ReactComponent as CloseMenu } from "./assets/x.svg";
 import { ReactComponent as MenuIcon } from "./assets/menu.svg";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Logo from "./assets/fever.png";
-import Cart from "../../Pages/Cart/Cart";
+import Cart from "../Pages/Cart/Cart";
 
 const Header = () => {
     const [click, setClick] = useState(false);
@@ -42,44 +42,74 @@ const Header = () => {
                     />
                 </Link>
             </div>
-            <ul className={click ? "nav-options active" : "nav-options"}>
-                <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="/#">
-                        Home
-                    </Link>
-                </li>
-                <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="/shop">
-                        Shop
-                    </Link>
-                </li>
-                <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="/about-us">
-                        About Us
-                    </Link>
-                </li>
-            </ul>
-
-            <ul
-                className={
-                    click ? "justify nav-options active" : "justify nav-options"
-                }
-            >
-                <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="/my-account">
-                        My Account
-                    </Link>
-                </li>
-                <li className="option" onClick={closeMobileMenu}>
-                    <Cart />
-                </li>
-                <li className="option" onClick={closeMobileMenu}>
-                    <Link className="link" to="/contact-us">
-                        Contact Us
-                    </Link>
-                </li>
-            </ul>
-
+            {click && (
+                <ul className="nav-options active">
+                    <li className="option" onClick={closeMobileMenu}>
+                        <Link className="link" to="/#">
+                            Home
+                        </Link>
+                    </li>
+                    <li className="option" onClick={closeMobileMenu}>
+                        <Link className="link" to="/shop">
+                            Shop
+                        </Link>
+                    </li>
+                    <li className="option" onClick={closeMobileMenu}>
+                        <Link className="link" to="/about-us">
+                            About Us
+                        </Link>
+                    </li>
+                    <li className="option" onClick={closeMobileMenu}>
+                        <Link className="link" to="/my-account">
+                            My Account
+                        </Link>
+                    </li>
+                    <li className="option" onClick={closeMobileMenu}>
+                        <Cart />
+                    </li>
+                    <li className="option" onClick={closeMobileMenu}>
+                        <Link className="link" to="/contact-us">
+                            Contact Us
+                        </Link>
+                    </li>
+                </ul>
+            )}
+            {!click && (
+                <>
+                    <ul className="nav-options">
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/#">
+                                Home
+                            </Link>
+                        </li>
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/shop">
+                                Shop
+                            </Link>
+                        </li>
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/about-us">
+                                About Us
+                            </Link>
+                        </li>
+                    </ul>
+                    <ul className="justify nav-options">
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/my-account">
+                                My Account
+                            </Link>
+                        </li>
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Cart />
+                        </li>
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/contact-us">
+                                Contact Us
+                            </Link>
+                        </li>
+                    </ul>
+                </>
+            )}
             <div className="mobile-menu" onClick={handleClick}>
                 {click ? (
                     <CloseMenu className="menu-icon" />
