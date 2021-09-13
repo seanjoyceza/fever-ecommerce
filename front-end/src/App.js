@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 //COMPONENTS
 import Navbar from "./Components/Navbar/Navbar";

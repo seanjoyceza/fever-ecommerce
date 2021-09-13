@@ -20,7 +20,7 @@ html * {
     align-items: center;
     padding: 0px 40px;
     height: 80px;
-    z-index: 99;
+    z-index: 98;
     box-sizing: border-box;
     transition: opacity 500ms ease-in-out;
     /* display: flex; */
@@ -36,6 +36,14 @@ html * {
 
 .justify {
     margin-left: auto;
+}
+
+ul {
+    margin-bottom: 0px;
+}
+
+li {
+    align-items: center;
 }
 
 .header2 {
@@ -95,7 +103,16 @@ html * {
 }
 .option:hover {
     cursor: pointer;
-    /* text-decoration: underline; */
+}
+
+li {
+    display: flex;
+    align-items: center;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
 }
 .link {
     text-decoration: none;
@@ -104,6 +121,7 @@ html * {
     padding-bottom: 3px;
     /* background-color:blueviolet */
     font-weight: 700;
+    text-decoration: none;
 }
 .link::after {
     content: "";

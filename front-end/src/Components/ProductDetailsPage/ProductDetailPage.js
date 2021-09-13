@@ -36,6 +36,7 @@ const Product = ({ match }) => {
         cartCtx.addItem({
             //remember to change this ID to a more comprehensive one
             id: product.id,
+            image: product.image,
             title: product.title,
             price: product.price,
             quantity: quantity,

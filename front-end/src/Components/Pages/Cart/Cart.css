@@ -1,9 +1,15 @@
+* {
+    z-index: 99;
+}
+
 .link {
     text-decoration: none;
     font-size: 18px;
     color: white;
     padding-bottom: 3px;
     /* background-color:blueviolet */
+
+    margin-bottom: 0px;
 }
 .link::after {
     content: "";
@@ -20,6 +26,11 @@
 
 .bump {
     animation: bump 300ms ease-out;
+}
+
+.cart-div {
+    display: flex;
+    justify-content: center;
 }
 
 @keyframes bump {

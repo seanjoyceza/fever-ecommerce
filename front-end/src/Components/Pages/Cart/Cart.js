@@ -41,6 +41,7 @@ const Cart = (props) => {
                 title={item.title}
                 quantity={item.quantity}
                 price={item.price}
+                size={item.size}
                 onRemove={cartItemRemoveHandler.bind(null, item.id)} //bind preconfigures the parameters that the function will receive
                 onAdd={cartItemAddHandler.bind(null, item)}
             />
@@ -93,7 +94,7 @@ const Cart = (props) => {
     }, [items]);
 
     return (
-        <div>
+        <div className="cart-div">
             <div>
                 <p className={btnClasses} onClick={showCartHandler}>
                     Cart ({numberOfCartItems})

@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import ProductCard from "../../ProductCard/ProductCard";
 import loadingSpinner from "../../assets/loading-buffering.gif";
+import SideBar from "../../SideBar/SideBar";
+import { Container, Row, Col } from "react-bootstrap";
 
 const FeaturedProducts = () => {
     const [products, setProducts] = useState([]);
@@ -47,28 +49,37 @@ const FeaturedProducts = () => {
                     onChange={searchProducts}
                 />
             </form>
-            <div className="shop__page__display">
-                <div className="shop__page__product_holder">
-                    {filteredProducts ? (
-                        filteredProducts.map((product) => (
-                            <Link
-                                key={product.id}
-                                className="product_card_link"
-                                to={`/shop/${product.id}`}
-                            >
-                                <ProductCard
-                                    // title={product.brand}
-                                    title={product.title}
-                                    image={product.image}
-                                    price={product.price}
-                                />
-                            </Link>
-                        ))
-                    ) : (
-                        <img src={loadingSpinner} alt="item" />
-                    )}
-                </div>
-            </div>
+            <Container>
+                <Row>
+                    <Col xs={3} className="mt-4 sidebar-col">
+                        <SideBar />
+                    </Col>
+                    <Col>
+                        <div className="shop__page__display">
+                            <div className="shop__page__product_holder">
+                                {filteredProducts ? (
+                                    filteredProducts.map((product) => (
+                                        <Link
+                                            key={product.id}
+                                            className="product_card_link"
+                                            to={`/shop/${product.id}`}
+                                        >
+                                            <ProductCard
+                                                // title={product.brand}
+                                                title={product.title}
+                                                image={product.image}
+                                                price={product.price}
+                                            />
+                                        </Link>
+                                    ))
+                                ) : (
+                                    <img src={loadingSpinner} alt="item" />
+                                )}
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </motion.div>
     );
 };

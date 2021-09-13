@@ -8,23 +8,38 @@ const CartItem = (props) => {
 
     return (
         <li className={classes["cart-item"]}>
-            <div>
-                <div className="productCard__image_holder">
-                    <img
-                        className="productCard__image"
-                        src={props.image}
-                        alt="product"
-                    />
-                </div>
-                <h2>{props.title}</h2>
-                <div className={classes.summary}>
-                    <span className={classes.price}>{price}</span>
-                    <span className={classes.amount}>x {props.quantity}</span>
-                </div>
+            <div className={classes.image_containter}>
+                <img
+                    className={classes.productCard__image}
+                    src={props.image}
+                    alt="product"
+                />
             </div>
             <div className={classes.actions}>
-                <button onClick={props.onAdd}>+</button>
-                <button onClick={props.onRemove}>-</button>
+                <div>
+                    <h2 className={classes.title}>{props.title}</h2>
+                    <p className={classes.size}>{props.size}</p>
+                    <p className={classes.price}>{price}</p>
+                    <div className={classes.div_align}>
+                        <div className={classes.quantity__select}>
+                            <button
+                                className={classes.quantity__plus}
+                                onClick={props.onRemove}
+                            >
+                                -
+                            </button>
+                            <span className={classes.quantity__number}>
+                                x{props.quantity}
+                            </span>
+                            <button
+                                className={classes.quantity__minus}
+                                onClick={props.onAdd}
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </li>
     );
