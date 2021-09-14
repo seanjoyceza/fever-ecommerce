@@ -4,7 +4,7 @@ import { ReactComponent as MenuIcon } from "./assets/menu.svg";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Logo from "./assets/fever.png";
-import Cart from "../Pages/Cart/Cart";
+import Cart from "../../Pages/Cart/Cart";
 
 const Header = () => {
     const [click, setClick] = useState(false);

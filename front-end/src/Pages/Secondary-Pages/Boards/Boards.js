@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import "./Boards.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ProductCard from "../../../ProductCard/ProductCard";
-import loadingSpinner from "../../../assets/loading-buffering.gif";
+import ProductCard from "../../../Components/ProductCard/ProductCard";
+import loadingSpinner from "../../../Components/assets/loading-buffering.gif";
 
 function Boards() {
     const [products, setProducts] = useState([]);

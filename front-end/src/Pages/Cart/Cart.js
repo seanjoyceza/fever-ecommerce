@@ -3,11 +3,11 @@ import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./Cart.css";
 
 //components
-import CartContext from "../../../ContextStore/cart-ctx";
+import CartContext from "../../ContextStore/cart-ctx";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
 import SlidingPane from "react-sliding-pane";
-import Button from "../../UI/Button";
+import Button from "../../Components/UI/Button";
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
