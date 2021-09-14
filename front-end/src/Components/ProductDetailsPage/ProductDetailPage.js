@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import CartContext from "../../ContextStore/cart-ctx";
 import axios from "axios";
-import Button from "../UI/Button";
+import { Button } from "react-bootstrap";
 
 const Product = ({ match }) => {
     const [product, setProduct] = useState([]);
@@ -143,16 +143,18 @@ const Product = ({ match }) => {
                         </div>
                     </div>
                     <div onClick={submitHandler}>
-                        <Button type="productDetail__page__add_to_cart">
-                            Add to Cart
+                        <Button className="btn btn-success my-3">
+                            Add To Cart
                         </Button>
                     </div>
-                    <Button type="productDetail__page__buy_now">Buy Now</Button>
+                    <Button className="btn btn-warning">Buy Now</Button>
                 </div>
             </div>
 
-            <div className="back_to_shop_link">
-                <Link to="/shop">Back to shop</Link>
+            <div>
+                <Link className="btn btn-danger" to="/shop">
+                    Back to shop
+                </Link>
             </div>
         </motion.div>
     );

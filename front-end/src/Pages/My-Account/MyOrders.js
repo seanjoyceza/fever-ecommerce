@@ -30,7 +30,7 @@ function MyOrders() {
                                 You haven't placed any orders yet.
                             </p>
 
-                            <button className="btn addresses-btn">
+                            <button className="btn btn-warning addresses-btn">
                                 Manage Addresses
                             </button>
                         </div>

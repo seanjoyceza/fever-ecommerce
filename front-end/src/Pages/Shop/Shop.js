@@ -41,21 +41,55 @@ const FeaturedProducts = () => {
             animate={{ opacity: 1 }}
             className="shop__page"
         >
-            <form className="product__search">
+            {/* <form className="product__search">
                 <input
                     type="text"
                     placeholder="Search for a product"
                     className="product__search__input"
                     onChange={searchProducts}
                 />
-            </form>
+            </form> */}
             <Container>
                 <Row>
                     <Col xs={3} className="mt-4 sidebar-col">
-                        <SideBar />
+                        <SideBar searchProducts={searchProducts} />
                     </Col>
                     <Col>
                         <div className="shop__page__display">
+                            <div className="shop_page_heading">
+                                All Products
+                            </div>
+                            <div className="shop_page_heading2">
+                                <div className="sort_by">Sort by:</div>
+                                <select className="shop_page_select">
+                                    <option
+                                        className="shop_page_option"
+                                        value={"Default sorting"}
+                                        selected
+                                    >
+                                        Default sorting
+                                    </option>
+                                    <option
+                                        className="shop_page_option"
+                                        value={"Sort by latest"}
+                                    >
+                                        Sort by latest
+                                    </option>
+                                    <option
+                                        className="shop_page_option"
+                                        value={"Sort by price: low to high"}
+                                    >
+                                        Sort by price: low to high
+                                    </option>
+                                    <option
+                                        className="shop_page_option"
+                                        value={"Sort by price: high to low"}
+                                    >
+                                        Sort by price: high to low
+                                    </option>
+                                </select>
+                            </div>
+
                             <div className="shop__page__product_holder">
                                 {filteredProducts ? (
                                     filteredProducts.map((product) => (

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 import { motion } from "framer-motion";
+import { Container, Row, Col } from "react-bootstrap";
 
 import MainLinks from "./MainLinks/MainLinks";
 
@@ -14,9 +15,11 @@ function Home() {
             animate={{ opacity: 1 }}
             className="home__page"
         >
-            {/*      <FeaturedProducts />
-             */}
-            <MainLinks />
+            <Container>
+                <Row>
+                    <MainLinks />
+                </Row>
+            </Container>
         </motion.div>
     );
 }

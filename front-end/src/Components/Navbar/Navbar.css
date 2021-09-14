@@ -8,6 +8,10 @@ html * {
     font-family: Arial;
 }
 
+a:hover {
+    color: white !important;
+}
+
 /*Desktop View*/
 .header {
     box-sizing: border-box;

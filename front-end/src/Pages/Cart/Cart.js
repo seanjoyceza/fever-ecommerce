@@ -7,7 +7,7 @@ import CartContext from "../../ContextStore/cart-ctx";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
 import SlidingPane from "react-sliding-pane";
-import Button from "../../Components/UI/Button";
+import { Button } from "react-bootstrap";
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -111,16 +111,22 @@ const Cart = (props) => {
                 {!hasItems && <div>Your cart is currently empty.</div>}
                 {hasItems >= 1 && (
                     <div>
-                        <Button type={"checkout-btn"}>
-                            Check Out | {totalAmount}
-                        </Button>
-                        <Link
-                            to="/checkout-page"
-                            className="yourbag-btn-link"
-                            onClick={onCloseHandler}
-                        >
-                            <Button type={"yourbag-btn"}>Your Bag</Button>
-                        </Link>
+                        <div class="d-grid gap-2">
+                            <Button className="btn btn-success">
+                                Check Out | {totalAmount}
+                            </Button>
+                            <Button className="btn btn-warning">
+                                <Link
+                                    to="/checkout-page"
+                                    className="yourbag-btn-link"
+                                    onClick={onCloseHandler}
+                                >
+                                    <div className="your_bag_link">
+                                        Your Bag
+                                    </div>
+                                </Link>
+                            </Button>
+                        </div>
                     </div>
                 )}
             </SlidingPane>

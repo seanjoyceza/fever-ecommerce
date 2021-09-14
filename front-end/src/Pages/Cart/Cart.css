@@ -19,6 +19,17 @@
     background-color: rgb(1, 138, 45);
     margin-top: 2px;
 }
+
+.your_bag_link {
+    color: black;
+    text-decoration: none !important;
+}
+
+.your_bag_link:hover {
+    color: black;
+    text-decoration: none !important;
+}
+
 .link:hover::after {
     width: 100%;
     transition: all 0.4s;

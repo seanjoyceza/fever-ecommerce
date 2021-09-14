@@ -48,6 +48,10 @@ label {
     display: flex;
 }
 
+.btn {
+    color: black;
+}
+
 .productDetail__page__size {
     background-color: #efefef;
     margin: 10px 0 20px 0;
@@ -74,6 +78,7 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid #767676;
 }
 .quantity__button {
     flex: 0.3;

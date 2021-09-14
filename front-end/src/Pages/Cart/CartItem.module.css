@@ -1,3 +1,9 @@
+/* Rasta Colors:
+Green: rgb(1, 138, 45)
+Yellow: rgb(252, 222, 3)
+Red: rgb(213, 28, 44)
+Black: rgb(14, 12, 11) */
+
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -19,7 +25,7 @@
 
 .price {
     font-weight: bold;
-    color: #8a2b06;
+    color: rgb(213, 28, 44);
 }
 
 .amount {
@@ -45,7 +51,7 @@
     font: inherit;
     font-weight: bold;
     font-size: 1.25rem;
-    color: #8a2b06;
+    color: #3a3a3a;
     border: none;
     width: 3rem;
     text-align: center;
@@ -58,8 +64,8 @@
 
 .cart-item button:hover,
 .cart-item button:active {
-    background-color: #8a2b06;
-    color: white;
+    background-color: rgb(252, 222, 3);
+    color: black;
 }
 
 /* image styling */
@@ -103,7 +109,7 @@
 }
 
 .quantity__select {
-    border: 1px solid black;
+    border: 1px solid #6a6a6a;
     border-radius: 6px;
 }
 
@@ -112,6 +118,8 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    color: rgb(213, 28, 44);
+    font-weight: 600;
 }
 
 .quantity__select {

@@ -1,27 +1,57 @@
+/* Rasta Colors:
+Green: rgb(1, 138, 45)
+Yellow: rgb(252, 222, 3)
+Red: rgb(213, 28, 44)
+Black: rgb(14, 12, 11) */
+
 .sidebar {
     margin: 0;
     padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
-    height: 100%;
+    width: 280px;
+    /* background-color: #f1f1f1; */
     overflow: auto;
+    border: 1px solid #e7e7e7;
+}
+
+.search {
+    /* background-color: #f1f1f1; */
+    height: 120px;
+    padding: 20px;
+    border-top: 1px solid #e7e7e7;
+}
+
+.search-items {
+    padding: 20px;
+}
+
+.search_heading {
+    font-size: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.sidebar_product__search__input {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    height: 44px;
+    font-size: 15px;
+    border: 1px solid #e7e7e7;
+}
+.sidebar_product__search__input:focus {
+    outline: none;
 }
 
 .sidebar a {
     display: block;
     color: black;
-    padding: 16px;
+    padding: 8px;
     text-decoration: none;
+    font-size: 14px;
 }
 
-.sidebar a.active {
-    background-color: #04aa6d;
-    color: white;
-}
-
-.sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
+.sidebar a:hover {
+    color: rgb(1, 138, 45) !important;
 }
 
 div.content {
@@ -48,5 +78,12 @@ div.content {
     .sidebar a {
         text-align: center;
         float: none;
+    }
+}
+
+@media screen and (max-width: 1220px) {
+    .sidebar {
+        width: 220px;
+        /* background-color: #f1f1f1; */
     }
 }
