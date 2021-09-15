@@ -2,6 +2,7 @@ import React from "react";
 import "./AboutUs.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 
 const AboutUs = () => {
   return (
@@ -11,9 +12,10 @@ const AboutUs = () => {
       animate={{ opacity: 1 }}
       className='about__page'
     >
+    <Container>
       <div className='about__page__wrapper'>
         <h1>About us</h1>
-        <p>
+        <p className='about__page__wrapper__first_paragraph'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -62,6 +64,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+      </Container>
     </motion.div>
   );
 };

@@ -70,17 +70,17 @@ function Footer() {
                 </li>
 
                 <li className='footer__option'>
-                  <Link className='footer__link' to='contact-us'>
+                  <Link className='footer__link' to='/policy/privacy-policy'>
                     Privacy Policy
                   </Link>
                 </li>
                 <li className='footer__option'>
-                  <Link className='footer__link' to='contact-us'>
+                  <Link className='footer__link' to='/policy/return-policy'>
                     Returns Policy
                   </Link>
                 </li>
                 <li className='footer__option'>
-                  <Link className='footer__link' to='contact-us'>
+                  <Link className='footer__link' to='/policy/shipping-policy'>
                     Shipping Policy
                   </Link>
                 </li>

@@ -82,7 +82,7 @@ function Boards() {
 
                             <div className="shop__page__product_holder">
                                 {filteredProducts ? (
-                                    filteredProducts.map((product) => (
+                                    filteredProducts.slice(0, 10).map((product) => (
                                         <Link
                                             key={product.id}
                                             className="product_card_link"
@@ -105,28 +105,7 @@ function Boards() {
                 </Row>
             </Container>
 
-            <div className="shop__page__display">
-                <div className="shop__page__product_holder">
-                    {filteredProducts ? (
-                        filteredProducts.map((product) => (
-                            <Link
-                                key={product.id}
-                                className="product_card_link"
-                                to={`/shop/${product.id}`}
-                            >
-                                <ProductCard
-                                    // title={product.brand}
-                                    title={product.title}
-                                    image={product.image}
-                                    price={product.price}
-                                />
-                            </Link>
-                        ))
-                    ) : (
-                        <img src={loadingSpinner} alt="item" />
-                    )}
-                </div>
-            </div>
+       
         </motion.div>
     );
 }
