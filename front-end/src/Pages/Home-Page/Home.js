@@ -15,7 +15,7 @@ function Home() {
             animate={{ opacity: 1 }}
             className="home__page"
         >
-            <Container>
+            <Container fluid="lg">
                 <Row>
                     <MainLinks />
                 </Row>

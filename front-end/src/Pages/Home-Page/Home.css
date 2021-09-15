@@ -1,19 +1,17 @@
 .home__page {
-  box-sizing: border-box;
-  /* margin-top: 80px; */
-  min-height: 100vh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  /* align-items: center;
+    box-sizing: border-box;
+    /* margin-top: 80px; */
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;
   justify-content: center; */
-  background-color: rgb(247, 247, 247);
+    background-color: rgb(247, 247, 247);
 }
 
 @media (max-width: 768px) {
-  .home__page {
-    padding-top: 30px;
-  }
+    .home__page {
+        padding-top: 30px;
+    }
 }
-
-

@@ -8,8 +8,15 @@ import Cart from "../../Pages/Cart/Cart";
 
 const Header = () => {
     const [click, setClick] = useState(false);
-    const handleClick = () => setClick(!click);
-    const closeMobileMenu = () => setClick(false);
+    const handleClick = () => {
+        console.log("it works!");
+
+        setClick(!click);
+    };
+    const closeMobileMenu = () => {
+        console.log("it works!");
+        setClick(false);
+    };
 
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);

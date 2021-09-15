@@ -107,7 +107,11 @@ const FeaturedProducts = () => {
                                         </Link>
                                     ))
                                 ) : (
-                                    <img src={loadingSpinner} alt="item" />
+                                    <img
+                                        src={loadingSpinner}
+                                        className="image-flex"
+                                        alt="item"
+                                    />
                                 )}
                             </div>
                         </div>
