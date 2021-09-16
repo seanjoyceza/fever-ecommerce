@@ -1,0 +1,74 @@
+.my_button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    color: white !important;
+}
+
+.my_button2 {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    color: black !important;
+}
+
+.my_button:hover {
+    background: none;
+    color: inherit;
+    border: none !important;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    color: white;
+    box-shadow: none;
+}
+
+.modal-backdrop {
+    background-color: transparent;
+}
+
+.my_button:focus {
+    background: none;
+    color: inherit;
+    border: none !important;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    color: white;
+    box-shadow: none;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.my_button:active {
+    background: none;
+    color: inherit;
+    border: none !important;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    color: white;
+    box-shadow: none;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 820px) {
+    /*Mobile View */
+
+    .btn {
+        /* width: 45px; */
+        color: black !important;
+    }
+}
