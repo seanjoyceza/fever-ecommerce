@@ -26,12 +26,12 @@ const FeaturedProducts = () => {
     }, []);
     const fetchProducts = () => {
         axios
-            .get("https://fakestoreapi.com/products")
+            .get("http://localhost:3001/api/get")
             .then((res) => {
                 setProducts(res.data);
             })
             .catch((err) => {
-                console.log(err);
+                console.log(`This is the error: ${err}`);
             });
     };
     return (
@@ -64,8 +64,7 @@ const FeaturedProducts = () => {
                                 <select className="shop_page_select">
                                     <option
                                         className="shop_page_option"
-                                        value={"Default sorting"}
-                                        selected
+                                        defaultValue={"Default sorting"}
                                     >
                                         Default sorting
                                     </option>
