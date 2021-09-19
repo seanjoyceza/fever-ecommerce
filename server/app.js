@@ -3,6 +3,7 @@ const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 const port = process.env.PORT || 3001;
+require("dotenv").config();
 
 //middleware
 app.use(express.urlencoded({ extended: true }));
@@ -11,10 +12,10 @@ app.use(cors());
 
 //start mySQL
 const db = mysql.createPool({
-    host: "dedi648.jnb3.host-h.net",
-    user: "feverboardsDB",
-    password: "VWl27JrtYmTMy3ycWH8R",
-    database: "feverboardsDB",
+    host: process.env.DB_URL,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
 });
 
 app.get("/api/get", (req, res) => {
