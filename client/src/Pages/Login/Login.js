@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Login.css";
+import LoginForm from "./LoginForm";
 
 // import { login } from "../../actions/auth.actions";
 // import { useDispatch, useSelector } from "react-redux";
@@ -33,29 +34,12 @@ function Login(props) {
             <p className="login__lead">
                 <i className="fas fa-user" /> Sign Into Your Account
             </p>
-            <form className="form">
-                <input
-                    className="form__input"
-                    type="email"
-                    placeholder="Email Address"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    // required
-                />
-
-                <input
-                    className="form__input"
-                    placeholder="Password"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    // required
-                />
-
-                <button className="login__button">Login</button>
-            </form>
-
+            <LoginForm
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+            />
             <p className="login__account">
                 Don't have an account?
                 <Link to="/register" className="dev-header">

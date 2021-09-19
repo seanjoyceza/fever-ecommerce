@@ -18,7 +18,7 @@ const db = mysql.createPool({
     database: process.env.DB_DATABASE,
 });
 
-app.get("/api/get", (req, res) => {
+app.get("/api/get", async (req, res) => {
     db.query("SELECT * from products", (err, rows) => {
         if (!err) {
             res.send(rows);
@@ -28,19 +28,36 @@ app.get("/api/get", (req, res) => {
     });
 });
 
-//started setting up register backend logic
-app.get("/api/register", (req, res) => {
-    db.query("SELECT * from products", (err, rows) => {
-        if (!err) {
-            res.send(rows);
-        } else {
-            console.log(err);
+app.post("/api/register", async (req, res) => {
+    const userFirstName = req.body.userFirstName;
+    const userLastName = req.body.userLastName;
+    const userEmail = req.body.userEmail;
+    const userPassword = req.body.userPassword;
+
+    const sqlInsert =
+        "INSERT INTO users (userFirstName, userLastName,userEmail, userPassword) VALUES (?,?,?,?)";
+    db.query(
+        sqlInsert,
+        [userFirstName, userLastName, userEmail, userPassword],
+        (err, result) => {
+            if (!err) {
+                res.send("Success!");
+            } else {
+                console.log(err);
+            }
         }
-    });
+    );
 });
 //end mySQL
 
+//custom error handling
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+});
+//
+
 //listen on env port or port 3001
 app.listen(port, () => {
-    console.log("Serving on port 3001");
+    console.log(`Serving on port ${port}`);
 });

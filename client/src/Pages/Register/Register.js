@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Register.css";
+import RegisterForm from "./RegisterForm";
+import "./RegisterForm.css";
 
 // import { useDispatch, useSelector } from "react-redux";
 // import { register } from "../../actions/user.actions";
@@ -35,63 +36,34 @@ function Register(props) {
     //   return <p>loading...</p>
     // }
 
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+    };
+
     return (
         <div className="login">
             <h1 className="login__header">Register</h1>
             <p className="login__lead">
                 <i className="fas fa-user" /> Create Your Account
             </p>
-            <form className="register__form">
-                <input
-                    // autoComplete='off'
-                    className="form__input"
-                    type="name"
-                    placeholder="First Name"
-                    name="first name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                />
-                <input
-                    // autoComplete='off'
-                    className="form__input"
-                    type="name"
-                    placeholder="Last Name"
-                    name=" last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                />
-
-                <input
-                    // autoComplete='off'
-                    className="form__input"
-                    type="email"
-                    placeholder="Email Address"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value.toLowerCase())}
-                    required
-                />
-
-                <input
-                    // autoComplete='off'
-                    className="form__input"
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-
-                <input
-                    value="Register"
-                    type="submit"
-                    className="login__button"
-                />
-            </form>
-
+            <RegisterForm
+                firstName={firstName}
+                setFirstName={setFirstName}
+                lastName={lastName}
+                setLastName={setLastName}
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+            />
             <p className="login__account">
                 Already have an account?
                 <Link to="/login" className="dev-header">

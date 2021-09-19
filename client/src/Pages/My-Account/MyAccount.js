@@ -3,7 +3,7 @@ import "./MyAccount.css";
 import { motion } from "framer-motion";
 import PageHeader from "./PageHeader";
 import MyOrders from "./MyOrders";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 function MyAccount() {
     return (
