@@ -7,10 +7,6 @@ import "./RegisterForm.css";
 // import { register } from "../../actions/user.actions";
 
 function Register(props) {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     // const auth = useSelector((state) => state.auth);
     // const dispatch = useDispatch();
     // const user = useSelector(state => state.user)
@@ -38,32 +34,13 @@ function Register(props) {
 
     const [validated, setValidated] = useState(false);
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        setValidated(true);
-    };
-
     return (
         <div className="login">
             <h1 className="login__header">Register</h1>
             <p className="login__lead">
                 <i className="fas fa-user" /> Create Your Account
             </p>
-            <RegisterForm
-                firstName={firstName}
-                setFirstName={setFirstName}
-                lastName={lastName}
-                setLastName={setLastName}
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
-            />
+            <RegisterForm />
             <p className="login__account">
                 Already have an account?
                 <Link to="/login" className="dev-header">

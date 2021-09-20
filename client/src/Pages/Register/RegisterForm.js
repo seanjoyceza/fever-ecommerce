@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+const axios = require("axios").default;
 
 const RegisterForm = (props) => {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [validated, setValidated] = useState(false);
 
     const handleSubmit = (event) => {
@@ -11,6 +16,19 @@ const RegisterForm = (props) => {
             event.stopPropagation();
         }
         setValidated(true);
+        axios
+            .post("http://localhost:3001/api/register", {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password,
+            })
+            .then(() => {
+                console.log("successful insert!");
+            })
+            .catch(() => {
+                console.log("could not send to backend!");
+            });
     };
 
     return (
@@ -19,27 +37,29 @@ const RegisterForm = (props) => {
             validated={validated}
             onSubmit={handleSubmit}
             className="register__form"
+            method="POST"
+            action="http://localhost:3000/api/users/register"
         >
             <Form.Group controlId="validationCustom01">
                 <Form.Control
                     required
-                    defaultValue={props.firstName}
+                    defaultValue={firstName}
                     className="form__input"
                     type="text"
                     placeholder="First Name"
                     name="first name"
-                    onChange={(e) => props.setFirstName(e.target.value)}
+                    onChange={(e) => setFirstName(e.target.value)}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="validationCustom02">
                 <Form.Control
                     type="text"
-                    defaultValue={props.lastName}
+                    defaultValue={lastName}
                     className="form__input"
                     placeholder="Last Name"
                     name="last name"
-                    onChange={(e) => props.setLastName(e.target.value)}
+                    onChange={(e) => setLastName(e.target.value)}
                     required
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -47,11 +67,11 @@ const RegisterForm = (props) => {
             <Form.Group controlId="validationCustom03">
                 <Form.Control
                     type="email"
-                    defaultValue={props.email}
+                    defaultValue={email}
                     className="form__input"
                     placeholder="Email"
                     name="email"
-                    onChange={(e) => props.setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -59,11 +79,11 @@ const RegisterForm = (props) => {
             <Form.Group controlId="validationCustom04">
                 <Form.Control
                     type="password"
-                    defaultValue={props.password}
+                    defaultValue={password}
                     className="form__input"
                     placeholder="Password"
                     name="password"
-                    onChange={(e) => props.setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
