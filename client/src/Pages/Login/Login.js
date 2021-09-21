@@ -9,8 +9,6 @@ import LoginForm from "./LoginForm";
 
 function Login(props) {
     // const dispatch = useDispatch();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
     // const auth = useSelector((state) => state.auth);
 
@@ -34,12 +32,7 @@ function Login(props) {
             <p className="login__lead">
                 <i className="fas fa-user" /> Sign Into Your Account
             </p>
-            <LoginForm
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
-            />
+            <LoginForm />
             <p className="login__account">
                 Don't have an account?
                 <Link to="/register" className="dev-header">

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 const axios = require("axios").default;
 
-const RegisterForm = (props) => {
+const RegisterForm = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -16,20 +16,26 @@ const RegisterForm = (props) => {
             event.stopPropagation();
         }
         setValidated(true);
-        axios
-            .post("http://localhost:3001/api/register", {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                password: password,
-            })
-            .then(() => {
-                console.log("successful insert!");
-            })
-            .catch(() => {
-                console.log("could not send to backend!");
-            });
+        if (form.checkValidity() === true) {
+            axios
+                .post("http://localhost:3001/api/register", {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                })
+                .then(() => {
+                    console.log("successful register insert!");
+                })
+                .catch(() => {
+                    console.log("could not send to backend!");
+                });
+        }
     };
+    //   const navigate = useNavigate();
+    //   useEffect(() => {
+    //     let didCancel = false;
+    //     const goToHomePage = () => navigate('/home');
 
     return (
         <Form

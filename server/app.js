@@ -4,12 +4,22 @@ const mysql = require("mysql");
 const cors = require("cors");
 const port = process.env.PORT || 3001;
 require("dotenv").config();
-const router = express.Router();
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
 //middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(
+    cors({
+        origin: ["http://localhost3000"],
+        methods: ["GET", "POST"],
+        credentials: true,
+    })
+);
+app.use(cookieParser());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
@@ -18,6 +28,18 @@ app.use(function (req, res, next) {
     );
     next();
 });
+
+app.use(
+    session({
+        key: "userId",
+        secret: "thisshouldbeabettersecret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 60 * 60 * 24 * 1000,
+        },
+    })
+);
 
 //get products
 const db = mysql.createPool({
@@ -44,21 +66,74 @@ app.post("/api/register", async (req, res) => {
     const userLastName = req.body.lastName;
     const userEmail = req.body.email;
     const userPassword = req.body.password;
-    const sqlInsert =
-        "INSERT INTO users (userFirstName, userLastName,userEmail, userPassword) VALUES (?,?,?,?)";
+
+    bcrypt.hash(userPassword, saltRounds, (err, hash) => {
+        if (err) {
+            console.log(err);
+        }
+
+        const sqlInsert =
+            "INSERT INTO users (userFirstName, userLastName,userEmail, userPassword) VALUES (?,?,?,?)";
+        db.query(
+            sqlInsert,
+            [userFirstName, userLastName, userEmail, hash],
+            (err, result) => {
+                if (!err) {
+                    res.send("Success!");
+                } else {
+                    console.log(err);
+                }
+            }
+        );
+    });
+});
+//end register
+
+//login
+app.get("/api/login", async (req, res) => {
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user });
+    } else {
+        res.send({ loggedIn: false });
+    }
+});
+
+app.post("/api/login", async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
     db.query(
-        sqlInsert,
-        [userFirstName, userLastName, userEmail, userPassword],
+        "SELECT * FROM users WHERE UserEmail = ?",
+        email,
         (err, result) => {
-            if (!err) {
-                res.send("Success!");
+            if (err) {
+                res.send({ err: err });
+            }
+
+            if (result.length > 0) {
+                bcrypt.compare(
+                    password,
+                    result[0].UserPassword,
+                    (error, response) => {
+                        if (response) {
+                            console.log("Logged in!");
+                            req.session.user = result;
+                            console.log(req.session.user);
+                            res.send(result);
+                        } else {
+                            res.send({
+                                message: "Wrong email or password combination!",
+                            });
+                        }
+                    }
+                );
             } else {
-                console.log(err);
+                res.send({ message: "Wrong email or password combination!" });
             }
         }
     );
 });
-//end register
+//end login
 
 //listen on env port or port 3001
 app.listen(port, () => {

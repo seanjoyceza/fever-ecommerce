@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, Fragment } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { ReactComponent as CloseMenu } from "./assets/x.svg";
 import { ReactComponent as MenuIcon } from "./assets/menu.svg";
 import "./Navbar.css";
@@ -7,9 +7,12 @@ import Logo from "./assets/fever.png";
 import Cart from "../../Pages/Cart/Cart";
 import SearchModal from "../SeachModal/SearchModal";
 import Button from "react-bootstrap/Button";
+import AuthContext from "../../ContextStore/auth-ctx";
 
 const Header = () => {
     const [click, setClick] = useState(false);
+    const authCtx = useContext(AuthContext);
+
     const handleClick = () => {
         console.log("it works!");
 
@@ -119,13 +122,42 @@ const Header = () => {
                                 <SearchModal />
                             </Link>
                         </li>
-                        <li className="option" onClick={closeMobileMenu}>
-                            <Link className="link" to="/my-account">
-                                <Button className="my_button" variant="primary">
-                                    My Account
-                                </Button>
-                            </Link>
-                        </li>
+                        {authCtx.isLoggedIn && (
+                            <li className="option" onClick={closeMobileMenu}>
+                                <Link className="link" to="/my-account">
+                                    <Button
+                                        className="my_button"
+                                        variant="primary"
+                                    >
+                                        My Account
+                                    </Button>
+                                </Link>
+                            </li>
+                        )}
+                        {!authCtx.isLoggedIn && (
+                            <li className="option" onClick={closeMobileMenu}>
+                                <Link className="link" to="/register">
+                                    <Button
+                                        className="my_button"
+                                        variant="primary"
+                                    >
+                                        Register
+                                    </Button>
+                                </Link>
+                            </li>
+                        )}
+                        {!authCtx.isLoggedIn && (
+                            <li className="option" onClick={closeMobileMenu}>
+                                <Link className="link" to="/login">
+                                    <Button
+                                        className="my_button"
+                                        variant="primary"
+                                    >
+                                        Log In
+                                    </Button>
+                                </Link>
+                            </li>
+                        )}
                         <li className="option" onClick={closeMobileMenu}>
                             <Button
                                 shadow-none
@@ -142,6 +174,19 @@ const Header = () => {
                                 </Button>
                             </Link>
                         </li>
+                        {authCtx.isLoggedIn && (
+                            <li className="option" onClick={closeMobileMenu}>
+                                <Link className="link" to="/#">
+                                    <Button
+                                        className="my_button"
+                                        variant="primary"
+                                        onClick={() => authCtx.setIsLoggedOut()}
+                                    >
+                                        Log Out
+                                    </Button>
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </>
             )}
