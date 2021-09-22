@@ -64,6 +64,7 @@ const LoginForm = () => {
                     name="email"
                     onChange={(e) => setEmail(e.target.value)}
                 />
+
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group controlId="validationCustom02">
