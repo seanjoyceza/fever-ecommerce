@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import AuthContext from "./auth-ctx";
-
-const defaultAuthState = { isLoggedIn: false };
+const axios = require("axios").default;
 
 const AuthProvider = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState("");
 
-    const setIsLoggedInHandler = () => {
-        setIsLoggedIn(true);
+    const setIsLoggedInHandler = (user) => {
+        setIsLoggedIn(user);
         // console.log("hello from auth-context!");
     };
 
     const setIsLoggedOutHandler = () => {
-        setIsLoggedIn(false);
+        setIsLoggedIn("");
+        axios.get("http://localhost:3001/api/logout").catch((response) => {
+            console.log("Could not log out!");
+        });
     };
 
     const authContext = {

@@ -1,13 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../../ContextStore/auth-ctx";
 import Form from "react-bootstrap/Form";
+import { useHistory } from "react-router-dom";
 const axios = require("axios").default;
 
 const LoginForm = () => {
     const [validated, setValidated] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [flash, setflash] = useState("");
     const authCtx = useContext(AuthContext);
+    const history = useHistory();
 
     axios.defaults.withCredentials = true;
 
@@ -26,13 +29,17 @@ const LoginForm = () => {
                     password: password,
                 })
                 .then((response) => {
-                    if (response.data.message) {
-                        console.log(response.data.message);
+                    console.log(response);
+                    if (response.data.result.message) {
                         setValidated(false);
                         // authCtx.setIsLoggedOut();
                     } else {
-                        console.log("logged in!");
-                        authCtx.setIsLoggedIn();
+                        authCtx.setIsLoggedIn(
+                            response.data.result[0].UserEmail
+                        );
+                        //sent flash from login route, need to receive in client
+                        let message = response.data.messages;
+                        history.push("/");
                     }
                 })
                 .catch(() => {
@@ -43,7 +50,9 @@ const LoginForm = () => {
 
     useEffect(() => {
         axios.get("http://localhost:3001/api/login").then((response) => {
-            console.log(response);
+            if (response.data.loggedIn === true) {
+                authCtx.setIsLoggedIn(response.data.user.UserEmail);
+            }
         });
     }, []);
 
@@ -79,7 +88,6 @@ const LoginForm = () => {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
-
             <button className="login__button">Login</button>
         </Form>
     );

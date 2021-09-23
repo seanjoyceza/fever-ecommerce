@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const axios = require("axios").default;
 
 const RegisterForm = () => {
@@ -8,6 +10,7 @@ const RegisterForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [validated, setValidated] = useState(false);
+    const history = useHistory();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,8 +27,13 @@ const RegisterForm = () => {
                     email: email,
                     password: password,
                 })
-                .then(() => {
-                    console.log("successful register insert!");
+                .then((response) => {
+                    if (response.data === "Success!") {
+                        console.log(response.data);
+                        history.push("/");
+                    } else {
+                        console.log("Email already exists!");
+                    }
                 })
                 .catch(() => {
                     console.log("could not send to backend!");

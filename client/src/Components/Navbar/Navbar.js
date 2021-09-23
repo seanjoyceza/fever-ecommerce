@@ -14,8 +14,6 @@ const Header = () => {
     const authCtx = useContext(AuthContext);
 
     const handleClick = () => {
-        console.log("it works!");
-
         setClick(!click);
     };
     const closeMobileMenu = () => {
