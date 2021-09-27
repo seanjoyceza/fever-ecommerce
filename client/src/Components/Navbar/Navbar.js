@@ -17,7 +17,6 @@ const Header = () => {
         setClick(!click);
     };
     const closeMobileMenu = () => {
-        console.log("it works!");
         setClick(false);
     };
 
@@ -74,11 +73,27 @@ const Header = () => {
                             <SearchModal className="search_modal_btn" />
                         </Link>
                     </li>
-                    <li className="option" onClick={closeMobileMenu}>
-                        <Link className="link" to="/my-account">
-                            My Account
-                        </Link>
-                    </li>
+                    {authCtx.isLoggedIn && (
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/my-account">
+                                My Account
+                            </Link>
+                        </li>
+                    )}
+                    {!authCtx.isLoggedIn && (
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/my-account">
+                                Register
+                            </Link>
+                        </li>
+                    )}
+                    {!authCtx.isLoggedIn && (
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/my-account">
+                                Log In
+                            </Link>
+                        </li>
+                    )}
                     <li className="option" onClick={closeMobileMenu}>
                         <Cart />
                     </li>
