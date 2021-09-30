@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../../ContextStore/auth-ctx";
 import Form from "react-bootstrap/Form";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Flash from "../../Components/Flash/Flash";
 const axios = require("axios").default;
 
@@ -67,6 +67,7 @@ const LoginForm = () => {
     };
 
     useEffect(() => {
+        console.log("useEffect ran!");
         axios.get("http://localhost:3001/api/login").then((response) => {
             if (response.data.loggedIn === true) {
                 authCtx.setIsLoggedIn(response.data.user.UserEmail);

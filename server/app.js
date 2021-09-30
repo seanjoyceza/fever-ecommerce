@@ -1,4 +1,3 @@
-const validateRegister = require("./auth/authValidation");
 const express = require("express");
 const app = express();
 const mysql = require("mysql");

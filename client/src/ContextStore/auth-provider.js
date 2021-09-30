@@ -3,7 +3,9 @@ import AuthContext from "./auth-ctx";
 const axios = require("axios").default;
 
 const AuthProvider = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(
+        localStorage.getItem("isLoggedIn") === "false"
+    );
 
     const setIsLoggedInHandler = (user) => {
         setIsLoggedIn(user);
@@ -22,7 +24,7 @@ const AuthProvider = (props) => {
         setIsLoggedOut: setIsLoggedOutHandler,
         setIsLoggedIn: setIsLoggedInHandler,
     };
-
+    console.log(isLoggedIn);
     return (
         <AuthContext.Provider value={authContext}>
             {props.children}
