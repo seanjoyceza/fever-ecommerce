@@ -225,7 +225,13 @@ app.post(
 //end login
 
 //logout
-app.get("/api/logout", async (req, res) => {
+app.post("/api/logout", async (req, res) => {
+    console.log("logout route hit");
+    res.clearCookie("_random_cookie_name", {
+        path: "/",
+        domain: ".awesomedomain.co",
+    });
+
     res.clearCookie("userId").send();
 });
 //end logout

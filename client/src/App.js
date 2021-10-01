@@ -30,6 +30,8 @@ import Mugs from "./Pages/Secondary-Pages/Mugs/Mugs";
 import AuthProvider from "./ContextStore/auth-provider";
 
 function App() {
+    const onEnterHandler = console.log("hello from register!");
+
     return (
         <CartProvider>
             <AuthProvider>
@@ -67,7 +69,11 @@ function App() {
                             <Route exact path="/policy/return-policy">
                                 <ReturnsPolicy />
                             </Route>
-                            <Route exact path="/register">
+                            <Route
+                                onEnter={onEnterHandler}
+                                exact
+                                path="/register"
+                            >
                                 <Register />
                             </Route>
                             <Route exact path="/login">

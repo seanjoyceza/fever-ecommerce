@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AuthContext from "./auth-ctx";
+
 const axios = require("axios").default;
 
 const AuthProvider = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(
-        localStorage.getItem("isLoggedIn") === "false"
-    );
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+            setIsLoggedIn(loggedInUser);
+        }
+    }, []);
 
     const setIsLoggedInHandler = (user) => {
         setIsLoggedIn(user);
-        // console.log("hello from auth-context!");
     };
 
     const setIsLoggedOutHandler = () => {
+        axios
+            .post(
+                "http://localhost:3001/api/logout",
+                { redentials: "same-origin" },
+                { withCredentials: true }
+            )
+            .catch(() => {
+                console.log("Could not log out!");
+            });
+        localStorage.clear();
         setIsLoggedIn("");
-        axios.get("http://localhost:3001/api/logout").catch((response) => {
-            console.log("Could not log out!");
-        });
     };
 
     const authContext = {
@@ -24,7 +36,6 @@ const AuthProvider = (props) => {
         setIsLoggedOut: setIsLoggedOutHandler,
         setIsLoggedIn: setIsLoggedInHandler,
     };
-    console.log(isLoggedIn);
     return (
         <AuthContext.Provider value={authContext}>
             {props.children}

@@ -54,6 +54,10 @@ const LoginForm = () => {
                     if (response.data.result.message) {
                         setValidated(false);
                     } else {
+                        localStorage.setItem(
+                            "user",
+                            response.data.result[0].UserEmail
+                        );
                         authCtx.setIsLoggedIn(
                             response.data.result[0].UserEmail
                         );
