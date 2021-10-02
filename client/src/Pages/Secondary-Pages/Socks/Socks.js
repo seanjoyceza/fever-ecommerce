@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
 import "./Socks.css";
 import { Link } from "react-router-dom";
@@ -7,33 +7,21 @@ import ProductCard from "../../../Components/ProductCard/ProductCard";
 import loadingSpinner from "../../../Components/assets/loading-buffering.gif";
 import { Container, Row, Col } from "react-bootstrap";
 import SideBar from "../../../Components/SideBar/SideBar";
+import ProductsContext from "../../../ContextStore/products-ctx";
 
 function Socks() {
-    const [products, setProducts] = useState([]);
-
     const [search, setSearch] = useState("");
 
+    const productsCtx = useContext(ProductsContext);
+
     //SEARCH FUNCTION
-    const filteredProducts = products.filter((product) =>
-        product.title.toLowerCase().includes(search.toLowerCase())
+    const filteredProducts = productsCtx.products.filter(
+        (product) => product.ProductCategoryID === 2
     );
     const searchProducts = (event) => {
         setSearch(event.target.value);
     };
 
-    useEffect(() => {
-        fetchProducts();
-    }, []);
-    const fetchProducts = () => {
-        axios
-            .get("https://fakestoreapi.com/products")
-            .then((res) => {
-                setProducts(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
     return (
         <motion.div
             initial={{ opacity: 0 }}

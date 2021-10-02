@@ -21,7 +21,7 @@ const AuthProvider = (props) => {
         axios
             .post(
                 "http://localhost:3001/api/logout",
-                { redentials: "same-origin" },
+                { credentials: "same-origin" },
                 { withCredentials: true }
             )
             .catch(() => {

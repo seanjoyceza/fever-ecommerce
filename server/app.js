@@ -42,6 +42,7 @@ app.use(
     })
 );
 app.use(flash());
+// end middleware
 
 //get products
 const db = mysql.createPool({
@@ -226,7 +227,7 @@ app.post(
 
 //logout
 app.post("/api/logout", async (req, res) => {
-    console.log("logout route hit");
+    // console.log("logout route hit");
     res.clearCookie("_random_cookie_name", {
         path: "/",
         domain: ".awesomedomain.co",

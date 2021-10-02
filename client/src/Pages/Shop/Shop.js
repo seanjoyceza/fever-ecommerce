@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Shop.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -6,34 +6,22 @@ import axios from "axios";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import loadingSpinner from "../../Components/assets/loading-buffering.gif";
 import SideBar from "../../Components/SideBar/SideBar";
+import ProductsContext from "../../ContextStore/products-ctx";
 import { Container, Row, Col } from "react-bootstrap";
 
 const FeaturedProducts = () => {
-    const [products, setProducts] = useState([]);
-
     const [search, setSearch] = useState("");
 
+    const productsCtx = useContext(ProductsContext);
+
     //SEARCH FUNCTION
-    const filteredProducts = products.filter((product) =>
+    const filteredProducts = productsCtx.products.filter((product) =>
         product.title.toLowerCase().includes(search.toLowerCase())
     );
     const searchProducts = (event) => {
         setSearch(event.target.value);
     };
 
-    useEffect(() => {
-        fetchProducts();
-    }, []);
-    const fetchProducts = () => {
-        axios
-            .get("http://localhost:3001/api/get")
-            .then((res) => {
-                setProducts(res.data);
-            })
-            .catch((err) => {
-                console.log(`This is the error: ${err}`);
-            });
-    };
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -41,14 +29,6 @@ const FeaturedProducts = () => {
             animate={{ opacity: 1 }}
             className="shop__page"
         >
-            {/* <form className="product__search">
-                <input
-                    type="text"
-                    placeholder="Search for a product"
-                    className="product__search__input"
-                    onChange={searchProducts}
-                />
-            </form> */}
             <Container>
                 <Row>
                     <Col xs={3} className="mt-4 sidebar-col">

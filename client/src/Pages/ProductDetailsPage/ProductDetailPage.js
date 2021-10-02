@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import CartContext from "../../ContextStore/cart-ctx";
 import axios from "axios";
 import { Button } from "react-bootstrap";
+import ProductsContext from "../../ContextStore/products-ctx";
 
 const Product = ({ match }) => {
     const [product, setProduct] = useState([]);
@@ -12,6 +13,7 @@ const Product = ({ match }) => {
     const [size, setSize] = useState("");
 
     const cartCtx = useContext(CartContext);
+    const productsCtx = useContext(ProductsContext);
 
     useEffect(() => {
         fetchProduct();
