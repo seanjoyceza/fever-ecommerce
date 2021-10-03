@@ -1,34 +1,25 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./ProductDetailPage.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import CartContext from "../../ContextStore/cart-ctx";
-import axios from "axios";
 import { Button } from "react-bootstrap";
 import ProductsContext from "../../ContextStore/products-ctx";
 
+const axios = require("axios").default;
+
 const Product = ({ match }) => {
-    const [product, setProduct] = useState([]);
     const [quantity, setQuantity] = useState(1);
     const [size, setSize] = useState("");
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     const cartCtx = useContext(CartContext);
     const productsCtx = useContext(ProductsContext);
 
-    useEffect(() => {
-        fetchProduct();
-        // console.log("uf", size);
-    }, []);
-
-    const fetchProduct = () => {
-        axios
-            .get(`https://fakestoreapi.com/products/${match.params.id}`)
-            .then((res) => {
-                setProduct(res.data);
-                // console.log(res.data);
-            })
-            .catch((err) => console.log(err));
-    };
+    const myFilteredProduct = productsCtx.products.filter((product) => {
+        return product.id == match.params.id;
+    });
+    console.log(myFilteredProduct[0]);
 
     const submitHandler = (event) => {
         if (!size) {
@@ -36,11 +27,10 @@ const Product = ({ match }) => {
         }
 
         cartCtx.addItem({
-            //remember to change this ID to a more comprehensive one
-            id: product.id,
-            image: product.image,
-            title: product.title,
-            price: product.price,
+            id: filteredProducts[0].id,
+            image: filteredProducts[0].image,
+            title: filteredProducts[0].title,
+            price: filteredProducts[0].price,
             quantity: quantity,
             size: size,
         });
@@ -57,19 +47,19 @@ const Product = ({ match }) => {
                 <div className="productDetail__page__image__holder">
                     <img
                         className="productDetail__page__image"
-                        src={product.image}
+                        // src={filteredProducts[0].image}
                         alt="product"
                     />
                 </div>
                 <div className="productDetail__page__text">
                     <h2 className="productDetail__page__title">
-                        {product.title}
+                        {/* {filteredProducts[0].title} */}
                     </h2>
                     <h3 className="productDetail__page__price">
-                        R{product.price}
+                        R{productsCtx.products.price}
                     </h3>
                     <p className="productDetail__page__description">
-                        {product.description}
+                        {productsCtx.products.ProductLongDesc}
                     </p>
                     <div>
                         {size && (
