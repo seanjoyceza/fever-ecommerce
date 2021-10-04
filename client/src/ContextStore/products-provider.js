@@ -9,7 +9,6 @@ const ProductsProvider = (props) => {
         axios
             .get("http://localhost:3001/api/get")
             .then((res) => {
-                console.log(res.data);
                 setProducts(res.data);
             })
             .catch((err) => {
@@ -21,39 +20,8 @@ const ProductsProvider = (props) => {
         fetchProducts();
     }, []);
 
-    // if (products[0]) {
-    //     console.log(`Category is: ${products[0].ProductCategoryID}`);
-    // }
-
-    // useEffect(() => {
-    //     const loggedInUser = localStorage.getItem("user");
-    //     if (loggedInUser) {
-    //         setIsLoggedIn(loggedInUser);
-    //     }
-    // }, []);
-
-    // const setIsLoggedInHandler = (user) => {
-    //     setIsLoggedIn(user);
-    // };
-
-    // const setIsLoggedOutHandler = () => {
-    //     axios
-    //         .post(
-    //             "http://localhost:3001/api/logout",
-    //             { redentials: "same-origin" },
-    //             { withCredentials: true }
-    //         )
-    //         .catch(() => {
-    //             console.log("Could not log out!");
-    //         });
-    //     localStorage.clear();
-    //     setIsLoggedIn("");
-    // };
-
     const productsContext = {
         products: products,
-        //     setIsLoggedOut: setIsLoggedOutHandler,
-        //     setIsLoggedIn: setIsLoggedInHandler,
     };
     return (
         <ProductsContext.Provider value={productsContext}>

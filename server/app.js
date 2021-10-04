@@ -237,6 +237,29 @@ app.post("/api/logout", async (req, res) => {
 });
 //end logout
 
+//Add Cart
+app.post("/api/initialAdd", async (req, res) => {
+    const userId = req.body.id;
+    const cartId = req.body.image;
+    const title = req.body.title;
+
+    const sqlInsert =
+        "INSERT INTO users (id, image,title, userPassword) VALUES (?,?,?,?)";
+    db.query(
+        sqlInsert,
+        [userFirstName, userLastName, userEmail, hash],
+        (err, result) => {
+            if (!err) {
+                message = "success";
+                res.send([message, userEmail]);
+            } else {
+                console.log(err);
+            }
+        }
+    );
+});
+//
+
 //listen on env port or port 3001
 app.listen(port, () => {
     console.log(`Serving on port ${port}`);
