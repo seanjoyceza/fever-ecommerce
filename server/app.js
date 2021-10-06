@@ -238,27 +238,23 @@ app.post("/api/logout", async (req, res) => {
 //end logout
 
 //Add Cart
-app.post("/api/initialAdd", async (req, res) => {
-    const userId = req.body.id;
-    const cartId = req.body.image;
-    const title = req.body.title;
+app.post("/api/addToCart", async (req, res) => {
+    const productId = req.body.productId;
+    const userId = req.body.userId;
+    const quantity = req.body.quantity;
+    const size = req.body.size;
 
-    const sqlInsert =
-        "INSERT INTO users (id, image,title, userPassword) VALUES (?,?,?,?)";
-    db.query(
-        sqlInsert,
-        [userFirstName, userLastName, userEmail, hash],
-        (err, result) => {
-            if (!err) {
-                message = "success";
-                res.send([message, userEmail]);
-            } else {
-                console.log(err);
-            }
+    const sqlSelect = "SELECT UserCartID FROM users WHERE UserID=?";
+    db.query(sqlSelect, [userId], (err, result) => {
+        if (!err) {
+            message = "success";
+            console.log(message);
+            // res.send([message, userEmail]);
+        } else {
+            console.log(err);
         }
-    );
+    });
 });
-
 //
 
 //listen on env port or port 3001

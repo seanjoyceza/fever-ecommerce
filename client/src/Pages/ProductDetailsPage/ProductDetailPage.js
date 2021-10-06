@@ -5,15 +5,17 @@ import { motion } from "framer-motion";
 import CartContext from "../../ContextStore/cart-ctx";
 import { Button } from "react-bootstrap";
 import ProductsContext from "../../ContextStore/products-ctx";
+import AuthContext from "../../ContextStore/auth-ctx";
 const axios = require("axios").default;
 axios.defaults.withCredentials = true;
 
 const Product = ({ match }) => {
     const [quantity, setQuantity] = useState(1);
-    const [size, setSize] = useState("");
+    const [size, setSize] = useState(null);
 
     const cartCtx = useContext(CartContext);
     const productsCtx = useContext(ProductsContext);
+    const authCtx = useContext(AuthContext);
 
     const myFilteredProduct = productsCtx.products.filter((product) => {
         return product.id == match.params.id;
@@ -24,33 +26,32 @@ const Product = ({ match }) => {
             return;
         }
 
-        //add item to frontend cart
-        cartCtx.addItem({
-            id: myFilteredProduct[0].id,
-            image: myFilteredProduct[0].image,
-            title: myFilteredProduct[0].title,
-            price: myFilteredProduct[0].price,
-            quantity: quantity,
-            size: size,
-        });
-        //
-
-        //add item to backend cart
-        axios
-            .post("http://localhost:3001/api/initialAdd", {
+        //add item to cart
+        if (authCtx.isLoggedIn) {
+            //frontend cart
+            cartCtx.addItem({
                 id: myFilteredProduct[0].id,
                 image: myFilteredProduct[0].image,
                 title: myFilteredProduct[0].title,
                 price: myFilteredProduct[0].price,
                 quantity: quantity,
                 size: size,
-            })
-            .then((res) => {
-                console.log(res.data);
-            })
-            .catch(() => {
-                console.log("did not send to backend!");
             });
+            //backend cart
+            axios
+                .post("http://localhost:3001/api/addToCart", {
+                    productId: myFilteredProduct[0].id,
+                    userId: authCtx.isLoggedIn,
+                    quantity: quantity,
+                    size: size,
+                })
+                .then((res) => {
+                    console.log(res.data);
+                })
+                .catch(() => {
+                    console.log("did not send to backend!");
+                });
+        }
         //
     };
 
