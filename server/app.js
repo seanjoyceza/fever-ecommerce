@@ -238,23 +238,77 @@ app.post("/api/logout", async (req, res) => {
 //end logout
 
 //Add Cart
-app.post("/api/addToCart", async (req, res) => {
-    const productId = req.body.productId;
+app.post("/api/addToCart", async (req, response) => {
     const userId = req.body.userId;
+    const productId = req.body.productId;
     const quantity = req.body.quantity;
     const size = req.body.size;
 
-    const sqlSelect = "SELECT UserCartID FROM users WHERE UserID=?";
-    db.query(sqlSelect, [userId], (err, result) => {
-        if (!err) {
-            message = "success";
-            console.log(message);
-            // res.send([message, userEmail]);
-        } else {
-            console.log(err);
+    db.query(
+        "SELECT * FROM UserCartItems WHERE UserID = userId AND ProductID = productId AND Size = size",
+        // [userId, productId, size],
+        (err, res) => {
+            if (res.length === 0) {
+                console.log("not found!");
+                const sqlInsert =
+                    "INSERT INTO UserCartItems (UserID, ProductID, Quantity, Size) VALUES (?,?,?,?)";
+                db.query(
+                    sqlInsert,
+                    [userId, productId, quantity, size],
+                    (err, result) => {
+                        if (!err) {
+                            message = "success";
+                            console.log(message);
+                            response.send(message);
+                        } else {
+                            console.log(err);
+                        }
+                    }
+                );
+            } else {
+                //HERE YOU JUST NEED TO CHANGE THE QUANTITY VALUE AFTER THE VALUE IS FOUND
+                console.log("found!");
+            }
         }
-    });
+    );
+
+    //add to cart
 });
+
+//increment cart
+app.post("/api/updateCartItem", async (req, res) => {
+    const userId = req.body.userId;
+    const productId = req.body.productId;
+    const increment = req.body.increment;
+
+    if (increment === 1) {
+        const sqlInsert =
+            "UPDATE UserCartItems SET Quantity = Quantity + 1 WHERE (UserID = ? and ProductID = ?)";
+        db.query(sqlInsert, [userId, productId], (err, result) => {
+            if (!err) {
+                message = "success";
+                console.log(message);
+                res.send(message);
+            } else {
+                console.log(err);
+            }
+        });
+    } else {
+        const sqlInsert =
+            "UPDATE UserCartItems SET Quantity = Quantity - 1 WHERE (UserID = ? and ProductID = ?)";
+        db.query(sqlInsert, [userId, productId], (err, result) => {
+            if (!err) {
+                message = "success";
+                console.log(message);
+                res.send(message);
+            } else {
+                console.log(err);
+            }
+        });
+    }
+});
+//
+
 //
 
 //listen on env port or port 3001
