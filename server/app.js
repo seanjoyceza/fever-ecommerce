@@ -10,6 +10,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("connect-flash");
 const { validationResult, check } = require("express-validator");
+const cartRoutes = require("./routes/cart");
 
 //middleware
 app.use(express.urlencoded({ extended: true }));
@@ -42,6 +43,9 @@ app.use(
     })
 );
 app.use(flash());
+
+app.use("/api/logout", cartRoutes);
+
 // end middleware
 
 //get products
@@ -226,15 +230,14 @@ app.post(
 //end login
 
 //logout
-app.post("/api/logout", async (req, res) => {
-    // console.log("logout route hit");
-    res.clearCookie("_random_cookie_name", {
-        path: "/",
-        domain: ".awesomedomain.co",
-    });
-
-    res.clearCookie("userId").send();
-});
+// app.post("/api/logout", async (req, res) => {
+//     // console.log("logout route hit");
+//     res.clearCookie("_random_cookie_name", {
+//         path: "/",
+//         domain: ".awesomedomain.co",
+//     });
+//     res.clearCookie("userId").send();
+// });
 //end logout
 
 //Add Cart
@@ -249,7 +252,7 @@ app.post("/api/addToCart", async (req, response) => {
         // [userId, productId, size],
         (err, res) => {
             if (res.length === 0) {
-                console.log("not found!");
+                // console.log("not found!");
                 const sqlInsert =
                     "INSERT INTO UserCartItems (UserID, ProductID, Quantity, Size) VALUES (?,?,?,?)";
                 db.query(
@@ -258,7 +261,7 @@ app.post("/api/addToCart", async (req, response) => {
                     (err, result) => {
                         if (!err) {
                             message = "success";
-                            console.log(message);
+                            // console.log(message);
                             response.send(message);
                         } else {
                             console.log(err);
@@ -266,8 +269,22 @@ app.post("/api/addToCart", async (req, response) => {
                     }
                 );
             } else {
-                //HERE YOU JUST NEED TO CHANGE THE QUANTITY VALUE AFTER THE VALUE IS FOUND
-                console.log("found!");
+                // console.log("found!");
+                const sqlInsert =
+                    "UPDATE UserCartItems SET Quantity = Quantity + quantity WHERE (UserID = userId AND ProductID = productId AND Size = size)";
+                db.query(
+                    sqlInsert,
+                    // [quantity, userId, productId, size],
+                    (err, result) => {
+                        if (!err) {
+                            message = "success";
+                            // console.log(message);
+                            response.send(message);
+                        } else {
+                            console.log(err);
+                        }
+                    }
+                );
             }
         }
     );

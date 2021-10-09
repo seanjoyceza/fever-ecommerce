@@ -28,15 +28,6 @@ const Product = ({ match }) => {
 
         //add item to cart
         if (authCtx.isLoggedIn) {
-            //frontend cart
-            cartCtx.addItem({
-                id: myFilteredProduct[0].id,
-                image: myFilteredProduct[0].image,
-                title: myFilteredProduct[0].title,
-                price: myFilteredProduct[0].price,
-                quantity: quantity,
-                size: size,
-            });
             //backend cart
             axios
                 .post("http://localhost:3001/api/addToCart", {
@@ -46,7 +37,18 @@ const Product = ({ match }) => {
                     size: size,
                 })
                 .then((res) => {
-                    console.log(res.data);
+                    if (res.data === "success") {
+                        //frontend cart
+                        cartCtx.addItem({
+                            id: myFilteredProduct[0].id,
+                            image: myFilteredProduct[0].image,
+                            title: myFilteredProduct[0].title,
+                            price: myFilteredProduct[0].price,
+                            quantity: quantity,
+                            size: size,
+                        });
+                        console.log(size);
+                    }
                 })
                 .catch(() => {
                     console.log("did not send to backend!");

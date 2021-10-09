@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./Cart.css";
+import AuthContext from "../../ContextStore/auth-ctx";
 
 //components
 import CartContext from "../../ContextStore/cart-ctx";
@@ -8,6 +9,9 @@ import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
 import SlidingPane from "react-sliding-pane";
 import { Button } from "react-bootstrap";
+
+const axios = require("axios").default;
+axios.defaults.withCredentials = true;
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -18,18 +22,50 @@ function getWindowDimensions() {
 }
 
 const Cart = (props) => {
+    const authCtx = useContext(AuthContext);
     const cartCtx = useContext(CartContext);
 
     const totalAmount = `R${cartCtx.totalAmount.toFixed(2)}`;
     const hasItems = cartCtx.items.length > 0;
 
     const cartItemRemoveHandler = (id) => {
-        cartCtx.removeItem(id);
+        if (authCtx.isLoggedIn) {
+            //backend cart
+            axios
+                .post("http://localhost:3001/api/updateCartItem", {
+                    productId: 1,
+                    userId: authCtx.isLoggedIn,
+                    increment: -1,
+                })
+                .then((res) => {
+                    //frontend cart
+                    cartCtx.removeItem(id);
+                })
+                .catch(() => {
+                    console.log("did not send to backend!");
+                });
+        }
+        //
     };
 
     const cartItemAddHandler = (item) => {
-        // console.log(item);
-        cartCtx.addItem({ ...item, quantity: 1 });
+        if (authCtx.isLoggedIn) {
+            //backend cart
+            axios
+                .post("http://localhost:3001/api/updateCartItem", {
+                    productId: 1,
+                    userId: authCtx.isLoggedIn,
+                    increment: 1,
+                })
+                .then((res) => {
+                    //frontend cart
+                    cartCtx.addItem({ ...item, quantity: 1 });
+                })
+                .catch(() => {
+                    console.log("did not send to backend!");
+                });
+        }
+        //
     };
 
     const cartItems = cartCtx.items.map((item) => {
@@ -111,7 +147,7 @@ const Cart = (props) => {
                 {!hasItems && <div>Your cart is currently empty.</div>}
                 {hasItems >= 1 && (
                     <div>
-                        <div class="d-grid gap-2">
+                        <div className="d-grid gap-2">
                             <div className="your_cart_note1">
                                 Add order note
                             </div>
