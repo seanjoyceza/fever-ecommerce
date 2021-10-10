@@ -16,6 +16,7 @@ module.exports.register =
         check("password", "password").isLength({ min: 2 }),
     ],
     async (req, res) => {
+        console.log(req.session);
         const userFirstName = req.body.firstName;
         const userLastName = req.body.lastName;
         const userEmail = req.body.email;
@@ -129,6 +130,8 @@ module.exports.postLogin =
         const password = req.body.password;
 
         db.query(
+            //join 2 tables, add userEmail to UserCartItems table
+            // "SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate FROM Orders INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID",
             "SELECT * FROM users WHERE UserEmail = ?",
             email,
             (err, result) => {
@@ -137,6 +140,7 @@ module.exports.postLogin =
                 }
 
                 if (result.length > 0) {
+                    const userId = result[0].UserID;
                     bcrypt.compare(
                         password,
                         result[0].UserPassword,
@@ -144,10 +148,28 @@ module.exports.postLogin =
                             if (response) {
                                 console.log("Logged in!");
                                 req.session.user = result;
-                                res.send({
-                                    result: result,
-                                    message: "Successfully logged in!",
-                                });
+                                //when logged in, fetch the user CART as well
+                                // console.log("Searching for Cart...");
+                                db.query(
+                                    "SELECT * FROM UserCartItems WHERE UserID = ?",
+                                    userId,
+                                    (err, response1) => {
+                                        if (response1) {
+                                            // req.session.user = cart;
+                                            const cart = response1[0];
+                                            res.send({
+                                                cart: cart,
+                                                result: result,
+                                                message:
+                                                    "Successfully logged in!",
+                                            });
+                                        }
+                                    }
+                                );
+                                // res.send({
+                                //     result: result,
+                                //     message: "Successfully logged in!",
+                                // });
                             } else {
                                 console.log("wrong");
                                 message =

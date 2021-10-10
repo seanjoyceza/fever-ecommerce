@@ -31,7 +31,6 @@ const LoginForm = () => {
                     password: password,
                 })
                 .then((response) => {
-                    console.log(response);
                     if (response.data[1] === "password") {
                         setFlashVariant("danger");
                         setFlashMessage(
@@ -54,12 +53,14 @@ const LoginForm = () => {
                     if (response.data.result.message) {
                         setValidated(false);
                     } else {
+                        console.log(response.data.cart);
                         localStorage.setItem(
                             "user",
                             response.data.result[0].UserID
                         );
                         authCtx.setIsLoggedIn(response.data.result[0].UserID);
                         history.push("/");
+                        // console.log(localStorage.user);
                     }
                 })
                 .catch(() => {
