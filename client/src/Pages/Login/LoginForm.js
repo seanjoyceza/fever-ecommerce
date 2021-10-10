@@ -31,6 +31,7 @@ const LoginForm = () => {
                     password: password,
                 })
                 .then((response) => {
+                    console.log(response);
                     if (response.data[1] === "password") {
                         setFlashVariant("danger");
                         setFlashMessage(
@@ -50,7 +51,6 @@ const LoginForm = () => {
                         setFlashMessage(response.data[0]);
                         setFlash(true);
                     }
-
                     if (response.data.result.message) {
                         setValidated(false);
                     } else {
