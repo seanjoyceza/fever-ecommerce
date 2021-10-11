@@ -26,7 +26,32 @@ const cartReducer = (state, action) => {
         } else {
             updatedItems = state.items.concat(action.item);
         }
+        console.log(updatedItems);
+        return {
+            items: updatedItems,
+            totalAmount: updatedTotalAmount,
+        };
+    }
 
+    if (action.type === "ADDALL") {
+        const updatedTotalAmount =
+            state.totalAmount + action.item.price * action.item.quantity;
+
+        const existingCartItemIndex = state.items.findIndex(
+            (item) => item.id === action.item.id
+        );
+        const existingCartItem = state.items[existingCartItemIndex];
+        let updatedItems;
+        if (existingCartItem) {
+            const updatedItem = {
+                ...existingCartItem,
+                quantity: existingCartItem.quantity + action.item.quantity,
+            };
+            updatedItems = [...state.items];
+            updatedItems[existingCartItemIndex] = updatedItem;
+        } else {
+            updatedItems = state.items.concat(action.item);
+        }
         // console.log(updatedItems);
         return {
             items: updatedItems,
@@ -58,6 +83,13 @@ const cartReducer = (state, action) => {
         };
     }
 
+    if (action.type === "REMOVEALL") {
+        return {
+            items: [],
+            totalAmount: 0,
+        };
+    }
+
     return defaultCartState;
 };
 
@@ -75,11 +107,21 @@ const CartProvider = (props) => {
         dispatchCartAction({ type: "REMOVE", id: id });
     };
 
+    const addItemsToCartHandler = (items) => {
+        dispatchCartAction({ type: "ADDALL", item: items });
+    };
+
+    const removeAllItemsFromCartHandler = () => {
+        dispatchCartAction({ type: "REMOVEALL" });
+    };
+
     const cartContext = {
         items: cartState.items,
         totalAmount: cartState.totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCart,
+        addItems: addItemsToCartHandler,
+        removeAll: removeAllItemsFromCartHandler,
     };
 
     return (

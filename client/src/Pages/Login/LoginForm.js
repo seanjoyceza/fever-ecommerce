@@ -3,6 +3,7 @@ import AuthContext from "../../ContextStore/auth-ctx";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import Flash from "../../Components/Flash/Flash";
+import CartContext from "../../ContextStore/cart-ctx";
 const axios = require("axios").default;
 
 const LoginForm = () => {
@@ -14,6 +15,7 @@ const LoginForm = () => {
     const [flash, setFlash] = useState(false);
     const [flashMessage, setFlashMessage] = useState("");
     const [flashVariant, setFlashVariant] = useState("");
+    const cartCtx = useContext(CartContext);
 
     axios.defaults.withCredentials = true;
     const handleSubmit = (event) => {
@@ -54,6 +56,10 @@ const LoginForm = () => {
                         setValidated(false);
                     } else {
                         console.log(response.data.cart);
+                        const cartData = response.data.cart;
+                        console.log(cartData);
+                        cartCtx.addItems(cartData);
+                        console.log(cartCtx.items);
                         localStorage.setItem(
                             "user",
                             response.data.result[0].UserID

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "./auth-ctx";
+import CartContext from "./cart-ctx";
 
 const axios = require("axios").default;
 
 const AuthProvider = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const cartCtx = useContext(CartContext);
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
@@ -24,6 +26,7 @@ const AuthProvider = (props) => {
                 { credentials: "same-origin" },
                 { withCredentials: true }
             )
+            .then(cartCtx.removeAll())
             .catch(() => {
                 console.log("Could not log out!");
             });

@@ -155,10 +155,22 @@ module.exports.postLogin =
                                     userId,
                                     (err, response1) => {
                                         if (response1) {
-                                            // req.session.user = cart;
-                                            const cart = response1[0];
+                                            //Query the Products from DB as well and send data in frontend-ready format
+                                            // const cart = response1[0];
+                                            //temp
+                                            const cart = {
+                                                id: 1,
+                                                image: "https://image.smythstoys.com/original/desktop/188593.jpg",
+                                                price: 9.99,
+                                                quantity: 2,
+                                                size: "Small",
+                                            };
+                                            const totalAmount = 9.99 * 2;
+                                            //end temp
+                                            console.log(cart);
                                             res.send({
                                                 cart: cart,
+                                                totalAmount: totalAmount,
                                                 result: result,
                                                 message:
                                                     "Successfully logged in!",
