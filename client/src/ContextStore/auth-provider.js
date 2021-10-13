@@ -33,6 +33,7 @@ const AuthProvider = (props) => {
         localStorage.clear();
         setIsLoggedIn("");
     };
+    //
 
     const authContext = {
         isLoggedIn: isLoggedIn,
