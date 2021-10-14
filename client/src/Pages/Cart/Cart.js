@@ -3,6 +3,7 @@ import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./Cart.css";
 import AuthContext from "../../ContextStore/auth-ctx";
 
+
 //components
 import CartContext from "../../ContextStore/cart-ctx";
 import CartItem from "./CartItem";
@@ -156,9 +157,9 @@ const Cart = (props) => {
                                 Shipping & taxes calculated at checkout
                             </div>
 
-                            <Button className="btn btn-success">
+                            <Link to='/checkout' className="btn btn-success">
                                 Check Out | {totalAmount}
-                            </Button>
+                            </Link>
                         </div>
                     </div>
                 )}
