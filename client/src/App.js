@@ -28,81 +28,85 @@ import Clothing from "./Pages/Secondary-Pages/Clothing/Clothing";
 import Masks from "./Pages/Secondary-Pages/Masks/Masks";
 import Mugs from "./Pages/Secondary-Pages/Mugs/Mugs";
 import AuthProvider from "./ContextStore/auth-provider";
+import Checkout from "./Pages/Checkout/Checkout";
+import PaymentPage from "./Pages/Payment/PaymentPage";
 
 function App() {
-    return (
-        <CartProvider>
-            <AuthProvider>
-                <Router>
-                    <Navbar />
-                    <AnimatePresence>
-                        <Switch>
-                            <Route path="/boards">
-                                <Boards />
-                            </Route>
-                            <Route path="/socks">
-                                <Socks />
-                            </Route>
-                            <Route path="/bandanas">
-                                <Bandanas />
-                            </Route>
-                            <Route path="/stickers">
-                                <Stickers />
-                            </Route>
-                            <Route path="/clothing">
-                                <Clothing />
-                            </Route>
-                            <Route path="/masks">
-                                <Masks />
-                            </Route>
-                            <Route path="/mugs">
-                                <Mugs />
-                            </Route>
-                            <Route exact path="/policy/shipping-policy">
-                                <ShippingPolicy />
-                            </Route>
-                            <Route exact path="/policy/privacy-policy">
-                                <PrivacyPolicy />
-                            </Route>
-                            <Route exact path="/policy/return-policy">
-                                <ReturnsPolicy />
-                            </Route>
-                            <Route exact path="/register">
-                                <Register />
-                            </Route>
-                            <Route exact path="/login">
-                                <Login />
-                            </Route>
-                            <Route exact path="/about-us">
-                                <AboutUs />
-                            </Route>
-                            <Route exact path="/contact-us">
-                                <ContactUs />
-                            </Route>
-                            <Route exact path="/my-account">
-                                <MyAccount />
-                            </Route>
-                            <Route exact path="/cart">
-                                <Cart />
-                            </Route>
-                            {/*THESE 2 COMPONENTS ARE RENDERED DIFFERENTLY TO GET THE CUSTOM PAGE ROUTING TO WORK. AN ERROR OCCURS WHEN IT HAS THE SAME LAYOUT AS THE OTHER */}
-                            <Route
-                                exact
-                                path="/shop/:id"
-                                component={ProductDetailPage}
-                            />
-                            <Route exact path="/shop" component={Shop} />
+  return (
+    <CartProvider>
+      <AuthProvider>
+        <Router>
+          <Navbar />
+          <AnimatePresence>
+            <Switch>
+              <Route path='/boards'>
+                <Boards />
+              </Route>
+              <Route path='/socks'>
+                <Socks />
+              </Route>
+              <Route path='/bandanas'>
+                <Bandanas />
+              </Route>
+              <Route path='/stickers'>
+                <Stickers />
+              </Route>
+              <Route path='/clothing'>
+                <Clothing />
+              </Route>
+              <Route path='/masks'>
+                <Masks />
+              </Route>
+              <Route path='/mugs'>
+                <Mugs />
+              </Route>
+              <Route exact path='/policy/shipping-policy'>
+                <ShippingPolicy />
+              </Route>
+              <Route exact path='/checkout'>
+                <Checkout />
+              </Route>
+              <Route exact path='/payment-page'>
+                <PaymentPage />
+              </Route>
+              <Route exact path='/policy/privacy-policy'>
+                <PrivacyPolicy />
+              </Route>
+              <Route exact path='/policy/return-policy'>
+                <ReturnsPolicy />
+              </Route>
+              <Route exact path='/register'>
+                <Register />
+              </Route>
+              <Route exact path='/login'>
+                <Login />
+              </Route>
+              <Route exact path='/about-us'>
+                <AboutUs />
+              </Route>
+              <Route exact path='/contact-us'>
+                <ContactUs />
+              </Route>
+              <Route exact path='/my-account'>
+                <MyAccount />
+              </Route>
+              <Route exact path='/cart'>
+                <Cart />
+              </Route>
+              {/*THESE 2 COMPONENTS ARE RENDERED DIFFERENTLY TO GET THE CUSTOM PAGE ROUTING TO WORK. AN ERROR OCCURS WHEN IT HAS THE SAME LAYOUT AS THE OTHER */}
+              <Route exact path='/shop/:id' component={ProductDetailPage} />
+              <Route exact path='/shop' component={Shop} />
 
-                            <Route exact path="/">
-                                <Home />
-                            </Route>
-                        </Switch>
-                    </AnimatePresence>
-                    <Footer />
-                </Router>
-            </AuthProvider>
-        </CartProvider>
-    );
+              <Route exact path='/'>
+                <Home />
+              </Route>
+            </Switch>
+          </AnimatePresence>
+          <Footer />
+        </Router>
+      </AuthProvider>
+    </CartProvider>
+  );
 }
 
 export default App;
