@@ -13,12 +13,21 @@ module.exports.addToCart = async (req, response) => {
     const quantity = req.body.quantity;
     const size = req.body.size;
 
+    console.log(userId);
+    console.log(productId);
+    console.log(quantity);
+    console.log(size);
+
     db.query(
         "SELECT * FROM UserCartItems WHERE UserID = userId AND ProductID = productId AND Size = size",
         // [userId, productId, size],
         (err, res) => {
+            console.log(res);
+            if (err) {
+                console.log("error");
+            }
             if (res.length === 0) {
-                // console.log("not found!");
+                console.log("not found!");
                 const sqlInsert =
                     "INSERT INTO UserCartItems (UserID, ProductID, Quantity, Size) VALUES (?,?,?,?)";
                 db.query(
@@ -35,7 +44,6 @@ module.exports.addToCart = async (req, response) => {
                     }
                 );
             } else {
-                // console.log("found!");
                 const sqlInsert =
                     "UPDATE UserCartItems SET Quantity = Quantity + quantity WHERE (UserID = userId AND ProductID = productId AND Size = size)";
                 db.query(

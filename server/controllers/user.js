@@ -149,25 +149,15 @@ module.exports.postLogin =
                                 console.log("Logged in!");
                                 req.session.user = result;
                                 //when logged in, fetch the user CART as well
-                                // console.log("Searching for Cart...");
+                                console.log("Searching for Cart...");
                                 db.query(
                                     "SELECT * FROM UserCartItems WHERE UserID = ?",
                                     userId,
                                     (err, response1) => {
-                                        if (response1) {
-                                            //Query the Products from DB as well and send data in frontend-ready format
-                                            // const cart = response1[0];
-                                            //temp
-                                            const cart = {
-                                                id: 1,
-                                                image: "https://image.smythstoys.com/original/desktop/188593.jpg",
-                                                price: 9.99,
-                                                quantity: 2,
-                                                size: "Small",
-                                            };
-                                            const totalAmount = 9.99 * 2;
-                                            //end temp
-                                            console.log(cart);
+                                        if (response1.length === 0) {
+                                            console.log("No initial cart!");
+                                            const cart = [];
+                                            totalAmount = 0;
                                             res.send({
                                                 cart: cart,
                                                 totalAmount: totalAmount,
@@ -175,6 +165,48 @@ module.exports.postLogin =
                                                 message:
                                                     "Successfully logged in!",
                                             });
+                                        } else {
+                                            console.log(response1[0].ProductID);
+                                            console.log(response1[0].Quantity);
+                                            console.log(response1[0].Size);
+
+                                            const ProductID =
+                                                response1[0].ProductID;
+                                            const quantity =
+                                                response1[0].Quantity;
+                                            const size = response1[0].Size;
+
+                                            db.query(
+                                                "SELECT * FROM products WHERE id = ?",
+                                                ProductID,
+                                                (err, response2) => {
+                                                    if (response2) {
+                                                        const image =
+                                                            response2[0].image;
+                                                        const productId =
+                                                            response2[0].id;
+                                                        const price =
+                                                            response2[0].price;
+                                                        const cart = {
+                                                            id: productId,
+                                                            image: image,
+                                                            price: price,
+                                                            quantity: quantity,
+                                                            size: size,
+                                                        };
+                                                        const totalAmount =
+                                                            9.99 * 2;
+                                                        res.send({
+                                                            cart: cart,
+                                                            totalAmount:
+                                                                totalAmount,
+                                                            result: result,
+                                                            message:
+                                                                "Successfully logged in!",
+                                                        });
+                                                    }
+                                                }
+                                            );
                                         }
                                     }
                                 );
