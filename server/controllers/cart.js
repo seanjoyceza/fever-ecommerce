@@ -48,7 +48,7 @@ module.exports.addToCart = async (req, response) => {
                     "UPDATE UserCartItems SET Quantity = Quantity + quantity WHERE (UserID = userId AND ProductID = productId AND Size = size)";
                 db.query(
                     sqlInsert,
-                    // [quantity, userId, productId, size],
+                    // [quantity, userId, productId, size],dd
                     (err, result) => {
                         if (!err) {
                             message = "success";
