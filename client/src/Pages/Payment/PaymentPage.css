@@ -9,3 +9,121 @@
     /* justify-content: center; */
     background-color: rgb(247, 247, 247);
 }
+.payment__page__container{
+    display: flex;
+    flex-direction: row;
+    margin: 50px 0;
+    width: 635px;
+    height: 430px;
+    background: white;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+}
+
+  
+  .item {
+    width: 50%;
+    position: relative;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .overlay-effect {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.2;
+    background-color: rgb(1, 138, 45);
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .item-details {
+    /* position: absolute; */
+    /* bottom: 0; */
+    margin-bottom: 5px;
+    /* margin-left: 20px; */
+    color: #000000;
+    text-align: center;
+  }
+  
+  .item-details__title {
+    font-size: 22px;
+  }
+  
+  .item-details__amount {
+    font-weight: bolder;
+  }
+  
+  .checkout {
+    background: #ffffff; /* fallback for old browsers */
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 430px;
+    width: 50%;
+  }
+  
+  .checkout-form {
+    padding: 20px 20px;
+  }
+  
+  .checkout-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .checkout-field label {
+    text-align: left;
+    color: #000000;
+    font-size: 10px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+  }
+  
+  .checkout-field input {
+    background-color: transparent;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    color: #e0eafc;
+    height: 35px;
+    padding-left: 10px;
+  }
+  
+  .checkout-field input:focus {
+    background-color: transparent;
+    outline: none;
+  }
+  
+  .paystack-button {
+    cursor: pointer;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    background-color: rgb(1, 138, 45);
+    font-weight: bold;
+    color: #e0eafc;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 45px;
+    margin-top: 40px;
+  }
+  
+  .paystack-button:hover {
+    background-color: rgb(0, 109, 34);
+  }
+  
+  .paystack-button:focus {
+    outline: none;
+  }
+  
