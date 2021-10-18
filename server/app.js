@@ -23,14 +23,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
     cors({
-        origin: ["http://localhost3001"],
+        origin: ["http://localhost:3000"],
         methods: ["GET", "POST"],
         credentials: true,
     })
 );
 app.use(cookieParser());
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");  //"HARRY NOTES:" I had to add the "http://localhost:3000" in place of the star as i was getting CORS errors. (see error at the bottom of the page)
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
@@ -65,26 +65,30 @@ app.listen(port, () => {
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST) <-----  HARRY: USE THIS ONE WHEN YOU GET .ENV FILE
 const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
 
-app.post("/post", cors(), async (req, res) => {
-    let { amount, id } = req.body;
-    try {
-        const payment = await stripe.paymentIntents.create({
-            amount,
-            currency: "ZAR",
-            description: "Fever Ecommerce",
-            payment_method: id,
-            confirm: true,
-        });
-        console.log("Payment", payment);
-        res.json({
-            message: "Payment successful",
-            success: true,
-        });
-    } catch (error) {
-        console.log("Error", error);
-        res.json({
-            message: "Payment failed",
-            success: false,
-        });
-    }
-});
+// app.post("/post", cors(), async (req, res) => {
+//     let { amount, id } = req.body;
+//     try {
+//         const payment = await stripe.paymentIntents.create({
+//             amount,
+//             currency: "ZAR",
+//             description: "Fever Ecommerce",
+//             payment_method: id,
+//             confirm: true,
+//         });
+//         console.log("Payment", payment);
+//         res.json({
+//             message: "Payment successful",
+//             success: true,
+//         });
+//     } catch (error) {
+//         console.log("Error", error);
+//         res.json({
+//             message: "Payment failed",
+//             success: false,
+//         });
+//     }
+// });
+
+
+
+//HARRY CORS ERRORS: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
