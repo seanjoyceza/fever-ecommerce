@@ -1,8 +1,8 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import CartContext from "./cart-ctx";
 
 const defaultCartState = {
-    items: [],
+    items: localStorage.getItem("userCart") || [],
     totalAmount: 0,
 };
 
@@ -26,6 +26,10 @@ const cartReducer = (state, action) => {
         } else {
             updatedItems = state.items.concat(action.item);
         }
+
+        localStorage.setItem("userCart", updatedItems);
+        localStorage.setItem("totalAmount", updatedTotalAmount);
+
         console.log(updatedItems);
         return {
             items: updatedItems,
@@ -90,6 +94,19 @@ const cartReducer = (state, action) => {
         };
     }
 
+    //note to self - check bookmark
+    // if (action.type === "UPDATE") {
+    //     console.log(localStorage.getItem("userCart"));
+    //     let cartItems;
+    //     if (localStorage.getItem("userCart")) {
+    //         return (cartItems = localStorage.getItem("userCart"));
+    //     }
+
+    //     return {
+    //         items: cartItems,
+    //     };
+    // }
+
     return defaultCartState;
 };
 
@@ -114,6 +131,14 @@ const CartProvider = (props) => {
     const removeAllItemsFromCartHandler = () => {
         dispatchCartAction({ type: "REMOVEALL" });
     };
+
+    // const updateOnReload = () => {
+    //     dispatchCartAction({ type: "UPDATE" });
+    // };
+
+    // useEffect(() => {
+    //     updateOnReload();
+    // }, []);
 
     const cartContext = {
         items: cartState.items,
