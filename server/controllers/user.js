@@ -1,6 +1,7 @@
 const { validationResult, check } = require("express-validator");
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
+const { v4 } = require("uuid");
 const saltRounds = 10;
 
 const db = mysql.createPool({
@@ -62,12 +63,18 @@ module.exports.register =
                         if (err) {
                             console.log(err);
                         }
-
+                        const UserCartID = v4();
                         const sqlInsert =
-                            "INSERT INTO users (userFirstName, userLastName,userEmail, userPassword) VALUES (?,?,?,?)";
+                            "INSERT INTO users (userFirstName, userLastName,userEmail, userPassword, UserCartID) VALUES (?,?,?,?,?)";
                         db.query(
                             sqlInsert,
-                            [userFirstName, userLastName, userEmail, hash],
+                            [
+                                userFirstName,
+                                userLastName,
+                                userEmail,
+                                hash,
+                                UserCartID,
+                            ],
                             (err, result) => {
                                 if (!err) {
                                     message = "success";
@@ -166,9 +173,9 @@ module.exports.postLogin =
                                                     "Successfully logged in!",
                                             });
                                         } else {
-                                            console.log(response1[0].ProductID);
-                                            console.log(response1[0].Quantity);
-                                            console.log(response1[0].Size);
+                                            // console.log(response1[0].ProductID);
+                                            // console.log(response1[0].Quantity);
+                                            // console.log(response1[0].Size);
 
                                             const ProductID =
                                                 response1[0].ProductID;

@@ -11,18 +11,17 @@ module.exports.addToCart = async (req, response) => {
     const userId = req.body.userId;
     const productId = req.body.productId;
     const quantity = req.body.quantity;
-    const size = req.body.size;
+    const size = req.body.size.substring(0, 2);
 
-    console.log(userId);
-    console.log(productId);
-    console.log(quantity);
-    console.log(size);
+    // console.log(userId);
+    // console.log(productId);
+    console.log(`Quantity from frontend is: ${quantity}`);
+    // console.log(size);
 
     db.query(
         "SELECT * FROM UserCartItems WHERE UserID = userId AND ProductID = productId AND Size = size",
         // [userId, productId, size],
         (err, res) => {
-            console.log(res);
             if (err) {
                 console.log("error");
             }
@@ -36,7 +35,6 @@ module.exports.addToCart = async (req, response) => {
                     (err, result) => {
                         if (!err) {
                             message = "success";
-                            // console.log(message);
                             response.send(message);
                         } else {
                             console.log(err);
@@ -45,20 +43,16 @@ module.exports.addToCart = async (req, response) => {
                 );
             } else {
                 const sqlInsert =
-                    "UPDATE UserCartItems SET Quantity = Quantity + quantity WHERE (UserID = userId AND ProductID = productId AND Size = size)";
-                db.query(
-                    sqlInsert,
-                    // [quantity, userId, productId, size],dd
-                    (err, result) => {
-                        if (!err) {
-                            message = "success";
-                            // console.log(message);
-                            response.send(message);
-                        } else {
-                            console.log(err);
-                        }
+                    "UPDATE UserCartItems SET Quantity = Quantity + ? WHERE (UserID = userId AND ProductID = productId AND Size = size)";
+                db.query(sqlInsert, [quantity], (err, result) => {
+                    if (!err) {
+                        message = "success";
+                        // console.log(message);
+                        response.send(message);
+                    } else {
+                        console.log(err);
                     }
-                );
+                });
             }
         }
     );

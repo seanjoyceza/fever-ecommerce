@@ -55,9 +55,9 @@ const LoginForm = () => {
                     if (response.data.result.message) {
                         setValidated(false);
                     } else {
-                        console.log(response.data.cart);
+                        // console.log(response.data.cart);
                         const cartData = response.data.cart;
-                        console.log(cartData);
+                        // console.log(cartData);
                         cartCtx.addItems(cartData);
                         localStorage.setItem(
                             "user",
