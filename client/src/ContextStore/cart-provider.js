@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useState } from "react";
 import CartContext from "./cart-ctx";
 
 const defaultCartState = {
-    items: localStorage.getItem("userCart") || [],
+    items: [],
     totalAmount: 0,
 };
 
@@ -12,7 +12,8 @@ const cartReducer = (state, action) => {
             state.totalAmount + action.item.price * action.item.quantity;
 
         const existingCartItemIndex = state.items.findIndex(
-            (item) => item.id === action.item.id
+            (item) =>
+                item.id === action.item.id && item.size === action.item.size
         );
         const existingCartItem = state.items[existingCartItemIndex];
         let updatedItems;
@@ -94,7 +95,7 @@ const cartReducer = (state, action) => {
         };
     }
 
-    //note to self - check bookmark
+    //note to self - check bookmark for updating reducer state with useEffect
     // if (action.type === "UPDATE") {
     //     console.log(localStorage.getItem("userCart"));
     //     let cartItems;

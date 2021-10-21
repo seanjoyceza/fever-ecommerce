@@ -124,13 +124,13 @@ const Product = ({ match }) => {
                                         </option>
                                         <option
                                             className="productDetail__page__size__option"
-                                            value={"X-Large"}
+                                            value={"XLarge"}
                                         >
                                             XL
                                         </option>
                                         <option
                                             className="productDetail__page__size__option"
-                                            value={"XX-Large"}
+                                            value={"XXLarge"}
                                         >
                                             XXL
                                         </option>

@@ -9,22 +9,19 @@ const db = mysql.createPool({
 
 module.exports.addToCart = async (req, response) => {
     const userId = req.body.userId;
-    const productId = req.body.productId;
+    const productId = parseInt(req.body.productId);
     const quantity = req.body.quantity;
     const size = req.body.size.substring(0, 2);
-
-    // console.log(userId);
-    // console.log(productId);
-    console.log(`Quantity from frontend is: ${quantity}`);
-    // console.log(size);
+    console.log(`id is: ${productId}`);
 
     db.query(
-        "SELECT * FROM UserCartItems WHERE UserID = userId AND ProductID = productId AND Size = size",
-        // [userId, productId, size],
+        "SELECT * FROM UserCartItems WHERE (UserID = ? AND ProductID = ? AND Size = ?)",
+        [userId, productId, size],
         (err, res) => {
             if (err) {
                 console.log("error");
             }
+            console.log(res);
             if (res.length === 0) {
                 console.log("not found!");
                 const sqlInsert =
@@ -42,17 +39,22 @@ module.exports.addToCart = async (req, response) => {
                     }
                 );
             } else {
+                console.log("found!");
                 const sqlInsert =
-                    "UPDATE UserCartItems SET Quantity = Quantity + ? WHERE (UserID = userId AND ProductID = productId AND Size = size)";
-                db.query(sqlInsert, [quantity], (err, result) => {
-                    if (!err) {
-                        message = "success";
-                        // console.log(message);
-                        response.send(message);
-                    } else {
-                        console.log(err);
+                    "UPDATE UserCartItems SET Quantity = Quantity + ? WHERE (UserID = ? AND ProductID = ? AND Size = ?)";
+                db.query(
+                    sqlInsert,
+                    [quantity, userId, productId, size],
+                    (err, result) => {
+                        if (!err) {
+                            message = "success";
+                            // console.log(message);
+                            response.send(message);
+                        } else {
+                            console.log(err);
+                        }
                     }
-                });
+                );
             }
         }
     );
