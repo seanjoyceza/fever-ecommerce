@@ -63,12 +63,14 @@ module.exports.addToCart = async (req, response) => {
 module.exports.updateCartItem = async (req, res) => {
     const userId = req.body.userId;
     const productId = req.body.productId;
+    const productSize = req.body.productSize.substring(0, 2);
     const increment = req.body.increment;
+    const quantity = 0;
 
     if (increment === 1) {
         const sqlInsert =
-            "UPDATE UserCartItems SET Quantity = Quantity + 1 WHERE (UserID = ? and ProductID = ?)";
-        db.query(sqlInsert, [userId, productId], (err, result) => {
+            "UPDATE UserCartItems SET Quantity = Quantity + 1 WHERE (UserID = ? and ProductID = ? and Size = ?)";
+        db.query(sqlInsert, [userId, productId, productSize], (err, result) => {
             if (!err) {
                 message = "success";
                 console.log(message);
@@ -79,12 +81,20 @@ module.exports.updateCartItem = async (req, res) => {
         });
     } else {
         const sqlInsert =
-            "UPDATE UserCartItems SET Quantity = Quantity - 1 WHERE (UserID = ? and ProductID = ?)";
-        db.query(sqlInsert, [userId, productId], (err, result) => {
+            "UPDATE UserCartItems SET Quantity = Quantity - 1 WHERE (UserID = ? and ProductID = ? and Size = ?)";
+        db.query(sqlInsert, [userId, productId, productSize], (err, result) => {
             if (!err) {
-                message = "success";
-                console.log(message);
-                res.send(message);
+                const sqlInsert2 =
+                    "DELETE FROM UserCartItems WHERE (Quantity = ?)";
+                db.query(sqlInsert2, [quantity], (err, result) => {
+                    if (!err) {
+                        message = "success";
+                        console.log(message);
+                        res.send(message);
+                    } else {
+                        console.log(err);
+                    }
+                });
             } else {
                 console.log(err);
             }

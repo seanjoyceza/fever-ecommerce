@@ -3,7 +3,6 @@ import "react-sliding-pane/dist/react-sliding-pane.css";
 import "./Cart.css";
 import AuthContext from "../../ContextStore/auth-ctx";
 
-
 //components
 import CartContext from "../../ContextStore/cart-ctx";
 import CartItem from "./CartItem";
@@ -29,12 +28,16 @@ const Cart = (props) => {
     const totalAmount = `R${cartCtx.totalAmount.toFixed(2)}`;
     const hasItems = cartCtx.items.length > 0;
 
-    const cartItemRemoveHandler = (id) => {
+    const cartItemRemoveHandler = (id, size) => {
+        // console.log(id);
+        // console.log(size);
+
         if (authCtx.isLoggedIn) {
             //backend cart
             axios
                 .post("http://localhost:3001/api/updateCartItem", {
-                    productId: 1,
+                    productId: id,
+                    productSize: size,
                     userId: authCtx.isLoggedIn,
                     increment: -1,
                 })
@@ -49,12 +52,16 @@ const Cart = (props) => {
         //
     };
 
-    const cartItemAddHandler = (item) => {
+    const cartItemAddHandler = (item, id, size) => {
+        // console.log(id);
+        // console.log(size);
+
         if (authCtx.isLoggedIn) {
             //backend cart
             axios
                 .post("http://localhost:3001/api/updateCartItem", {
-                    productId: 1,
+                    productId: id,
+                    productSize: size,
                     userId: authCtx.isLoggedIn,
                     increment: 1,
                 })
@@ -73,14 +80,14 @@ const Cart = (props) => {
         return (
             //Remember the return keyword when using map - does not come up as an error
             <CartItem
-                key={item.id}
+                key={`${item.id}+${item.size}`}
                 image={item.image}
                 title={item.title}
                 quantity={item.quantity}
                 price={item.price}
                 size={item.size}
-                onRemove={cartItemRemoveHandler.bind(null, item.id)} //bind preconfigures the parameters that the function will receive
-                onAdd={cartItemAddHandler.bind(null, item)}
+                onRemove={cartItemRemoveHandler.bind(null, item.id, item.size)} //bind preconfigures the parameters that the function will receive
+                onAdd={cartItemAddHandler.bind(null, item, item.id, item.size)}
             />
         );
     });
@@ -157,7 +164,7 @@ const Cart = (props) => {
                                 Shipping & taxes calculated at checkout
                             </div>
 
-                            <Link to='/checkout' className="btn btn-success">
+                            <Link to="/checkout" className="btn btn-success">
                                 Check Out | {totalAmount}
                             </Link>
                         </div>

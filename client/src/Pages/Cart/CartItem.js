@@ -3,7 +3,6 @@ import React from "react";
 import classes from "./CartItem.module.css";
 
 const CartItem = (props) => {
-    // console.log(props.price);
     const price = `R${parseInt(props.price).toFixed(2)}`;
 
     return (
