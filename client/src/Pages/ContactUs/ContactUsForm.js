@@ -29,7 +29,7 @@ const ContactUsForm = (props) => {
                 <Form.Group controlId="validationCustom01">
                     <Form.Control
                         required
-                        className="contact__form__input"
+                        className="checkout-field"
                         type="text"
                         placeholder="Enter Name"
                         name="name"
@@ -41,7 +41,7 @@ const ContactUsForm = (props) => {
                 <Form.Group controlId="validationCustom01">
                     <Form.Control
                         required
-                        className="contact__form__input"
+                        className="checkout-field"
                         type="text"
                         placeholder="Enter Surname"
                         name="surname"
@@ -53,7 +53,7 @@ const ContactUsForm = (props) => {
                 <Form.Group controlId="validationCustom01">
                     <Form.Control
                         required
-                        className="contact__form__input"
+                        className="checkout-field"
                         type="email"
                         placeholder="Enter email address"
                         name="email"
@@ -65,7 +65,7 @@ const ContactUsForm = (props) => {
                 <Form.Group controlId="validationCustom01">
                     <Form.Control
                         required
-                        className="contact__form__input"
+                        className="checkout-field"
                         type="text"
                         placeholder="Enter phone number"
                         name="phone"
@@ -77,7 +77,7 @@ const ContactUsForm = (props) => {
                 <Form.Group controlId="validationCustom01">
                     <Form.Control
                         required
-                        className="contact__form__input"
+                        className="checkout-field"
                         type="text"
                         placeholder="Your message..."
                         name="message"

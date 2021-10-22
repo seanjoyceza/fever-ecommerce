@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useContext, Fragment } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import "./PaymentStepOne.css";
 
@@ -31,8 +32,18 @@ function PaymentStepOne() {
   let totalAmount = +cartAmount + +shippingAmount;
 
   totalAmount = +cartAmount + +shippingAmount;
+
+  useEffect(() => {
+    // storing input name
+    localStorage.setItem("total_to_pay", JSON.stringify(totalAmount));
+  }, [totalAmount]);
   return (
-    <div className='payment__page__left'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className='payment__page__left'
+    >
       <div className='payment__page__left__wrapper'>
         <p className='payment__page__left__wrapper__title'>Cart totals</p>
         <div className='payment__page__subtotal'>
@@ -62,7 +73,7 @@ function PaymentStepOne() {
                 type='radio'
                 id='shipping value'
                 name='drone'
-                value={(95.0, 55)}
+                value={95.0}
                 onChange={(e) => setShippingAmount(e.target.value)}
               />
               <label className='payment__page__shipping__option__label'>
@@ -159,18 +170,20 @@ function PaymentStepOne() {
         <div className='payment__page__total'>
           <p>Shipping costs: </p>
           <p className='payment__page__total__value'>
-            {shippingAmount ? `R${shippingAmount}` : "--"}
+            {shippingAmount <= 0 ? "--" : `R${shippingAmount}`}
           </p>
         </div>
         <div className='payment__page__total'>
           <p>Total: </p>
           <p className='payment__page__total__value'>
-            {totalAmount ? `R${totalAmount}` : "--"}
+            {!!totalAmount ? `R${totalAmount}` : "--"}
           </p>
         </div>
       </div>
-      <Link to='/payment-step-2'>proceed</Link>
-    </div>
+      <Link to='/payment-step-2' className='payment__page__proceed__button'>
+        Proceed to Payment Step 2
+      </Link>
+    </motion.div>
   );
 }
 

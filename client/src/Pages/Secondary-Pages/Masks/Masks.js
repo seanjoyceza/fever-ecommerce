@@ -49,13 +49,13 @@ function Masks() {
                     <Col>
                         <div className="shop__page__display">
                             <div className="shop_page_heading">Masks</div>
+                           {/** 
                             <div className="shop_page_heading2">
                                 <div className="sort_by">Sort by:</div>
                                 <select className="shop_page_select">
                                     <option
                                         className="shop_page_option"
-                                        value={"Default sorting"}
-                                        selected
+                                        defaultValue={"Default sorting"}
                                     >
                                         Default sorting
                                     </option>
@@ -79,6 +79,7 @@ function Masks() {
                                     </option>
                                 </select>
                             </div>
+                            */}
 
                             <div className="shop__page__product_holder">
                                 {filteredProducts ? (

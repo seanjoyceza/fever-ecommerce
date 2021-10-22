@@ -48,8 +48,10 @@
   /* border-radius: 5px; */
   color: #000000;
   height: 25px;
+
   /* padding-left: 10px; */
 }
+
 
 
 
@@ -89,6 +91,7 @@
   .checkout-field {
     width: 320px;
   }
+
   .payment__page__right__form {
     display: flex;
     flex-direction: column;

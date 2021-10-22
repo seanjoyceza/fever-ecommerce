@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext, Fragment } from "react";
 import "./Checkout.css";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import CartContext from "../../ContextStore/cart-ctx";
 import CheckoutProduct from "./CheckoutProduct/CheckoutProduct";
-import CartItem from "../Cart/CartItem";
+
 function Checkout() {
   const cartItemRemoveHandler = (id) => {
     cartCtx.removeItem(id);
@@ -20,13 +21,14 @@ function Checkout() {
   const hasItems = cartCtx.items.length > 0;
 
   return (
-    <div className='checkout__page'>
+    <motion.div initial={{ opacity: 0 }}
+    exit={{ opacity: 0 }}
+    animate={{ opacity: 1 }} className='checkout__page'>
       {/** 
   
   */}
       {hasItems ? (
         <Fragment>
-          {" "}
           <div>
             <p className='checkout__page__header'>Review your shopping cart</p>
           </div>
@@ -46,7 +48,7 @@ function Checkout() {
           </div>
           <div className='checkout__page__cartTotal__wrapper'>Cart total: {totalAmount}</div>
           <div className='checkout__page__payment__link__wrapper'>
-            <Link className='checkout__page__payment__link' to='/payment'>Proceed to payment</Link>
+            <Link className='checkout__page__payment__link' to='/payment'>Proceed to Payment Step 1</Link>
           </div>
         </Fragment>
       ) : (
@@ -61,7 +63,7 @@ function Checkout() {
           </Link>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

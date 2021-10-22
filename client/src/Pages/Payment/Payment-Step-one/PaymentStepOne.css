@@ -98,6 +98,17 @@
   .payment__page__details__amount {
     margin: 0 !important;
   }
+  .payment__page__proceed__button{
+    margin: 10px 0 50px 0;
+    padding: 10px;
+    background-color: rgb(1, 138, 45) !important;
+    text-decoration: none !important;
+    color: white;
+    border-radius: 3px
+  }
+  .payment__page__proceed__button:hover{
+    color: black !important;
+  }
   
   
   @media (max-width: 910px) {

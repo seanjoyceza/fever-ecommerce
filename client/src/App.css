@@ -11,6 +11,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-
+input {
+  font-size: 14px !important;
+}
+textarea {
+  font-size: 14px !important;
+}
 
 /* ----------------------------------------------------- */

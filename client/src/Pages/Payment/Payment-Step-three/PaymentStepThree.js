@@ -1,42 +1,31 @@
 import React, { useEffect, useState, useContext, Fragment } from "react";
-import './PaymentStepThree.css'
+import "./PaymentStepThree.css";
+import { useHistory } from "react-router-dom";
 
-import CartContext from "../../../ContextStore/cart-ctx";
+import { motion } from "framer-motion";
 import { PaystackButton } from "react-paystack";
 
 function PaymentStepThree() {
-useEffect(() => {
- 
+  let history = useHistory();
+  //THIS USEEFFECT IS TO GET THE EMAIL FROM LOCAL STORAGE. (THE EMAIL ADDRESS IS REQUIRED TO MAKE PAYMENT VIA THE STACK PAYMENT PROCESS)
+  useEffect(() => {
     const saved = localStorage.getItem("shipping_email");
     const initialValue = JSON.parse(saved);
-    
-    setShippingEmail(initialValue)
-    setEmail(initialValue)
-  
-  
-}, [])
+    setEmail(initialValue);
+  }, []);
+  //THIS USEEFFECT IS TO GET THE TOTAL AMOUNT TO BE PAID FROM LOCAL STORAGE. (THE AMOUNT IS NEEDED TO AS A VALUE TO BE PAID its the value of the cart and the shipping costs)
+  useEffect(() => {
+    const saved = localStorage.getItem("total_to_pay");
+    const initialValue = JSON.parse(saved);
 
-
-     //CONTEXT API FOR CART
-  const cartItemRemoveHandler = (id) => {
-    cartCtx.removeItem(id);
-  };
-
-  const cartItemAddHandler = (item) => {
-    // console.log(item);
-    cartCtx.addItem({ ...item, quantity: 1 });
-  };
-  const cartCtx = useContext(CartContext);
-
-  const cartAmount = cartCtx.totalAmount;
-
-  const hasItems = cartCtx.items.length > 0;
+    // setShippingEmail(initialValue)
+    setTotalToPay(initialValue);
+  }, []);
 
   //PAYSTACK -----------------------------------------------------------------
-  let totalAmount;
+
   const publicKey = "pk_test_e6a50ea8a510d5701bffdf68cb9ea88692b8b5b1";
 
-  
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [phone, setPhone] = useState("");
@@ -45,24 +34,13 @@ useEffect(() => {
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [shippingAmount, setShippingAmount] = useState("");
-  const [shippingOption, setShippingOption] = useState(() => {
-    const saved = localStorage.getItem("shipping_option");
-    const initialValue = JSON.parse(saved);
-    return initialValue || "";
-  });
-  const [shippingEmail, setShippingEmail] = useState("");
-  const [email, setEmail] = useState('');
- 
 
-  console.log(shippingOption);
-  console.log(email);
+  const [email, setEmail] = useState("");
+  const [totalToPay, setTotalToPay] = useState("");
 
- 
-  console.log("e",email);
-  totalAmount = +cartAmount + +shippingOption;
-  const amount = totalAmount * 100;
-  // const email = shippingEmail;
+  //THIS SETS THE AMOUNT TO THE AMOUNT TO BE PAID AND MULTIPLIES IT BY 100 TO GET A VALUE IN CENTS. (VALUE IN CENTS REQUIRED FOR PAYSTACK)
+  const amount = totalToPay * 100;
+
   const componentProps = {
     email,
     amount,
@@ -90,34 +68,45 @@ useEffect(() => {
       setCity("");
       setProvince("");
       setPostalCode("");
+      //this line below redirects us to the thank you page
+      history.push("/thank-you");
+      //after payment is successful clear all saved variables in local storage
+      localStorage.removeItem("total_to_pay");
+      localStorage.removeItem("shipping_name");
+      localStorage.removeItem("shipping_option");
+      localStorage.removeItem("shipping_email");
+      localStorage.removeItem("shipping_phone");
+      localStorage.removeItem("totalAmount");
     },
     onClose: () => alert("An error has accured, please try again later"),
   };
 
-  console.log(cartAmount);
-  console.log(shippingAmount);
-  console.log(cartCtx.items);
-  console.log("pc", postalCode);
-  const [showItem, setShowItem] = useState(false);
-  const sendorderInfo =(e) => {
-    e.preventDefault()
-  }
-    
-    return (
-        <div>
-        final page
-        
-        {`totalAmount ${totalAmount}`}
-        {`cartAmount ${cartAmount}`}
-        {`email ${email}`}
-       
-          <PaystackButton className='paystack-button' {...componentProps} />
-          
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className='final__payment__page'
+    >
+      <div className='final__payment__page__wrapper'>
+        <p className='final__payment__page__total__title'>
+          You are about to make payment
+        </p>
+        <div className='final__payment__page__total'>
+          <p>Total:</p>
+          <p>
+            <b>
+              <p className='final__payment__page__total__value'>
+                R{totalToPay}
+              </p>
+            </b>
+          </p>
         </div>
-     
-            
-        
-    )
+
+        <PaystackButton className='paystack-button' {...componentProps} />
+      </div>
+    </motion.div>
+  );
 }
 
-export default PaymentStepThree
+export default PaymentStepThree;

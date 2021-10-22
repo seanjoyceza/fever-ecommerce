@@ -20,7 +20,12 @@
     margin: 10px 0 20px 0
 }
 .checkout__page__payment__link{
-    margin: 10px 0 20px 0
+    margin: 10px 0 20px 0;
+    padding: 10px;
+    background-color: rgb(1, 138, 45) !important;
+    text-decoration: none !important;
+    color: white;
+    border-radius: 3px
 }
 .checkout__page__payment__link:hover{
     color: black !important;

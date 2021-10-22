@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./SideBar.css";
 import { Link } from "react-router-dom";
 
 const SideBar = (props) => {
     return (
-        <>
+        <Fragment>
             <div className="sidebar">
                 <div className="search-items">
                     <h3 className="search_heading">PRODUCT CATEGORIES</h3>
@@ -27,7 +27,7 @@ const SideBar = (props) => {
                         Masks
                     </Link>
                     <Link className="sidebar_links" to="/mugs">
-                        Cofee Mugs
+                        Mugs
                     </Link>
                 </div>
 
@@ -43,7 +43,7 @@ const SideBar = (props) => {
                     </form>
                 </div>
             </div>
-        </>
+        </Fragment>
     );
 };
 

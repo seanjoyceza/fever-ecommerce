@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, Fragment } from "react";
 import "./PaymentStepTwo.css";
 
 import CartContext from "../../../ContextStore/cart-ctx";
-import { PaystackButton } from "react-paystack";
+import { motion } from "framer-motion";
 
 function PaymentStepOne() {
   //CONTEXT API FOR CART
@@ -88,7 +88,11 @@ function PaymentStepOne() {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <div className='payment__page__right'>
         <p className='payment__page__right__title'>Billing Information</p>
         <div className='payment__page__right__form'>
@@ -263,7 +267,7 @@ function PaymentStepOne() {
           </form>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

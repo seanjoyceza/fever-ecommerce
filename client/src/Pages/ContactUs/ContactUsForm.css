@@ -36,7 +36,7 @@
     font-size: 30px;
 }
 .contact__page__details__text {
-    margin: 40px 0 50px 0;
+    margin: 40px 0 30px 0;
     letter-spacing: 1px;
 }
 .contact__page__details__form__holder {
@@ -93,6 +93,7 @@ textarea {
 .contact__form__submitButton {
     width: 80px;
     padding: 10px 15px;
+    border-radius: 3px !important;
     background-color: #018a2d;
     /* border-radius: 5px; */
     color: #f7f7f7 !important;
