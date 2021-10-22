@@ -1,19 +1,23 @@
 import React, { useEffect, useState, useContext, Fragment } from "react";
+import './PaymentStepThree.css'
 
-import "./PaymentPage.css";
-//CART CONTEXT
-
-import CartContext from "../../ContextStore/cart-ctx";
-
-// import CheckoutProduct from "./CheckoutProduct/CheckoutProduct";
-// import CartItem from "../Cart/CartItem";
-
-//PAYSTACK
+import CartContext from "../../../ContextStore/cart-ctx";
 import { PaystackButton } from "react-paystack";
-import PaymentStepOne from "./Payment-Step-one/PaymentStepOne";
 
-function PaymentPage() {
-  //CONTEXT API FOR CART
+function PaymentStepThree() {
+useEffect(() => {
+ 
+    const saved = localStorage.getItem("shipping_email");
+    const initialValue = JSON.parse(saved);
+    
+    setShippingEmail(initialValue)
+    setEmail(initialValue)
+  
+  
+}, [])
+
+
+     //CONTEXT API FOR CART
   const cartItemRemoveHandler = (id) => {
     cartCtx.removeItem(id);
   };
@@ -32,7 +36,7 @@ function PaymentPage() {
   let totalAmount;
   const publicKey = "pk_test_e6a50ea8a510d5701bffdf68cb9ea88692b8b5b1";
 
-  const [email, setEmail] = useState("");
+  
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [phone, setPhone] = useState("");
@@ -42,8 +46,23 @@ function PaymentPage() {
   const [province, setProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [shippingAmount, setShippingAmount] = useState("");
-  totalAmount = +cartAmount + +shippingAmount;
+  const [shippingOption, setShippingOption] = useState(() => {
+    const saved = localStorage.getItem("shipping_option");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "";
+  });
+  const [shippingEmail, setShippingEmail] = useState("");
+  const [email, setEmail] = useState('');
+ 
+
+  console.log(shippingOption);
+  console.log(email);
+
+ 
+  console.log("e",email);
+  totalAmount = +cartAmount + +shippingOption;
   const amount = totalAmount * 100;
+  // const email = shippingEmail;
   const componentProps = {
     email,
     amount,
@@ -80,16 +99,25 @@ function PaymentPage() {
   console.log(cartCtx.items);
   console.log("pc", postalCode);
   const [showItem, setShowItem] = useState(false);
-  const sendorderInfo = (e) => {
-    e.preventDefault();
-  };
-  return (
-    <div className='payment__page'>
-      <div className='payment__page__container'>
-        <PaymentStepOne />
-      </div>
-    </div>
-  );
+  const sendorderInfo =(e) => {
+    e.preventDefault()
+  }
+    
+    return (
+        <div>
+        final page
+        
+        {`totalAmount ${totalAmount}`}
+        {`cartAmount ${cartAmount}`}
+        {`email ${email}`}
+       
+          <PaystackButton className='paystack-button' {...componentProps} />
+          
+        </div>
+     
+            
+        
+    )
 }
 
-export default PaymentPage;
+export default PaymentStepThree

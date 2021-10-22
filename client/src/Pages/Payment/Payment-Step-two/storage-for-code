@@ -1,0 +1,214 @@
+     <div className='checkout-field '>
+            <label>Name and Surname</label>
+            <input
+              type='text'
+              id='name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <div className='checkout-field'>
+            <label>Email</label>
+            <input
+              type='text'
+              id='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className='checkout-field'>
+            <label>Phone Number</label>
+            <input
+              type='text'
+              id='phone number'
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div className='checkout-field'>
+            <label>Address Line 1</label>
+            <input
+              type='text'
+              id='adressLine1'
+              value={addressLine1}
+              onChange={(e) => setAddressLine1(e.target.value)}
+            />
+          </div>
+          <div className='checkout-field'>
+            <label>Adress Line 2</label>
+            <input
+              type='text'
+              id='adressLine2'
+              value={addressLine2}
+              onChange={(e) => setAddressLine2(e.target.value)}
+            />
+          </div>
+          <div className='checkout-field'>
+            <label>City</label>
+            <input
+              type='text'
+              id='city'
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </div>
+          <div className='checkout-field'>
+            <label>Province</label>
+            <input
+              type='text'
+              id='province'
+              value={province}
+              onChange={(e) => setProvince(e.target.value)}
+            />
+          </div>
+          <div className='checkout-field'>
+            <label>Postal Code</label>
+            <input
+              type='text'
+              id='postalcode'
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+            />
+          </div>
+
+
+
+
+
+
+
+
+
+
+           {/*-------------------------------------------------------------------------------------------- */}
+          <form
+            action='https://formsubmit.co/harryminnie6@gmail.com'
+            method='POST'
+            className='contact__form'
+          >
+            <input
+              type='hidden'
+              name='_next'
+              value='http://localhost:3000/payment-step-3'
+            ></input>
+            <input
+              type='hidden'
+              name='_subject'
+              value='New submission!'
+            ></input>
+            <input type='hidden' name='_captcha' value='false'></input>
+
+            {/*-------------------------------------------------------------------------- */}
+            <div className='checkout-field '>
+              <label>Name and Surname</label>
+              <input
+                required
+                autocomplete='off'
+                type='text'
+                id='name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+
+            <div className='checkout-field'>
+              <label>Email</label>
+              <input
+                required
+                autocomplete='off'
+                type='text'
+                id='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className='checkout-field'>
+              <label>Phone Number</label>
+              <input
+                required
+                autocomplete='off'
+                type='text'
+                id='phone number'
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            <div className='checkout-field'>
+              <label>Address Line 1</label>
+              <input
+                required
+                autocomplete='off'
+                type='text'
+                id='Adress Line 1'
+                value={addressLine1}
+                onChange={(e) => setAddressLine1(e.target.value)}
+              />
+            </div>
+            <div className='checkout-field'>
+              <label>Address Line 2</label>
+              <input
+                required
+                autocomplete='off'
+                type='text'
+                id='Adress Line 2'
+                value={addressLine2}
+                onChange={(e) => setAddressLine2(e.target.value)}
+              />
+            </div>
+
+            <div className='checkout-field'>
+              <label>City</label>
+              <input
+                required
+                autocomplete='off'
+                type='text'
+                id='city'
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+            <div className='checkout-field'>
+              <label>Province</label>
+              <input
+                required
+                autocomplete='off'
+                type='text'
+                id='province'
+                value={province}
+                onChange={(e) => setProvince(e.target.value)}
+              />
+            </div>
+            <div className='checkout-field'>
+              <label>Postal Code</label>
+              <input
+                required
+                autocomplete='off'
+                type='text'
+                id='postalcode'
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+              />
+            </div>
+            <div className='checkout-field__hidden'>
+              <textarea
+                name='ordered items'
+                id='textarea-input'
+                defaultValue={JSON.stringify(cartCtx.items)}
+              ></textarea>
+            </div>
+            <button type='submit' className='contact__form__submitButton'>
+              Proceed to final step
+            </button>
+          </form>
+
+
+           useEffect(() => {
+    localStorage.setItem("shipping_name", JSON.stringify(name));
+  }, [name]);
+  useEffect(() => {
+    localStorage.setItem("shipping_email", JSON.stringify(email));
+  }, [shippingAmount]);
+  useEffect(() => {
+    localStorage.setItem("shipping_phone_number", JSON.stringify(phone));
+  }, [phone]);

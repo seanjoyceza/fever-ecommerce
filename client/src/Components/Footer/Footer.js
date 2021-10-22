@@ -44,12 +44,12 @@ function Footer() {
               <h3> Fever Boards</h3>
               <ul className='footer__list'>
                 <li className='footer__option'>
-                  <Link className='footer__link' to='about-us'>
+                  <Link className='footer__link' to='/about-us'>
                     About
                   </Link>
                 </li>
                 <li className=' footer__option'>
-                  <Link className='footer__link' to='shop'>
+                  <Link className='footer__link' to='/shop'>
                     Shop
                   </Link>
                 </li>
@@ -58,11 +58,12 @@ function Footer() {
                     My Account
                   </Link>
                 </li>
+                {/* 
                 <li className='footer__option'>
                   <Link className='footer__link' to='cart'>
                     Cart
                   </Link>
-                </li>
+                </li>*/}
                 <li className='footer__option'>
                   <Link className='footer__link' to='contact-us'>
                     Contact

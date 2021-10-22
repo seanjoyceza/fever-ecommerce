@@ -31,6 +31,8 @@ import AuthProvider from "./ContextStore/auth-provider";
 import ProductsProvider from "./ContextStore/products-provider";
 import Checkout from "./Pages/Checkout/Checkout";
 import PaymentPage from "./Pages/Payment/PaymentPage";
+import PaymentStepTwo from "./Pages/Payment/Payment-Step-two/PaymentStepTwo";
+import PaymentStepThree from "./Pages/Payment/Payment-Step-three/PaymentStepThree";
 
 function App() {
   const onEnterHandler = console.log("hello from register!");
@@ -96,6 +98,12 @@ function App() {
                 </Route>
                 <Route exact path='/payment'>
                   <PaymentPage />
+                </Route>
+                <Route exact path='/payment-step-2'>
+                  <PaymentStepTwo />
+                </Route>
+                <Route exact path='/payment-step-3'>
+                  <PaymentStepThree />
                 </Route>
                 {/*THESE 2 COMPONENTS ARE RENDERED DIFFERENTLY TO GET THE CUSTOM PAGE ROUTING TO WORK. AN ERROR OCCURS WHEN IT HAS THE SAME LAYOUT AS THE OTHER */}
                 <Route exact path='/shop/:id' component={ProductDetailPage} />

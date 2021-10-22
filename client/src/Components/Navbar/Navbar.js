@@ -68,11 +68,12 @@ const Header = () => {
                             About Us
                         </Link>
                     </li>
+                    {/*
                     <li className="option">
                         <Link className="link" to="#">
                             <SearchModal className="search_modal_btn" />
                         </Link>
-                    </li>
+                    </li>  */}
                     {authCtx.isLoggedIn && (
                         <li className="option" onClick={closeMobileMenu}>
                             <Link className="link" to="/my-account">
@@ -130,11 +131,15 @@ const Header = () => {
                         </li>
                     </ul>
                     <ul className="justify nav-options">
+                    {/* 
                         <li className="option" onClick={closeMobileMenu}>
+
+                        
                             <Link className="link" to="#">
                                 <SearchModal />
                             </Link>
                         </li>
+                        */}
                         {authCtx.isLoggedIn && (
                             <li className="option" onClick={closeMobileMenu}>
                                 <Link className="link" to="/my-account">

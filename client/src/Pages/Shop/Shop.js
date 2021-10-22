@@ -37,8 +37,9 @@ const FeaturedProducts = () => {
                     <Col>
                         <div className="shop__page__display">
                             <div className="shop_page_heading">
-                                All Products
+                            SHOP ALL
                             </div>
+                            {/** 
                             <div className="shop_page_heading2">
                                 <div className="sort_by">Sort by:</div>
                                 <select className="shop_page_select">
@@ -68,6 +69,7 @@ const FeaturedProducts = () => {
                                     </option>
                                 </select>
                             </div>
+                            */}
 
                             <div className="shop__page__product_holder">
                                 {filteredProducts ? (
