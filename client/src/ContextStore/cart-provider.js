@@ -9,8 +9,8 @@ const defaultCartState = {
 const cartReducer = (state, action) => {
     if (action.type === "ADD") {
         const updatedTotalAmount =
-            state.totalAmount + action.item.price * action.item.quantity;
-
+            +state.totalAmount + +action.item.price * action.item.quantity;
+        console.log(updatedTotalAmount);
         const existingCartItemIndex = state.items.findIndex(
             (item) =>
                 item.id === action.item.id && item.size === action.item.size
@@ -30,7 +30,6 @@ const cartReducer = (state, action) => {
 
         localStorage.setItem("userCart", updatedItems);
         localStorage.setItem("totalAmount", updatedTotalAmount);
-
         console.log(updatedItems);
         return {
             items: updatedItems,
@@ -39,9 +38,6 @@ const cartReducer = (state, action) => {
     }
 
     if (action.type === "ADDALL") {
-        const updatedTotalAmount =
-            state.totalAmount + action.item.price * action.item.quantity;
-
         const existingCartItemIndex = state.items.findIndex(
             (item) => item.id === action.item.id
         );
@@ -57,7 +53,14 @@ const cartReducer = (state, action) => {
         } else {
             updatedItems = state.items.concat(action.item);
         }
+
+        let updatedTotalAmount = 0;
+        for (let i = 0; i < updatedItems.length; i++) {
+            updatedTotalAmount +=
+                updatedItems[i].price * updatedItems[i].quantity;
+        }
         // console.log(updatedItems);
+        // console.log(`updatedTotalAmount is: ${updatedTotalAmount}`);
         return {
             items: updatedItems,
             totalAmount: updatedTotalAmount,

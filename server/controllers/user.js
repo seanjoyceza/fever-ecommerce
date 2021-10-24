@@ -173,40 +173,85 @@ module.exports.postLogin =
                                                     "Successfully logged in!",
                                             });
                                         } else {
-                                            // console.log(response1[0].ProductID);
-                                            // console.log(response1[0].Quantity);
-                                            // console.log(response1[0].Size);
-
-                                            const ProductID =
-                                                response1[0].ProductID;
-                                            const quantity =
-                                                response1[0].Quantity;
-                                            const size = response1[0].Size;
+                                            let cart = [];
+                                            for (
+                                                i = 0;
+                                                i < response1.length;
+                                                i++
+                                            ) {
+                                                const cartItem = {
+                                                    id: response1[i].ProductID,
+                                                    quantity:
+                                                        response1[i].Quantity,
+                                                    size: response1[i].Size,
+                                                };
+                                                cart.push(cartItem);
+                                            }
+                                            // console.log(cart);
 
                                             db.query(
-                                                "SELECT * FROM products WHERE id = ?",
-                                                ProductID,
+                                                "SELECT * FROM products",
                                                 (err, response2) => {
                                                     if (response2) {
-                                                        const image =
-                                                            response2[0].image;
-                                                        const productId =
-                                                            response2[0].id;
-                                                        const price =
-                                                            response2[0].price;
-                                                        const cart = {
-                                                            id: productId,
-                                                            image: image,
-                                                            price: price,
-                                                            quantity: quantity,
-                                                            size: size,
-                                                        };
-                                                        const totalAmount =
-                                                            9.99 * 2;
+                                                        cart.forEach(
+                                                            (element) => {
+                                                                for (
+                                                                    i = 0;
+                                                                    i <
+                                                                    response2.length;
+                                                                    i++
+                                                                ) {
+                                                                    if (
+                                                                        element.id ===
+                                                                        response2[
+                                                                            i
+                                                                        ].id
+                                                                    ) {
+                                                                        element[
+                                                                            "title"
+                                                                        ] =
+                                                                            response2[
+                                                                                i
+                                                                            ].title;
+                                                                        element[
+                                                                            "image"
+                                                                        ] =
+                                                                            response2[
+                                                                                i
+                                                                            ].image;
+                                                                        element[
+                                                                            "price"
+                                                                        ] =
+                                                                            response2[
+                                                                                i
+                                                                            ].price;
+                                                                    }
+                                                                }
+                                                            }
+                                                        );
+                                                        console.log(cart);
+                                                        let totalAmount = 0;
+                                                        cart.forEach(
+                                                            (element) => {
+                                                                totalAmount +=
+                                                                    +element.quantity *
+                                                                    +element.price;
+                                                            }
+                                                        );
+
+                                                        console.log(
+                                                            Math.round(
+                                                                totalAmount *
+                                                                    100
+                                                            ) / 100
+                                                        );
                                                         res.send({
                                                             cart: cart,
                                                             totalAmount:
-                                                                totalAmount,
+                                                                Math.round(
+                                                                    totalAmount *
+                                                                        100
+                                                                ) / 100,
                                                             result: result,
                                                             message:
                                                                 "Successfully logged in!",

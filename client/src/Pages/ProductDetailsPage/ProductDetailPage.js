@@ -27,6 +27,7 @@ const Product = ({ match }) => {
         }
 
         //add item to cart
+        console.log(myFilteredProduct[0].price);
         if (authCtx.isLoggedIn) {
             //backend cart
             axios

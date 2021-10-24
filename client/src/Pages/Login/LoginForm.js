@@ -57,8 +57,23 @@ const LoginForm = () => {
                     } else {
                         // console.log(response.data.cart);
                         const cartData = response.data.cart;
-                        // console.log(cartData);
-                        cartCtx.addItems(cartData);
+                        const totalAmount = response.data.totalAmount;
+                        console.log(cartData);
+                        for (let i = 0; i < cartData.length; i++) {
+                            if (cartData[i].size === "Sm") {
+                                cartData[i].size = "Small";
+                            } else if (cartData[i].size === "Me") {
+                                cartData[i].size = "Medium";
+                            } else if (cartData[i].size === "La") {
+                                cartData[i].size = "Large";
+                            } else if (cartData[i].size === "XL") {
+                                cartData[i].size = "XLarge";
+                            } else if (cartData[i].size === "XX") {
+                                cartData[i].size = "XXLarge";
+                            }
+                        }
+                        // console.log(totalAmount);
+                        cartCtx.addItems(cartData, totalAmount);
                         localStorage.setItem(
                             "user",
                             response.data.result[0].UserID

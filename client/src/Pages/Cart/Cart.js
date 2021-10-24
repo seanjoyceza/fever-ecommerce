@@ -164,7 +164,11 @@ const Cart = (props) => {
                                 Shipping & taxes calculated at checkout
                             </div>
 
-                            <Link to="/checkout" className="btn btn-success" onClick={onCloseHandler}>
+                            <Link
+                                to="/checkout"
+                                className="btn btn-success"
+                                onClick={onCloseHandler}
+                            >
                                 Check Out | {totalAmount}
                             </Link>
                         </div>
