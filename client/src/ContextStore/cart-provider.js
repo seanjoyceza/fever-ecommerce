@@ -28,8 +28,6 @@ const cartReducer = (state, action) => {
             updatedItems = state.items.concat(action.item);
         }
 
-        localStorage.setItem("userCart", updatedItems);
-        localStorage.setItem("totalAmount", updatedTotalAmount);
         console.log(updatedItems);
         return {
             items: updatedItems,
@@ -98,19 +96,6 @@ const cartReducer = (state, action) => {
         };
     }
 
-    //note to self - check bookmark for updating reducer state with useEffect
-    // if (action.type === "UPDATE") {
-    //     console.log(localStorage.getItem("userCart"));
-    //     let cartItems;
-    //     if (localStorage.getItem("userCart")) {
-    //         return (cartItems = localStorage.getItem("userCart"));
-    //     }
-
-    //     return {
-    //         items: cartItems,
-    //     };
-    // }
-
     return defaultCartState;
 };
 
@@ -136,13 +121,15 @@ const CartProvider = (props) => {
         dispatchCartAction({ type: "REMOVEALL" });
     };
 
-    // const updateOnReload = () => {
-    //     dispatchCartAction({ type: "UPDATE" });
-    // };
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem("user-cart"));
+        console.log(items);
+        dispatchCartAction({ type: "ADDALL", item: items.items });
+    }, []);
 
-    // useEffect(() => {
-    //     updateOnReload();
-    // }, []);
+    useEffect(() => {
+        localStorage.setItem("user-cart", JSON.stringify(cartState));
+    }, [cartState]);
 
     const cartContext = {
         items: cartState.items,
