@@ -27,7 +27,7 @@ const Product = ({ match }) => {
         }
 
         //add item to cart
-        console.log(myFilteredProduct[0].price);
+        // console.log(myFilteredProduct[0].price);
         if (authCtx.isLoggedIn) {
             //backend cart
             axios
@@ -37,6 +37,7 @@ const Product = ({ match }) => {
                     quantity: quantity,
                     size: size,
                 })
+
                 .then((res) => {
                     if (res.data === "success") {
                         //frontend cart
@@ -48,7 +49,7 @@ const Product = ({ match }) => {
                             quantity: quantity,
                             size: size,
                         });
-                        console.log(size);
+                        // console.log(size);
                     }
                 })
                 .catch(() => {
@@ -162,8 +163,11 @@ const Product = ({ match }) => {
                                     </button>
                                 </div>
                             </div>
-                            <div onClick={submitHandler}>
-                                <Button className="btn btn-success my-3">
+                            <div>
+                                <Button
+                                    onClick={submitHandler}
+                                    className="btn btn-success my-3"
+                                >
                                     Add To Cart
                                 </Button>
                             </div>

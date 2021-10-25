@@ -58,7 +58,6 @@ const LoginForm = () => {
                         // console.log(response.data.cart);
                         const cartData = response.data.cart;
                         const totalAmount = response.data.totalAmount;
-                        console.log(cartData);
                         for (let i = 0; i < cartData.length; i++) {
                             if (cartData[i].size === "Sm") {
                                 cartData[i].size = "Small";
@@ -89,7 +88,7 @@ const LoginForm = () => {
     };
 
     useEffect(() => {
-        console.log("useEffect ran!");
+        // console.log("useEffect ran!");
         axios.get("http://localhost:3001/api/login").then((response) => {
             if (response.data.loggedIn === true) {
                 authCtx.setIsLoggedIn(response.data.user.UserEmail);

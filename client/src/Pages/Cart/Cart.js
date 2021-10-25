@@ -43,7 +43,7 @@ const Cart = (props) => {
                 })
                 .then((res) => {
                     //frontend cart
-                    cartCtx.removeItem(id);
+                    cartCtx.removeItem(id, size);
                 })
                 .catch(() => {
                     console.log("did not send to backend!");

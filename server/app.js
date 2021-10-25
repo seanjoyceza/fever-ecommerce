@@ -30,7 +30,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");  //"HARRY NOTES:" I had to add the "http://localhost:3000" in place of the star as i was getting CORS errors. (see error at the bottom of the page)
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); //"HARRY NOTES:" I had to add the "http://localhost:3000" in place of the star as i was getting CORS errors. (see error at the bottom of the page)
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
@@ -88,7 +88,5 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
 //         });
 //     }
 // });
-
-
 
 //HARRY CORS ERRORS: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
