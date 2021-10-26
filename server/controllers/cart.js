@@ -89,7 +89,7 @@ module.exports.updateCartItem = async (req, res) => {
                 db.query(sqlInsert2, [quantity], (err, result) => {
                     if (!err) {
                         message = "success";
-                        console.log(message);
+                        // console.log(message);
                         res.send(message);
                     } else {
                         console.log(err);

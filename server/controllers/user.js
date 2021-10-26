@@ -282,6 +282,23 @@ module.exports.postLogin =
         );
     });
 
+module.exports.addOrder = async (req, response) => {
+    const userCart = req.body.userCart;
+    const orderDate = new Date();
+    const userId = req.body.userID;
+
+    const sqlInsert =
+        "INSERT INTO UserOrderItems (UserID, OrderItems, OrderDate) VALUES (?,?,?)";
+    db.query(sqlInsert, [userId, userCart, orderDate], (err, result) => {
+        if (!err) {
+            message = "success";
+            response.send(message);
+        } else {
+            console.log(err);
+        }
+    });
+};
+
 module.exports.logout = async (req, res) => {
     res.clearCookie("_random_cookie_name", {
         path: "/",
