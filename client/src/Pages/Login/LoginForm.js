@@ -55,7 +55,6 @@ const LoginForm = () => {
                     if (response.data.result.message) {
                         setValidated(false);
                     } else {
-                        // console.log(response.data.cart);
                         const cartData = response.data.cart;
                         const totalAmount = response.data.totalAmount;
                         for (let i = 0; i < cartData.length; i++) {
@@ -73,10 +72,17 @@ const LoginForm = () => {
                         }
                         // console.log(totalAmount);
                         cartCtx.addItems(cartData, totalAmount);
+                        const userOrders = response.data.userOrders;
+                        console.log(userOrders);
                         localStorage.setItem(
                             "user",
                             response.data.result[0].UserID
                         );
+                        localStorage.setItem(
+                            "userOrders",
+                            JSON.stringify(userOrders)
+                        );
+
                         authCtx.setIsLoggedIn(response.data.result[0].UserID);
                         history.push("/");
                     }

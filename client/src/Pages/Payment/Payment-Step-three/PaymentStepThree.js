@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./PaymentStepThree.css";
 import { useHistory } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import { PaystackButton } from "react-paystack";
+import AuthContext from "../../../ContextStore/auth-ctx";
+import CartContext from "../../../ContextStore/cart-ctx";
 const axios = require("axios").default;
 
 function PaymentStepThree() {
     axios.defaults.withCredentials = true;
+    const authCtx = useContext(AuthContext);
+    const cartCtx = useContext(CartContext);
 
     let history = useHistory();
     //THIS USEEFFECT IS TO GET THE EMAIL FROM LOCAL STORAGE. (THE EMAIL ADDRESS IS REQUIRED TO MAKE PAYMENT VIA THE STACK PAYMENT PROCESS)
@@ -78,9 +82,26 @@ function PaymentStepThree() {
             axios
                 .post("http://localhost:3001/api/order", {
                     userCart: userCart,
+                    userId: authCtx.isLoggedIn,
                 })
                 .then((response) => {
                     //if successfully saved to backend, clear userCart
+                    if (response.data === "success") {
+                        //backend cart
+                        axios
+                            .post(
+                                "http://localhost:3001/api/removeAllCartItems",
+                                {
+                                    userId: authCtx.isLoggedIn,
+                                }
+                            )
+                            .then((res) => {
+                                if (res.data === "success") {
+                                    //frontend cart
+                                    cartCtx.removeAll();
+                                }
+                            });
+                    }
                 })
                 .catch(() => {
                     console.log("did not send to backend!");

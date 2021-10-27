@@ -101,3 +101,17 @@ module.exports.updateCartItem = async (req, res) => {
         });
     }
 };
+
+module.exports.removeAllCartItems = async (req, res) => {
+    const userId = req.body.userId;
+
+    const sqlInsert = "DELETE FROM UserCartItems WHERE UserID = ?";
+    db.query(sqlInsert, [userId], (err, result) => {
+        if (!err) {
+            message = "success";
+            res.send(message);
+        } else {
+            console.log(err);
+        }
+    });
+};

@@ -165,13 +165,30 @@ module.exports.postLogin =
                                             console.log("No initial cart!");
                                             const cart = [];
                                             totalAmount = 0;
-                                            res.send({
-                                                cart: cart,
-                                                totalAmount: totalAmount,
-                                                result: result,
-                                                message:
-                                                    "Successfully logged in!",
-                                            });
+
+                                            db.query(
+                                                "SELECT * FROM UserOrderItems WHERE UserID = ?",
+                                                userId,
+                                                (err, response4) => {
+                                                    if (response4) {
+                                                        const userOrders =
+                                                            response4;
+                                                        // console.log(userOrders);
+                                                        res.send({
+                                                            userOrders:
+                                                                userOrders,
+                                                            cart: cart,
+                                                            totalAmount:
+                                                                totalAmount,
+                                                            result: result,
+                                                            message:
+                                                                "Successfully logged in!",
+                                                        });
+                                                    } else {
+                                                        console.log("error!");
+                                                    }
+                                                }
+                                            );
                                         } else {
                                             let cart = [];
                                             for (
@@ -229,7 +246,6 @@ module.exports.postLogin =
                                                                 }
                                                             }
                                                         );
-                                                        console.log(cart);
                                                         let totalAmount = 0;
                                                         cart.forEach(
                                                             (element) => {
@@ -239,33 +255,45 @@ module.exports.postLogin =
                                                             }
                                                         );
 
-                                                        console.log(
-                                                            Math.round(
-                                                                totalAmount *
-                                                                    100
-                                                            ) / 100
+                                                        //when logged in, fetch the user ORDERS as well
+                                                        db.query(
+                                                            "SELECT * FROM UserOrderItems WHERE UserID = ?",
+                                                            userId,
+                                                            (
+                                                                err,
+                                                                response4
+                                                            ) => {
+                                                                if (response4) {
+                                                                    const userOrders =
+                                                                        response4;
+                                                                    // console.log(userOrders);
+                                                                    res.send({
+                                                                        userOrders:
+                                                                            userOrders,
+                                                                        cart: cart,
+                                                                        totalAmount:
+                                                                            Math.round(
+                                                                                totalAmount *
+                                                                                    100
+                                                                            ) /
+                                                                            100,
+                                                                        result: result,
+                                                                        message:
+                                                                            "Successfully logged in!",
+                                                                    });
+                                                                } else {
+                                                                    console.log(
+                                                                        "error!"
+                                                                    );
+                                                                }
+                                                            }
                                                         );
-                                                        res.send({
-                                                            cart: cart,
-                                                            totalAmount:
-                                                                Math.round(
-                                                                    totalAmount *
-                                                                        100
-                                                                ) / 100,
-                                                            result: result,
-                                                            message:
-                                                                "Successfully logged in!",
-                                                        });
                                                     }
                                                 }
                                             );
                                         }
                                     }
                                 );
-                                // res.send({
-                                //     result: result,
-                                //     message: "Successfully logged in!",
-                                // });
                             } else {
                                 console.log("wrong");
                                 message =
@@ -284,8 +312,8 @@ module.exports.postLogin =
 
 module.exports.addOrder = async (req, response) => {
     const userCart = req.body.userCart;
+    const userId = req.body.userId;
     const orderDate = new Date();
-    const userId = req.body.userID;
 
     const sqlInsert =
         "INSERT INTO UserOrderItems (UserID, OrderItems, OrderDate) VALUES (?,?,?)";
