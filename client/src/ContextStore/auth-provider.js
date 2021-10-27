@@ -12,6 +12,7 @@ const AuthProvider = (props) => {
         const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
             setIsLoggedIn(loggedInUser);
+            
         }
     }, []);
 

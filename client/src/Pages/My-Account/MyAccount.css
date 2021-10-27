@@ -1,3 +1,141 @@
-.my_account_container {
-    background-color: rgb(247, 247, 247);
+.myAccount__page {
+  box-sizing: border-box;
+  /* padding-top: 80px; */
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  background-color: rgb(247, 247, 247);
+}
+.myAccount__page__wrapper {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  /* background-color: blanchedalmond; */
+  align-items: center;
+}
+.myAccount__page__wrapper__top {
+  width: 100%;
+  /* background-color: blueviolet; */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 50px;
+}
+.myAccount__page__wrapper__top__title {
+  margin: 0 0 20px 0;
+}
+
+.myAccount__page__wrapper__bottom {
+  width: 100%;
+  display: flex;
+  margin-top: 50px;
+  /* background-color: blueviolet; */
+}
+.myAccount__page__orders__wrapper {
+  flex: 0.7;
+  width: 100%;
+  /* background-color: brown; */
+  margin-right: 80px;
+}
+.myAccount__page__orders__wrapper__title {
+  text-transform: uppercase;
+  margin: 0;
+  margin: 5px 0;
+}
+.line {
+  height: 1px;
+  width: 100%;
+  background-color: #767676;
+}
+.order__display {
+  margin-top: 40px;
+}
+
+.track__your__order__wrapper {
+  flex: 0.3;
+  display: flex;
+  flex-direction: column;
+  /* background-color: cadetblue; */
+}
+.track__your__order__wrapper__title {
+  text-transform: uppercase;
+  margin: 5px 0;
+}
+.track__your__order__wrapper__button {
+  margin-top: 40px;
+  text-decoration: none;
+  width: 100%;
+  color: white;
+  background-color: #0e0c0b;
+  text-align: center;
+  padding: 5px 0;
+}
+.track__your__order__wrapper__button:hover {
+  background-color: #1b1b1b;
+}
+
+@media (max-width: 1024px) {
+  .myAccount__page__wrapper {
+    width: 85%;
+  }
+  .myAccount__page__orders__wrapper {
+    margin-right: 50px;
+  }
+}
+@media (max-width: 768px) {
+  .myAccount__page__wrapper__bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .myAccount__page__orders__wrapper {
+    flex: 0.7;
+    width: 100%;
+
+    margin-right: 0px;
+  }
+  .order__display {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .track__your__order__wrapper {
+    flex: 0.3;
+    display: flex;
+    flex-direction: column;
+  }
+ 
+}
+@media (max-width: 650px) {
+  .myAccount__page__wrapper__top {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  .myAccount__page__orders__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .track__your__order__wrapper {
+    flex: 0.3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+  }
+  .track__your__order__wrapper__button {
+    margin-top: 20px;
+    width: 250px;
+
+    
+  }
 }
