@@ -53,7 +53,10 @@
   background-color: #767676;
 }
 .order__display {
-  margin-top: 40px;
+  margin-top: 00px;
+}
+.item__table{
+  background-color: #f5f5f5;
 }
 
 .track__your__order__wrapper {
@@ -78,6 +81,8 @@
 .track__your__order__wrapper__button:hover {
   background-color: #1b1b1b;
 }
+
+
 
 @media (max-width: 1024px) {
   .myAccount__page__wrapper {
