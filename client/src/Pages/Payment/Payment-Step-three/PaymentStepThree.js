@@ -6,12 +6,14 @@ import { motion } from "framer-motion";
 import { PaystackButton } from "react-paystack";
 import AuthContext from "../../../ContextStore/auth-ctx";
 import CartContext from "../../../ContextStore/cart-ctx";
+import OrdersContext from "../../../ContextStore/orders-ctx";
 const axios = require("axios").default;
 
 function PaymentStepThree() {
     axios.defaults.withCredentials = true;
     const authCtx = useContext(AuthContext);
     const cartCtx = useContext(CartContext);
+    const ordersCtx = useContext(OrdersContext);
 
     let history = useHistory();
     //THIS USEEFFECT IS TO GET THE EMAIL FROM LOCAL STORAGE. (THE EMAIL ADDRESS IS REQUIRED TO MAKE PAYMENT VIA THE STACK PAYMENT PROCESS)
@@ -82,11 +84,18 @@ function PaymentStepThree() {
             axios
                 .post("http://localhost:3001/api/order", {
                     userCart: userCart,
+                    paidAmount: totalToPay,
                     userId: authCtx.isLoggedIn,
                 })
                 .then((response) => {
                     //if successfully saved to backend, clear userCart
-                    if (response.data === "success") {
+                    if (response.data.message === "success") {
+                        const userOrders = response.data.userOrders;
+                        ordersCtx.addOrder(userOrders);
+                        localStorage.setItem(
+                            "userOrders",
+                            JSON.stringify(userOrders)
+                        );
                         //backend cart
                         axios
                             .post(

@@ -314,17 +314,34 @@ module.exports.addOrder = async (req, response) => {
     const userCart = req.body.userCart;
     const userId = req.body.userId;
     const orderDate = new Date();
+    const paidAmount = req.body.paidAmount;
 
     const sqlInsert =
-        "INSERT INTO UserOrderItems (UserID, OrderItems, OrderDate) VALUES (?,?,?)";
-    db.query(sqlInsert, [userId, userCart, orderDate], (err, result) => {
-        if (!err) {
-            message = "success";
-            response.send(message);
-        } else {
-            console.log(err);
+        "INSERT INTO UserOrderItems (UserID, OrderItems, OrderDate, PaidAmount) VALUES (?,?,?,?)";
+    db.query(
+        sqlInsert,
+        [userId, userCart, orderDate, paidAmount],
+        (err, result) => {
+            if (!err) {
+                const sqlInsert =
+                    "SELECT * FROM UserOrderItems WHERE UserID = ?";
+                db.query(sqlInsert, [userId], (err, result) => {
+                    if (!err) {
+                        userOrders = result;
+                        message = "success";
+                        response.send({
+                            message: message,
+                            userOrders: userOrders,
+                        });
+                    } else {
+                        console.log(err);
+                    }
+                });
+            } else {
+                console.log(err);
+            }
         }
-    });
+    );
 };
 
 module.exports.logout = async (req, res) => {

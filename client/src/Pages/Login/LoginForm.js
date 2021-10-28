@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import Flash from "../../Components/Flash/Flash";
 import CartContext from "../../ContextStore/cart-ctx";
+import OrdersContext from "../../ContextStore/orders-ctx";
 const axios = require("axios").default;
 
 const LoginForm = () => {
@@ -16,6 +17,7 @@ const LoginForm = () => {
     const [flashMessage, setFlashMessage] = useState("");
     const [flashVariant, setFlashVariant] = useState("");
     const cartCtx = useContext(CartContext);
+    const ordersCtx = useContext(OrdersContext);
 
     axios.defaults.withCredentials = true;
     const handleSubmit = (event) => {
@@ -73,7 +75,8 @@ const LoginForm = () => {
                         // console.log(totalAmount);
                         cartCtx.addItems(cartData, totalAmount);
                         const userOrders = response.data.userOrders;
-                        console.log(userOrders);
+                        // console.log(userOrders);
+                        ordersCtx.addOrder(userOrders);
                         localStorage.setItem(
                             "user",
                             response.data.result[0].UserID
