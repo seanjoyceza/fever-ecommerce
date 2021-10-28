@@ -12,7 +12,7 @@ const CheckoutProduct = ({
     onAdd,
 }) => {
     // console.log(props.price);
-    const price = `R${parseInt(itemPrice).toFixed(2)}`;
+    // const price = `R${parseInt(itemPrice).toFixed(2)}`;
 
     return (
         <div className="checkout__item">

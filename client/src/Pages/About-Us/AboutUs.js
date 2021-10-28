@@ -2,7 +2,7 @@ import React from "react";
 import "./AboutUs.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 const AboutUs = () => {
   return (

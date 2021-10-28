@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./MyAccount.css";
 import { motion } from "framer-motion";
-import PageHeader from "./PageHeader";
-import MyOrders from "./MyOrders";
-import { Container, Row } from "react-bootstrap";
+// import PageHeader from "./PageHeader";
+// import MyOrders from "./MyOrders";
+// import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import OrdersContext from "../../ContextStore/orders-ctx";
 
 function MyAccount() {
     const [order, setOrder] = useState([]);
-    const [order2, setOrder2] = useState({});
+    // const [order2, setOrder2] = useState({});
     const ordersCtx = useContext(OrdersContext);
     //THIS USEEFFECT IS TO GET THE USER ORDER FROM LOCAL STORAGE. (THE AMOUNT IS NEEDED TO AS A VALUE TO BE PAID its the value of the cart and the shipping costs)
     //Harry, use "ordersCtx.userOrders" to access orders, no need to parse then either
@@ -21,20 +21,22 @@ function MyAccount() {
         // console.log(typeof saved);
 
         // setShippingEmail(initialValue)
-        setOrder(JSON.parse(Object.values(initialValue)[0].OrderItems));
-        // console.log("iniital value typeof", typeof initialValue);
+        setOrder(JSON.parse(Object.values(initialValue)[initialValue.length -1].OrderItems));
+        
+        console.log(Object.values(initialValue)[initialValue.length -1].OrderItems);
+        console.log( "full order",Object.values(initialValue));
         // console.log(initialValue.items);
 
         Object.values(initialValue).forEach((val) =>
             Object.values(JSON.parse(val.OrderItems))[0].map(
                 (element, index) => {
-                    console.log(element.title);
+                 return   console.log(element.title);
                 }
             )
         );
     }, []);
-    console.log("order t of", typeof order);
-    console.log("orderrrr", order.items);
+    console.log("order typeof", typeof order);
+    console.log("order", order.items);
 
     const display_user_order = () => {
         if (order) {

@@ -46,10 +46,13 @@ function PaymentStepThree() {
 
     const [email, setEmail] = useState("");
     const [totalToPay, setTotalToPay] = useState("");
+    console.log(typeof totalToPay);
+    let parsetotal = parseFloat(totalToPay, 10)
 
     //THIS SETS THE AMOUNT TO THE AMOUNT TO BE PAID AND MULTIPLIES IT BY 100 TO GET A VALUE IN CENTS. (VALUE IN CENTS REQUIRED FOR PAYSTACK)
     const amount = totalToPay * 100;
-
+    console.log(typeof parsetotal);
+    console.log(typeof amount);
     const componentProps = {
         email,
         amount,

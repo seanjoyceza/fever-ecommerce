@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
 import "./Boards.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 import loadingSpinner from "../../../Components/assets/loading-buffering.gif";
 import { Container, Row, Col } from "react-bootstrap";

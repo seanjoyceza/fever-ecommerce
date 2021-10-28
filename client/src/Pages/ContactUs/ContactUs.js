@@ -9,7 +9,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TelegramIcon from "@material-ui/icons/Telegram";
 
 import { motion } from "framer-motion";
-import Fade from "react-reveal/Fade";
+// import Fade from "react-reveal/Fade";
 
 function Contact() {
     //to load page at the top and not somewhere in the middle

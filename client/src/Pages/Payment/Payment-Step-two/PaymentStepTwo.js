@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useContext, Fragment } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./PaymentStepTwo.css";
 
 import CartContext from "../../../ContextStore/cart-ctx";
 import { motion } from "framer-motion";
+import {Link} from 'react-router-dom'
 
 function PaymentStepOne() {
   //CONTEXT API FOR CART
@@ -34,6 +35,7 @@ function PaymentStepOne() {
   const [province, setProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [shippingAmount, setShippingAmount] = useState("");
+  const [notComplete, setNotComplete] = useState(true);
 
   useEffect(() => {
     localStorage.setItem("shipping_name", JSON.stringify(name));
@@ -44,6 +46,13 @@ function PaymentStepOne() {
   useEffect(() => {
     localStorage.setItem("shipping_phone", JSON.stringify(phone));
   }, [phone]);
+
+  //MAKING SURE ALL FIELDS ARE FILLED IN PRIOR TO MAKING PAYMENT
+  // if (name.length === 0) {
+  //   alert("complete name");
+  // } else {
+  //   setNotComplete(false);
+  // }
 
   totalAmount = +cartAmount + +shippingAmount;
   const amount = totalAmount * 100;
@@ -79,13 +88,16 @@ function PaymentStepOne() {
   };
 
   console.log(cartAmount);
-  console.log( typeof shippingAmount);
+  console.log(typeof shippingAmount);
   console.log(cartCtx.items);
   console.log("pc", postalCode);
-  const [showItem, setShowItem] = useState(false);
-  const sendorderInfo = (e) => {
-    e.preventDefault();
-  };
+  // const [showItem, setShowItem] = useState(false);
+  // const sendorderInfo = (e) => {
+  //   e.preventDefault();
+  // };
+  //  const checkName = () => {
+
+  //  }
 
   return (
     <motion.div
@@ -277,10 +289,23 @@ function PaymentStepOne() {
                 defaultValue={JSON.stringify(cartCtx.items)}
               ></textarea>
             </div>
-
-            <button type='submit' className='contact__form__submitButton'>
-              Proceed to final step
-            </button>
+            {/*CHECKING IF ALL THE FILEDS ARE FILLED IN */}
+            {name.length === 0 ||
+            email.length <= 0  ||
+            phone.length > 10 ||
+            addressLine1.length == 0 ||
+            addressLine2.length == 0 ||
+            city.length == 0 ||
+            province.length <= 2 ||
+            postalCode.length < 3 ? (
+              <p className={"contact__form__submitButton__not__complete"}>
+                Proceed to final step
+              </p>
+            ) : (
+              <button type='submit' className={"contact__form__submitButton"}>
+                Proceed to final step
+              </button>
+            )}
           </form>
         </div>
       </div>

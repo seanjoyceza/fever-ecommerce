@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ThankYou.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";

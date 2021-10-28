@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 import "./RegisterForm.css";
@@ -32,7 +32,7 @@ function Register(props) {
     //   return <p>loading...</p>
     // }
 
-    const [validated, setValidated] = useState(false);
+    // const [validated, setValidated] = useState(false);
 
     return (
         <div className="login">

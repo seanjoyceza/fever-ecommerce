@@ -51,6 +51,47 @@
 
   /* padding-left: 10px; */
 }
+.payment__page__proceed__button{
+  margin: 10px 0 50px 0;
+  padding: 10px;
+  background-color: rgb(1, 138, 45) !important;
+  text-decoration: none !important;
+  color: white;
+  border-radius: 3px;
+  border:none
+}
+.payment__page__proceed__button__not__complete{
+  margin: 10px 0 50px 0;
+  padding: 10px;
+  background-color: rgb(142, 185, 155) !important;
+  text-decoration: none !important;
+  color: white;
+  border-radius: 3px;
+  border:none
+}
+.payment__page__proceed__button__not__complete:hover{
+  cursor: not-allowed;
+}
+.payment__page__proceed__button:hover{
+  color: black !important;
+}
+.contact__form__submitButton__not__complete{
+  
+  width: 100%;
+  justify-self: center;
+  margin: 10px 0 50px 0;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(142, 185, 155) !important;
+  text-decoration: none !important;
+  color: white;
+  border-radius: 3px;
+  border:none
+    }
+.contact__form__submitButton__not__complete:hover{
+  cursor: not-allowed;
+    }
+    
 
 
 

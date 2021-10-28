@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
-import InstagramIcon from "@material-ui/icons/Instagram";
+// import InstagramIcon from "@material-ui/icons/Instagram";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import TelegramIcon from "@material-ui/icons/Telegram";
+// import TelegramIcon from "@material-ui/icons/Telegram";
 
 function Footer() {
   return (

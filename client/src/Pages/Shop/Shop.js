@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./Shop.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import axios from "axios";
+// import axios from "axios";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import loadingSpinner from "../../Components/assets/loading-buffering.gif";
 import SideBar from "../../Components/SideBar/SideBar";

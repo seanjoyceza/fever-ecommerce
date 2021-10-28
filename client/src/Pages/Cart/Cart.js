@@ -8,7 +8,7 @@ import CartContext from "../../ContextStore/cart-ctx";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
 import SlidingPane from "react-sliding-pane";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 
 const axios = require("axios").default;
 axios.defaults.withCredentials = true;

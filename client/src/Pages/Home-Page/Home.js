@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import { motion } from "framer-motion";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 import MainLinks from "./MainLinks/MainLinks";
 
