@@ -82,6 +82,10 @@ const LoginForm = () => {
                             response.data.result[0].UserID
                         );
                         localStorage.setItem(
+                            "userFirst",
+                            response.data.result[0].UserFirstName
+                        );
+                        localStorage.setItem(
                             "userOrders",
                             JSON.stringify(userOrders)
                         );

@@ -171,7 +171,7 @@ const Product = ({ match }) => {
                                     Add To Cart
                                 </Button>
                             </div>
-                            <Button className="btn btn-warning">Buy Now</Button>
+                            {/* <Button className="btn btn-warning">Buy Now</Button> */}
                         </div>
                     </div>
 

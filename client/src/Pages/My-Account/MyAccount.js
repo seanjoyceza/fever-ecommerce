@@ -15,28 +15,39 @@ function MyAccount() {
     //Harry, use "ordersCtx.userOrders" to access orders, no need to parse then either
     console.log(ordersCtx.userOrders);
 
+    const userFirstName = localStorage.getItem("userFirst");
+
     useEffect(() => {
         const saved = localStorage.getItem("userOrders");
         const initialValue = JSON.parse(saved);
-        // console.log(typeof saved);
+        console.log(initialValue);
 
         // setShippingEmail(initialValue)
-        setOrder(JSON.parse(Object.values(initialValue)[initialValue.length -1].OrderItems));
-        
-        console.log(Object.values(initialValue)[initialValue.length -1].OrderItems);
-        console.log( "full order",Object.values(initialValue));
-        // console.log(initialValue.items);
+        if (initialValue.length !== 0) {
+            setOrder(
+                JSON.parse(
+                    Object.values(initialValue)[initialValue.length - 1]
+                        .OrderItems
+                )
+            );
 
-        Object.values(initialValue).forEach((val) =>
-            Object.values(JSON.parse(val.OrderItems))[0].map(
-                (element, index) => {
-                 return   console.log(element.title);
-                }
-            )
-        );
+            // console.log(
+            //     Object.values(initialValue)[initialValue.length - 1].OrderItems
+            // );
+            // console.log("full order", Object.values(initialValue));
+            // console.log(initialValue.items);
+
+            Object.values(initialValue).forEach((val) =>
+                Object.values(JSON.parse(val.OrderItems))[0].map(
+                    (element, index) => {
+                        return console.log(element.title);
+                    }
+                )
+            );
+        }
     }, []);
-    console.log("order typeof", typeof order);
-    console.log("order", order.items);
+    // console.log("order typeof", typeof order);
+    // console.log("order", order.items);
 
     const display_user_order = () => {
         if (order) {
@@ -73,7 +84,7 @@ function MyAccount() {
                         {" "}
                         My Account
                     </h3>
-                    <p>Welcome back, {"name"}!</p>
+                    <p>Welcome back, {userFirstName}!</p>
                 </div>
 
                 <div className="myAccount__page__wrapper__bottom">
@@ -84,7 +95,7 @@ function MyAccount() {
                         <div className="line"></div>
                         <div className="order__display">
                             {!order.items ? (
-                                "no"
+                                "You have no orders yet!"
                             ) : (
                                 <table className="table item__table">
                                     <thead className="table__head">
