@@ -131,7 +131,7 @@ const Header = () => {
                         </li>
                     </ul>
                     <ul className="justify nav-options">
-                    {/* 
+                        {/* 
                         <li className="option" onClick={closeMobileMenu}>
 
                         
@@ -178,7 +178,7 @@ const Header = () => {
                         )}
                         <li className="option" onClick={closeMobileMenu}>
                             <Button
-                               // shadow-none 
+                                // shadow-none
                                 className="my_button"
                                 variant="primary"
                             >

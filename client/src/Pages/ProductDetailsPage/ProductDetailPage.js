@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./ProductDetailPage.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -6,16 +6,26 @@ import CartContext from "../../ContextStore/cart-ctx";
 import { Button } from "react-bootstrap";
 import ProductsContext from "../../ContextStore/products-ctx";
 import AuthContext from "../../ContextStore/auth-ctx";
+import { useHistory } from "react-router-dom";
+import Flash from "../../Components/Flash/Flash";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 const axios = require("axios").default;
+
 axios.defaults.withCredentials = true;
 
 const Product = ({ match }) => {
     const [quantity, setQuantity] = useState(1);
     const [size, setSize] = useState(null);
+    const [flash, setFlash] = useState(false);
+    const [flashMessage, setFlashMessage] = useState("");
+    const [flashVariant, setFlashVariant] = useState("");
 
     const cartCtx = useContext(CartContext);
     const productsCtx = useContext(ProductsContext);
     const authCtx = useContext(AuthContext);
+    const history = useHistory();
 
     const myFilteredProduct = productsCtx.products.filter((product) => {
         return product.id == match.params.id;
@@ -23,7 +33,23 @@ const Product = ({ match }) => {
 
     const submitHandler = () => {
         if (!size) {
+            setFlashVariant("danger");
+            setFlashMessage("You need to select a size!");
+            setFlash(true);
             return;
+        }
+
+        if (!authCtx.isLoggedIn) {
+            setFlashVariant("danger");
+            setFlashMessage("You need to log in first!");
+            setFlash(true);
+            return;
+            // history.push("/login");
+            // const message = "You need to log in first!";
+            // const timer = setTimeout(() => {
+            //     window.alert(message);
+            // }, 200);
+            // return () => clearTimeout(timer);
         }
 
         //add item to cart
@@ -59,8 +85,29 @@ const Product = ({ match }) => {
         //
     };
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setFlashMessage("");
+            setFlash(false);
+        }, 15000);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <>
+            <Container className="text-center d-flex justify-content-center">
+                <Row>
+                    <Col>
+                        {flash && (
+                            <Flash
+                                message={flashMessage}
+                                variant={flashVariant}
+                            />
+                        )}
+                    </Col>
+                </Row>
+            </Container>
+
             {productsCtx.products.length > 1 && (
                 <motion.div
                     initial={{ opacity: 0 }}
