@@ -86,10 +86,7 @@ const ContactUsForm = (props) => {
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
             </Fade>
-            <Button
-                type="submit"
-                className="contact__form__submitButton btn btn-success"
-            >
+            <Button type="submit" className="btn btn-success">
                 Send
             </Button>
         </Form>

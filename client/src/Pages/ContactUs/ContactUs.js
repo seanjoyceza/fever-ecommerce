@@ -51,7 +51,7 @@ function Contact() {
                     </div>
                     <div className="contact__page__details__location">
                         <LocationOnIcon className="location__icon" />
-                        <p>Cape Town,</p>
+                        <p>Pretoria,</p>
                         <p>South Africa</p>
                     </div>
                 </div>

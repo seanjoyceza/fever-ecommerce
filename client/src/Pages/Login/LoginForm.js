@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import Flash from "../../Components/Flash/Flash";
 import CartContext from "../../ContextStore/cart-ctx";
 import OrdersContext from "../../ContextStore/orders-ctx";
+import Fade from "react-reveal/Fade";
+import { Button } from "react-bootstrap";
 const axios = require("axios").default;
 
 const LoginForm = () => {
@@ -126,32 +128,42 @@ const LoginForm = () => {
                 onSubmit={handleSubmit}
                 className="form"
             >
-                <Form.Group controlId="validationCustom01">
-                    <Form.Control
-                        required
-                        defaultValue={email}
-                        className="form__input"
-                        type="email"
-                        placeholder="Email Address"
-                        name="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+                <Fade delay={200}>
+                    <Form.Group controlId="validationCustom01">
+                        <Form.Control
+                            required
+                            defaultValue={email}
+                            className="form__input"
+                            type="email"
+                            placeholder="Email Address"
+                            name="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
 
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group controlId="validationCustom02">
-                    <Form.Control
-                        type="password"
-                        defaultValue={password}
-                        className="form__input"
-                        placeholder="Password"
-                        name="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-                <button className="login__button">Login</button>
+                        <Form.Control.Feedback>
+                            Looks good!
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Fade>
+                <Fade delay={300}>
+                    <Form.Group controlId="validationCustom02">
+                        <Form.Control
+                            type="password"
+                            defaultValue={password}
+                            className="form__input"
+                            placeholder="Password"
+                            name="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <Form.Control.Feedback>
+                            Looks good!
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Fade>
+                <Button type="submit" className="btn btn-success">
+                    Login
+                </Button>
             </Form>
         </>
     );

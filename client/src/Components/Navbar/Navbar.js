@@ -52,7 +52,7 @@ const Header = () => {
                 </Link>
             </div>
             {click && (
-                <ul className="nav-options active">
+                <ul className="nav-options active d-flex justify-content-center">
                     <li className="option" onClick={closeMobileMenu}>
                         <Link className="link" to="/#">
                             Home
@@ -83,26 +83,46 @@ const Header = () => {
                     )}
                     {!authCtx.isLoggedIn && (
                         <li className="option" onClick={closeMobileMenu}>
-                            <Link className="link" to="/my-account">
-                                Register
+                            <Link className="link" to="/register">
+                                <Button className="my_button" variant="primary">
+                                    Register
+                                </Button>
                             </Link>
                         </li>
                     )}
                     {!authCtx.isLoggedIn && (
                         <li className="option" onClick={closeMobileMenu}>
-                            <Link className="link" to="/my-account">
-                                Log In
+                            <Link className="link" to="/login">
+                                <Button className="my_button" variant="primary">
+                                    Log In
+                                </Button>
                             </Link>
                         </li>
                     )}
                     <li className="option" onClick={closeMobileMenu}>
-                        <Cart />
+                        <Button className="my_button" variant="primary">
+                            <Cart className="cart" />
+                        </Button>
                     </li>
+
                     <li className="option" onClick={closeMobileMenu}>
                         <Link className="link" to="/contact-us">
                             Contact Us
                         </Link>
                     </li>
+                    {authCtx.isLoggedIn && (
+                        <li className="option" onClick={closeMobileMenu}>
+                            <Link className="link" to="/#">
+                                <Button
+                                    className="my_button"
+                                    variant="primary"
+                                    onClick={() => authCtx.setIsLoggedOut()}
+                                >
+                                    Log Out
+                                </Button>
+                            </Link>
+                        </li>
+                    )}
                 </ul>
             )}
             {!click && (

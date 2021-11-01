@@ -55,7 +55,9 @@ app.use("/", userRoutes);
 app.use("/", showRoute);
 app.use("/", cartRoute);
 // end middleware
-
+app.get("*", function (req, res) {
+    res.render("what???", 404);
+});
 //listen on env port or port 3001
 app.listen(port, () => {
     console.log(`Serving on port ${port}`);
